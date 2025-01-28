@@ -5,7 +5,7 @@
 With built-in support for **Tailwind CSS**, **PixelWrap** streamlines the process of building user interfaces, saving developers time and effort.
 PixelWrap ensures that the final product is both visually appealing and highly functional, without sacrificing design integrity or user interaction quality. Perfect for developers who want to move quickly and efficiently.
 
-### More information can be found at [PixelWrap](/../pixelwrap)
+### More information can be found at [PixelWrap](https://github.com/pixelwrap/pixelwrap)
 
 ## Installation
 
