@@ -1,0 +1,32 @@
+{
+    "name": "pixelwrap/laravel",
+    "description": "Vortex laravel adapter",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Vortex\\Laravel\\": "src/"
+        },
+        "files": [
+            "src/Support/Functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Griffins Oringo",
+            "email": "oringogriffins78@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-mbstring": "*",
+        "symfony/yaml": "^7.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vortex\\Laravel\\VortexServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
