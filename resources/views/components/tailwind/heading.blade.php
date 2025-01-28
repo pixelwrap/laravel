@@ -15,7 +15,7 @@
     $keys   =   array_keys($headingTypes);
     $size   =   mb_strtolower($heading->size ?? 'small');
     if(!in_array($size, $keys)){
-        $headingErrors = sprintf("Heading \"size\" must be one of %s. ", implode(", ", $keys));
+        $headingErrors = [sprintf("Heading \"size\" must be one of %s. ", implode(", ", $keys))];
     }else{
         $headingErrors = [];
     }

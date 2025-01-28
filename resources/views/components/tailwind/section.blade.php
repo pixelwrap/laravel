@@ -3,12 +3,15 @@
         raise(null, "You must pass section when rendering the section component");
     }
     if(!isset($section->nodes)){
-        $componentError = "Nodes must be set. Please check if your template is formated correctly.";
+        $componentError = ["Nodes must be set. Please check if your template is formated correctly."];
+    }else{
+        $componentError = [];
     }
     [$componentErrors, $border, $margin, $padding] = parseBoxModelProperties($section, get_defined_vars());
+    $sectionErrors = array_merge($componentErrors, $componentError)
 @endphp
-@if(count($componentErrors) > 0)
-    @include("pixelwrap::components/{$theme}/exception",["errors" => $componentErrors, "component" => $row])
+@if(count($sectionErrors) > 0)
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $sectionErrors, "component" => $row])
 @else
     <div class="{{$border}} {{ $margin }} {{$padding}}">
         <div class="grid grid-cols-2 md:grid-cols-2 items-center gap-4">
