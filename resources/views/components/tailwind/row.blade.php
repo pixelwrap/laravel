@@ -8,9 +8,9 @@
     [$componentErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($row, get_defined_vars());
 @endphp
 @if(count($componentErrors) > 0)
-    @include("vortex::components/{$theme}/exception",["errors" => $componentErrors, "component" => $row])
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $componentErrors, "component" => $row])
 @else
     <div class="flex items-center {{$border}} {{ $margin }} {{$padding}} {{ $gap }}">
-        @include("vortex::components.nodes",["nodes" => $row->nodes])
+        @include("pixelwrap::components.nodes",["nodes" => $row->nodes])
     </div>
 @endif

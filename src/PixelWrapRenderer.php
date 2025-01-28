@@ -1,12 +1,12 @@
 <?php
 
-namespace Vortex\Laravel;
+namespace PixelWrap\Laravel;
 
 use Symfony\Component\Yaml\Yaml;
 use Illuminate\Contracts\View\View;
-use Vortex\Laravel\Support\InvalidPropertyValue;
+use PixelWrap\Laravel\Support\InvalidPropertyValue;
 
-class VortexRenderer
+class PixelWrapRenderer
 {
     protected $theme = "tailwind";
 
@@ -17,21 +17,21 @@ class VortexRenderer
 
     function render($page, $data = []): View
     {
-        $pageContainer = config('vortex.page-root');
-        $nodes = $this->loadVortexPage($page);
+        $pageContainer = config('pixelwrap.page-root');
+        $nodes = $this->loadPage($page);
         try {
-            return view('vortex::page', ['theme' => $this->theme, 'vortexContainer' => $pageContainer, 'nodes' => $nodes, ...$data]);
+            return view('pixelwrap::page', ['theme' => $this->theme, 'pixelWrapContainer' => $pageContainer, 'nodes' => $nodes, ...$data]);
         } catch (InvalidPropertyValue $exception) {
             return view('vortex::exception', ['exception' => $exception]);
         }
     }
 
-    function loadVortexPage($page)
+    function loadPage($page)
     {
         if (file_exists($page)) {
             $file = $page;
         } else {
-            $file = resource_path(sprintf("vortex/%s.yaml", $page));
+            $file = resource_path(sprintf("pixelwrap/%s.yaml", $page));
         }
         return Yaml::parse(file_get_contents($file), Yaml::PARSE_OBJECT_FOR_MAP);
     }

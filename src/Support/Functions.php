@@ -2,8 +2,8 @@
 
 use Illuminate\View\View;
 use Symfony\Component\Yaml\Yaml;
-use Vortex\Laravel\Support\InvalidPropertyValue;
-use Vortex\Laravel\Support\NodeNotImplemented;
+use PixelWrap\Laravel\Support\InvalidPropertyValue;
+use PixelWrap\Laravel\Support\NodeNotImplemented;
 
 /**
  * @throws Exception
@@ -17,7 +17,7 @@ function raise($code, $message)
     };
 }
 
-function vortex_resource($path = null): string
+function pixelwrap_resource($path = null): string
 {
     $base = realpath(__DIR__ . "/../../resources/views");
     if ($path) {
@@ -26,9 +26,9 @@ function vortex_resource($path = null): string
     return $base;
 }
 
-function renderVortexPage($page, $data = []): View
+function renderPixelWrapPage($page, $data = []): View
 {
-    return app('vortex')->render($page, $data);
+    return app('pixelwrap')->render($page, $data);
 }
 
 function renderComponentSource($component, $ignoreNodes = true): string

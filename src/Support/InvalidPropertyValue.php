@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortex\Laravel\Support;
+namespace PixelWrap\Laravel\Support;
 
 use Exception;
 

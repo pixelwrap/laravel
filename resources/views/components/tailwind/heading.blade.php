@@ -23,7 +23,7 @@
     $headingErrors = array_merge($componentErrors, $headingErrors)
 @endphp
 @if(count($headingErrors) > 0)
-    @include("vortex::components/{$theme}/exception",["errors" => $headingErrors, "component" => $heading])
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $headingErrors, "component" => $heading])
 @else
     <h2 class="{{$headingTypes[$size]}} font-bold text-gray-800 dark:text-gray-50 {{$border}} {{ $margin }} {{$padding}}">{{ interpolateString($heading->label,get_defined_vars())}}</h2>
 @endif

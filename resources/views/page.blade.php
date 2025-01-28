@@ -2,9 +2,9 @@
     if (!isset($theme)){
         $theme = "tailwind";
     }
-    require vortex_resource("components/{$theme}/definitions.php");
+    require pixelwrap_resource("components/{$theme}/definitions.php");
 @endphp
-@extends($vortexContainer)
-@section('vortex-container')
-    @include("vortex::components.nodes",['nodes' => $nodes])
+@extends($pixelWrapContainer)
+@section('pixelwrap-container')
+    @include("pixelwrap::components.nodes",['nodes' => $nodes])
 @endsection

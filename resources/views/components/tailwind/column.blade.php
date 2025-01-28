@@ -10,11 +10,11 @@
 
 @endphp
 @if(isset($componentError))
-    @include("vortex::components/{$theme}/exception",["error" => $componentError, "component" => $column])
+    @include("pixelwrap::components/{$theme}/exception",["error" => $componentError, "component" => $column])
 @else
     <div class="grid {{$border}} {{ $margin }} {{$padding}} {{ $gap }} align-left">
         @foreach($column->nodes as $node)
-            @include("vortex::components.node",["node" => $node])
+            @include("pixelwrap::components.node",["node" => $node])
         @endforeach
     </div>
 @endif

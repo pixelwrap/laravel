@@ -1,3 +1,3 @@
 @foreach($nodes as $node)
-    @include("vortex::components.node",['node' => $node])
+    @include("pixelwrap::components.node",['node' => $node])
 @endforeach

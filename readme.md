@@ -73,7 +73,9 @@ module.exports = {
 Once you have installed PixelWrap, you can start creating your YAML schema to define your UI. Here’s a step-by-step guide:
 
 ### 1. Create Your First YAML Schema
+All schemas files should go under `resources\pixelwrap\` directory
 You can define your UI structure in a YAML file. Below is an example schema:
+Lets call is ```account.yaml```
 ```yaml
 type: Grid
 cols: 3
@@ -95,6 +97,17 @@ nodes:
           guest: 'Guest'
 ```
 This schema will generate a grid with three columns, containing an input for name, email, and a dropdown for user roles.
+
+Now create a rew route in `web.php` and navigate your browser to your web application `/`
+```php
+use Illuminate\Support\Facades\Route;
+use PixelWrap\Laravel\PixelWrapRenderer;
+
+Route::get('/', function (PixelWrapRenderer $res) {
+    return $res->render('test');
+});
+
+```
 
 ## Documentation
 

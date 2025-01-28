@@ -8,7 +8,7 @@
     [$componentErrors, $border, $margin, $padding] = parseBoxModelProperties($section, get_defined_vars());
 @endphp
 @if(count($componentErrors) > 0)
-    @include("vortex::vortex/{$theme}/exception",["errors" => $componentErrors, "component" => $row])
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $componentErrors, "component" => $row])
 @else
     <div class="{{$border}} {{ $margin }} {{$padding}}">
         <div class="grid grid-cols-2 md:grid-cols-2 items-center gap-4">
@@ -19,13 +19,13 @@
             @isset($section->actions)
                 @foreach($section->actions as $action)
                     <div class="flex justify-end space-x-4">
-                        @include("vortex::components/{$theme}/button",['button' => $action])
+                        @include("pixelwrap::components/{$theme}/button",['button' => $action])
                     </div>
                 @endforeach
             @endif
         </div>
         @if(isset($section->nodes))
-            @include("vortex::components.nodes",["nodes" => $section->nodes])
+            @include("pixelwrap::components.nodes",["nodes" => $section->nodes])
         @endif
     </div>
 @endif

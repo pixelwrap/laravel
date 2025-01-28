@@ -1,19 +1,19 @@
 <?php
 
-namespace Vortex\Laravel;
+namespace PixelWrap\Laravel;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class VortexServiceProvider extends ServiceProvider
+class PixelWrapServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        app()->singleton('vortex', function ($app) {
-            return VortexRenderer::make($app->config->get('vortex.theme'));
+        app()->singleton('pixelwrap', function ($app) {
+            return PixelWrapRenderer::make($app->config->get('pixelwrap.theme'));
         });
     }
 
@@ -22,6 +22,6 @@ class VortexServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::addNamespace("vortex", [vortex_resource()]);
+        View::addNamespace("pixelwrap", [pixelwrap_resource()]);
     }
 }

@@ -1,10 +1,10 @@
 {
     "name": "pixelwrap/laravel",
-    "description": "Vortex laravel adapter",
+    "description": "PixelWrap Laravel adapter",
     "type": "library",
     "autoload": {
         "psr-4": {
-            "Vortex\\Laravel\\": "src/"
+            "PixelWrap\\Laravel\\": "src/"
         },
         "files": [
             "src/Support/Functions.php"
@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Vortex\\Laravel\\VortexServiceProvider"
+                "PixelWrap\\Laravel\\PixelWrapServiceProvider"
             ]
         }
     },
