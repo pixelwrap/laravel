@@ -111,7 +111,7 @@ Route::get('/', function (PixelWrapRenderer $res) {
 
 ## Documentation
 
-For a detailed guide on how to create and customize your YAML schemas, as well as more examples of UI components, visit the official [PixelWrap Documentation](../pixelwrap).
+For a detailed guide on how to create and customize your YAML schemas, as well as more examples of UI components, visit the official [PixelWrap Documentation](https://github.com/pixelwrap/pixelwrap).
 
 # Contributing
 To set up your development environment and contribute to the project.
@@ -137,7 +137,7 @@ composer create-project --prefer-dist laravel/laravel pixelwrap-project
 cd pixelwrap-project
 ```
 
-## 2. Setup the packages/pixelwrap directory
+## 2. Setup the `packages/pixelwrap` directory
 
 Create the directory
 ```shell
@@ -162,7 +162,7 @@ git clone git@github.com:pixelwrap/laravel.git packages/pixelwrap/laravel
 ```shell
 composer require pixelwrap/laravel
 ```
-This will install the pixelwrap/laravel package from your local directory.
+This will install the `pixelwrap/laravel` package from your local directory.
 
 ### 5. Working on your new feature
 Create a New Branch for Your Work
