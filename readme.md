@@ -56,7 +56,7 @@ You can modify these settings based on your project’s design requirements.
 
 ## Integrating Tailwind CSS
 ### Add PixelWrap and YAML File Paths to Tailwind Configuration
-To ensure live reloading when editing the `yaml` templated and avoid purging the required CSS during production builds, you need to update the content array in your tailwind.config.js file. This will ensure Tailwind picks up the package and YAML files correctly.
+To ensure live reloading when editing the `yaml` templated and avoid purging the required CSS during production builds, you need to update the content array in your `tailwind.config.js` file. This will ensure Tailwind picks up the package and YAML files correctly.
 ```js
 module.exports = {
     content: [
