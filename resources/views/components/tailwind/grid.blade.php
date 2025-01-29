@@ -6,6 +6,9 @@
     if(!isset($grid->nodes)){
         $gridErrors[] = "Nodes must be set. Please check if your template is formated correctly.";
     }else{
+
+        [$gridErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($grid, get_defined_vars());
+
         $columns = $grid->cols ?? 12;
         $validations= [
             "columns" => array_keys($columnOptions)
@@ -18,13 +21,12 @@
                 $gridErrors[] = sprintf("Grid span for node \"%s\" only allows one of %s.", $index+1 , implode(", ", $options));
             }
         }
+
         foreach ($validations as $key => $options){
             if(!in_array($$key, $options)){
                 $gridErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $options));
             }
         }
-
-        [$gridErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($grid, get_defined_vars());
     }
 
     if(count($gridErrors) ===0 ){
