@@ -6,7 +6,7 @@
     if(!isset($grid->nodes)){
         $gridErrors[] = "Nodes must be set. Please check if your template is formated correctly.";
     }else{
-
+        $ignoreNodes = true;
         [$gridErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($grid, get_defined_vars());
 
         $columns = $grid->cols ?? 12;
@@ -19,6 +19,7 @@
             $options = range(1,12);
             if(!in_array($span, $options)){
                 $gridErrors[] = sprintf("Grid span for node \"%s\" only allows one of %s.", $index+1 , implode(", ", $options));
+                $ignoreNodes = false;
             }
         }
 
@@ -34,7 +35,7 @@
     }
 @endphp
 @if(count($gridErrors)>0)
-    @include("pixelwrap::components/{$theme}/exception",["errors" => $gridErrors, "component" => $grid])
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $gridErrors, "component" => $grid, "ignoreNodes" => $ignoreNodes])
 @else
     <div class="grid {{$columns}} {{$border}} {{ $margin }} {{$padding}} {{ $gap }} align-top">
         @foreach($grid->nodes as $node)

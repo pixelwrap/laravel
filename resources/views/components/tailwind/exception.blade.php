@@ -1,3 +1,6 @@
+@php
+    $ignoreNodes =  $ignoreNodes ?? true;
+@endphp
 <div class="border-2 border-red-600 dark:border-red-600">
     <p class="text-start text-wrap text-lg p-1 bg-red-600 dark:bg-red-600 text-gray-100 dark:text-gray-900">
         {{ implode(", ", $errors) }}
@@ -7,7 +10,7 @@
     </p>
     <div class="text-start text-gray-700 dark:text-gray-50 text-sm m-1 code-block">
         <code>
-            @foreach(explode("\n", renderComponentSource($component)) as $line)
+            @foreach(explode("\n", renderComponentSource($component, $ignoreNodes)) as $line)
                 <pre>{{$line}} &nbsp;</pre>
             @endforeach
         </code>
