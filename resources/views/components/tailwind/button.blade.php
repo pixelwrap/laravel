@@ -36,7 +36,7 @@
         $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst("role") , implode(", ", $options));
     }
 
-    $sizes =array_keys($buttonsSizes);
+    $sizes = array_keys($buttonsSizes);
     if(!in_array($size, $sizes)){
         $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst("size") , implode(", ", $sizes));
     }
