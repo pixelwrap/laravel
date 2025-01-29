@@ -21,8 +21,6 @@
     $size           =  $button->size  ?? 'small';
     $role           =  $button->role  ?? 'submit';
     $value          =  $button->value ?? '';
-    $class          =  $buttonClasses[$class];
-    $size           =  $buttonsSizes[$size];
 
      if(!isset($button)){
         raise(null, "You must pass button when rendering the button component");
@@ -37,6 +35,14 @@
     if(!in_array($role, $options)){
         $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst("role") , implode(", ", $options));
     }
+
+    $sizes =array_keys($buttonsSizes);
+    if(!in_array($size, $sizes)){
+        $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst("size") , implode(", ", $sizes));
+    }
+
+    $class =  $buttonClasses[$class];
+    $size  =  $buttonsSizes[$size];
 @endphp
 @if(count($buttonErrors)>0)
     @include("pixelwrap::components/{$theme}/exception",["errors" => $buttonErrors, "component" => $button])
