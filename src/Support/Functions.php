@@ -1,9 +1,13 @@
 <?php
 
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
+use League\Uri\BaseUri;
 use Symfony\Component\Yaml\Yaml;
 use PixelWrap\Laravel\Support\InvalidPropertyValue;
 use PixelWrap\Laravel\Support\NodeNotImplemented;
+use League\Uri\Http;
+use League\Uri\QueryString;
 
 /**
  * @throws Exception
@@ -11,9 +15,9 @@ use PixelWrap\Laravel\Support\NodeNotImplemented;
 function raise($code, $message)
 {
     throw match ($code) {
-        "not_implemented" => new NodeNotImplemented($message, null),
-        "invalid" => new InvalidPropertyValue($message, null),
-        default => new Exception($message),
+        "not_implemented"   => new NodeNotImplemented($message, null),
+        "invalid"           => new InvalidPropertyValue($message, null),
+        default             => new Exception($message),
     };
 }
 
@@ -33,11 +37,15 @@ function renderPixelWrapPage($page, $data = []): View
 
 function renderComponentSource($component, $ignoreNodes = true): string
 {
-    if ($ignoreNodes && isset($component->nodes)) {
-        unset($component->nodes);
+    if(is_string($component)) {
+        return $component;
+    }else{
+        if ($ignoreNodes && isset($component->nodes)) {
+            $component->nodes = ["section redacted"];
+        }
+        $data = json_decode(json_encode($component), true);
+        return Yaml::dump($data, 8, 2, Yaml::DUMP_OBJECT);
     }
-    $data = json_decode(json_encode($component), true);
-    return Yaml::dump($data, 8, 2, Yaml::DUMP_OBJECT);
 }
 
 
@@ -104,13 +112,53 @@ function parseBoxModelProperties($node, $context): array
     return [$errors, ...$model];
 }
 
-function filterObjectProps($object,$except){
+function buildLink($action, $context): array
+{
+    $errors = [];
+    $link   = $action->link ?? '';
+    $link   = BaseUri::from($link);
+    if(!$link->isAbsolute()){
+       $link = Http::fromBaseUri($link->getUriString(), request()->getUri());
+    }
+    $query  = Http::fromBaseUri($link)->getQuery();
+    $query  = QueryString::parse(mb_strlen($query) >0 ? $query : null);
+    if (isset($action->params)) {
+        foreach ($action->params as $key => $alias) {
+            if (is_object($alias)) {
+                if (!isset($alias->key)) {
+                    $errors[] = sprintf(
+                        "Key field %s must be set. Please check if your template is compliant with the specification.",
+                        $action->name
+                    );
+                }else{
+                    $key = $alias->key;
+                    $alias  = $alias->alias ?? $key;
+                }
+            }
+            $value  = $context["context"][$key] ?? $context[$key] ?? $key;
+            $param  = sprintf("{%s}",$alias);
+            if(mb_strpos($link,$param) !== false){
+                $link = str_replace($param, $value, $link);
+            }else {
+                $query[] = [$alias, $value];
+            }
+        }
+    }
+
+    $url = Http::fromBaseUri($link)->withQuery(QueryString::buildFromPairs($query) ?? "");
+    return [$errors, $url];
+}
+
+function filterObjectProps($object,$except): Collection
+{
    return collect(get_object_vars($object))
            ->except($except);
 }
 
-function filterAndMapObjectProps($object,$except){
+function filterAndMapObjectProps($object,$except): string
+{
    return filterObjectProps($object,$except)
               ->map(fn($value, $key) => $key . '="' . $value . '"')
               ->implode(' ');
 }
+

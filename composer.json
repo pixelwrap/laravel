@@ -18,7 +18,8 @@
     ],
     "require": {
         "ext-mbstring": "*",
-        "symfony/yaml": "^7.2"
+        "symfony/yaml": "^7.2",
+        "league/uri": "^7.5"
     },
     "extra": {
         "laravel": {

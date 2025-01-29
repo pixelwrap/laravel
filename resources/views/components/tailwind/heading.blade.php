@@ -17,13 +17,14 @@
     if(!in_array($size, $keys)){
         $headingErrors = [sprintf("Heading \"size\" must be one of %s. ", implode(", ", $keys))];
     }else{
-        $headingErrors = [];
+        [$headingErrors, $border, $margin, $padding] = parseBoxModelProperties($heading, get_defined_vars());
     }
-    [$componentErrors, $border, $margin, $padding] = parseBoxModelProperties($heading, get_defined_vars());
-    $headingErrors = array_merge($componentErrors, $headingErrors)
+    $size = $headingTypes[$size]
 @endphp
 @if(count($headingErrors) > 0)
     @include("pixelwrap::components/{$theme}/exception",["errors" => $headingErrors, "component" => $heading])
 @else
-    <h2 class="{{$headingTypes[$size]}} font-bold text-gray-800 dark:text-gray-50 {{$border}} {{ $margin }} {{$padding}}">{{ interpolateString($heading->label,get_defined_vars())}}</h2>
+    <h2 class="{{$size}} {{$border}} {{ $margin }} {{$padding}} p-0 font-bold text-gray-800 dark:text-gray-50">
+        {{ interpolateString($heading->label,get_defined_vars())}}
+    </h2>
 @endif

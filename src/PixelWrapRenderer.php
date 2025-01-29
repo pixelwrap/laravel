@@ -2,6 +2,7 @@
 
 namespace PixelWrap\Laravel;
 
+use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 use Illuminate\Contracts\View\View;
 use PixelWrap\Laravel\Support\InvalidPropertyValue;
@@ -18,22 +19,30 @@ class PixelWrapRenderer
     function render($page, $data = []): View
     {
         $pageContainer = config('pixelwrap.page-root');
-        $nodes = $this->loadPage($page);
         try {
-            return view('pixelwrap::page', ['theme' => $this->theme, 'pixelWrapContainer' => $pageContainer, 'nodes' => $nodes, ...$data]);
-        } catch (InvalidPropertyValue $exception) {
-            return view('vortex::exception', ['exception' => $exception]);
+            $nodes = $this->loadPage($page);
+        } catch (ParseException $exception) {
+            $errors     = [$exception->getMessage()];
+            $component  = $this->loadFile($page);
+            $nodes      = [(object) ["type" => "Exception"]];
+            $data       = compact('errors', 'component');
         }
+        return view('pixelwrap::page', ['theme' => $this->theme, 'pixelWrapContainer' => $pageContainer, 'nodes' => $nodes, ...$data]);
     }
 
     function loadPage($page)
+    {
+        return Yaml::parse($this->loadFile($page), Yaml::PARSE_OBJECT_FOR_MAP);
+    }
+
+    function loadFile($page)
     {
         if (file_exists($page)) {
             $file = $page;
         } else {
             $file = resource_path(sprintf("pixelwrap/%s.yaml", $page));
         }
-        return Yaml::parse(file_get_contents($file), Yaml::PARSE_OBJECT_FOR_MAP);
+        return mb_trim(file_get_contents($file));
     }
 
     public function setTheme(string $theme): static

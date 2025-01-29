@@ -9,7 +9,7 @@
 @if(file_exists(pixelwrap_resource("components{$sep}{$theme}{$sep}{$file}.blade.php")))
     @include("pixelwrap::components/{$theme}/{$file}",[$file => $node])
 @elseif($node->type === "HorizontalRuler")
-    @include("pixelwrap::components/$theme}/hr",['ruler' => $node])
+    @include("pixelwrap::components/$theme}/hr",['hr' => $node])
 @elseif($node->type === null)
     @include("pixelwrap::components/$theme/null",['components.node' => $node])
 @else

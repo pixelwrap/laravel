@@ -3,14 +3,10 @@
         raise(null, "You must pass \"column\" when rendering the column component");
     }
     if(!isset($column->nodes)){
-        $componentError = ["Nodes must be set. Please check if your template is formated correctly."];
+        $columnErrors = ["Nodes must be set. Please check if your template is formated correctly."];
     }else{
-        $componentError = [];
+        [$columnErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($column, get_defined_vars());
     }
-
-    [$componentErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($column, get_defined_vars());
-    $columnErrors = array_merge($componentErrors, $componentError)
-
 @endphp
 @if(count($columnErrors)>0)
     @include("pixelwrap::components/{$theme}/exception",["errors" => $columnErrors, "component" => $column])

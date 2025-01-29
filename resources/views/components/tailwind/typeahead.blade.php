@@ -1,53 +1,57 @@
 @php
-    $inputId = $typeahead->id;
-    $currentValue = old($inputId, $$inputId ?? "");
-    $currentValueLabel = old("$inputId-label", interpolateString($typeahead->value ?? "", get_defined_vars()));
+    if(!isset($typeahead)){
+        raise(null, "You must pass \"typeahead\" when rendering the typeahead component");
+    }
+    if (!isset($typeahead->id) || !isset($typeahead->action)) {
+        $componentError = ["ID and Action must be set. Please check if your template is compliant with the specification."];
+    }
+    $inputId           = $typeahead->id;
+    $query             = $typeahead->query ?? "q";
+    $show              = $typeahead->show ?? "name";
+    $currentValue      = old($inputId, $$inputId ?? "");
+    $typeahead->id     = sprintf("search-input-%s",$inputId);
+    $currentValueLabel = old($typeahead->id, interpolateString($typeahead->value ?? "", get_defined_vars()));
+    $typeahead->value  = $currentValueLabel;
+    $typeahead->autocomplete = "off";
+
+    [$inputErrors, $action] = buildLink($typeahead->action, get_defined_vars());
+    $action .= (mb_strpos($action, "?") === false) ? "?" : "&";
 @endphp
-<div class="relative">
-    <label for="search-input-{{$typeahead->id}}" class="block mb-2 text-sm font-medium text-gray-700">
-        {{$typeahead->label}}
-    </label>
-    <input
-        type="text" name="{{ $inputId }}-label"
-        value="{{ $currentValueLabel }}"
-        placeholder="Start typing..." autocomplete="false"
-        class="w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-600 rounded-sm shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
-        id="search-input-{{$typeahead->id}}"
-    />
-    <div
-        class="absolute z-10 hidden w-full mt-1 bg-white border border-gray-300 rounded-sm shadow-lg"
-        id="dropdown-results-{{$typeahead->id}}">
-        <ul class="divide-y divide-gray-200" id="search-results-{{$typeahead->id}}"></ul>
+@if(count($inputErrors)>0)
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $inputErrors, "component" => $input])
+@else
+    <div class="relative">
+        @include("pixelwrap::components/{$theme}/input",["input" => $typeahead])
+        <div
+            class="absolute z-10 hidden w-full mt-1 bg-white border border-gray-300 rounded-sm shadow-lg dark:bg-gray-700 dark:border-gray-800"
+            id="dropdown-results-{{$inputId}}">
+            <ul class="divide-y divide-gray-200 dark:divide-gray-600" id="search-results-{{$inputId}}"></ul>
+        </div>
+        <input type="hidden" name="{{ $inputId }}" id="{{$inputId}}" value="{{ $currentValue }}"/>
     </div>
-    <input type="hidden" name="{{ $inputId }}" id="{{$inputId}}" value="{{ $currentValue }}"/>
-</div>
-@section("js")
-    @parent
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const valueInput = document.getElementById("{{$inputId}}");
-            const searchInput = document.getElementById("search-input-{{$typeahead->id}}");
-            const dropdownResults = document.getElementById("dropdown-results-{{$typeahead->id}}");
-            const searchResults = document.getElementById("search-results-{{$typeahead->id}}");
+            const searchInput = document.getElementById("search-input-{{$inputId}}");
+            const dropdownResults = document.getElementById("dropdown-results-{{$inputId}}");
+            const searchResults = document.getElementById("search-results-{{$inputId}}");
 
             let searchTimeout;
             let results = [];
 
             // Fetch results dynamically
             const fetchSearchResults = async (query) => {
-                searchResults.innerHTML = '<li class="px-4 py-2 text-sm text-gray-500">Loading... </li>';
-
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<li class="px-4 py-2 text-sm text-gray-500 dark:text-gray-50">Loading... </li>';
+                }
                 try {
-                    const response = await fetch(`{{route($typeahead->route)}}?q=${encodeURIComponent(query)}`);
+                    const response = await fetch(`{!! $action . $query!!}=${encodeURIComponent(query)}`);
                     results = await response.json();
-
-                    // Clear existing results
-                    searchResults.innerHTML = "";
-
-                    if (results.length) {
+                    if (results.length > 0) {
+                        searchResults.innerHTML = "";
                         results.forEach((result) => {
                             const li = document.createElement("li");
-                            li.className = "px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer";
+                            li.className = "px-4 py-2 text-sm text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer";
                             li.textContent = result.name; // Assuming the result object has a 'name' field
 
                             // Add click event to handle user selection
@@ -56,12 +60,13 @@
                                 valueInput.value = result.{{$typeahead->attach}};
                                 dropdownResults.classList.add("hidden");
                             });
-
                             searchResults.appendChild(li);
                         });
                     } else {
                         // Show "No results found" if no results are returned
-                        searchResults.innerHTML = '<li class="px-4 py-2 text-sm text-gray-500">No results found.</li>';
+                        setTimeout(() => {
+                            searchResults.innerHTML = '<li class="px-4 py-2 text-sm text-gray-500 dark:text-gray-50">No results found.</li>';
+                        }, 500)
                     }
                 } catch (error) {
                     console.error("Error fetching search results:", error);
@@ -72,8 +77,10 @@
             // Handle input changes with debounce
             searchInput.addEventListener("input", (event) => {
                 const query = event.target.value.trim();
+
                 // Show dropdown and "Loading..." indicator
                 dropdownResults.classList.remove("hidden");
+
                 // Clear existing timeout
                 clearTimeout(searchTimeout);
 
@@ -82,7 +89,7 @@
                     searchTimeout = setTimeout(() => fetchSearchResults(query), 100);
                 } else {
                     // Hide dropdown if input is empty
-                    dropdownResults.classList.add("hidden");
+                    // dropdownResults.classList.add("hidden");
                     searchResults.innerHTML = "";
                 }
             });
@@ -95,4 +102,4 @@
             });
         });
     </script>
-@endsection
+@endif
