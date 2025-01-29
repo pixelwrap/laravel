@@ -2,10 +2,11 @@
 
 namespace PixelWrap\Laravel;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class PixelWrapServiceProvider extends ServiceProvider
+class PixelWrapServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register any application services.
@@ -16,6 +17,10 @@ class PixelWrapServiceProvider extends ServiceProvider
 
         app()->singleton('pixelwrap', function ($app) {
             return PixelWrapRenderer::make($app->config->get('pixelwrap.theme'), $app->config->get('pixelwrap.resources'));
+        });
+
+        app()->singleton(PixelWrapRenderer::class, function ($app) {
+            return $app->make('pixelwrap');
         });
     }
 

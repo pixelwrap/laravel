@@ -11,7 +11,7 @@
 @if(count($rowErrors) > 0)
     @include("pixelwrap::components/{$theme}/exception",["errors" => $rowErrors, "component" => $row])
 @else
-    <div class="flex items-end {{$border}} {{ $margin }} {{$padding}} {{ $gap }}">
+    <div class="flex items-center {{$border}} {{ $margin }} {{$padding}} {{ $gap }}">
         @include("pixelwrap::components.nodes",["nodes" => $row->nodes])
     </div>
 @endif
