@@ -16,11 +16,18 @@ class PixelWrapRenderer
         return (new static)->setTheme($theme)->setPaths($paths);
     }
 
+    /**
+     * @throws \Exception
+     */
     function render($page, $data = []): View
     {
         $pageContainer = config('pixelwrap.page-root');
         try {
-            $nodes = $this->loadPage($page);
+            if(view()->exists($pageContainer)) {
+                $nodes = $this->loadPage($page);
+            }else{
+                raise(null, "The page-root view \"$pageContainer\" does not exist. Please check your config file \"config/pixelwrap.php\" and try again.");
+            }
         } catch (ParseException $exception) {
             $errors     = [$exception->getMessage()];
             $component  = $this->loadFile($page);
