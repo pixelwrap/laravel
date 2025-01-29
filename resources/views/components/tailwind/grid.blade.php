@@ -12,11 +12,15 @@
         ];
 
         foreach($grid->nodes as $index => $node) {
-            $validations["Grid Node:" . $index] = range(1,12);
+            $span    = $node->span ?? 3;
+            $options = range(1,12);
+            if(!in_array($span, $options)){
+                $gridErrors[] = sprintf("Grid span for node \"%s\" only allows one of %s.", $index+1 , implode(", ", $options));
+            }
         }
         foreach ($validations as $key => $options){
             if(!in_array($$key, $options)){
-                $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $options));
+                $gridErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $options));
             }
         }
 
