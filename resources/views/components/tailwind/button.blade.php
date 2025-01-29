@@ -38,7 +38,7 @@
      ];
     foreach ($validations as $key => $options){
         if(!in_array($$key, $options)){
-            $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($$key) , implode(", ", $options));
+            $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $options));
         }
     }
 
