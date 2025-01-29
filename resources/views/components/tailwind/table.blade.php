@@ -95,7 +95,7 @@
         @empty
             <tr class="bg-gray-200">
                 <td class="px-3 py-2"
-                    colspan="{{ count(get_object_vars($fields)) + ($indexed ? 1: 0) + count($actions)>0 ? 1:0 }}">
+                    colspan="{{ count($fields) + ($indexed ? 1: 0) + count($actions)>0 ? 1:0 }}">
                     <p class="text-md font-normal">
                         {{ $table->emptyMessage ?? "Nothing here." }}
                     </p>
