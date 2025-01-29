@@ -118,7 +118,7 @@ function buildLink($action, $context): array
     $link   = $action->link ?? '';
     $link   = BaseUri::from($link);
     if(!$link->isAbsolute()){
-       $link = Http::fromBaseUri($link->getUriString(), request()->getUri());
+        $link = Http::fromBaseUri($link->getUriString(), request()->getUri());
     }
     $query  = Http::fromBaseUri($link)->getQuery();
     $query  = QueryString::parse(mb_strlen($query) >0 ? $query : null);
@@ -137,8 +137,9 @@ function buildLink($action, $context): array
             }
             $value  = $context["context"][$key] ?? $context[$key] ?? $key;
             $param  = sprintf("{%s}",$alias);
-            if(mb_strpos($link,$param) !== false){
-                $link = str_replace($param, $value, $link);
+            $decodedLink = urldecode($link);
+            if(mb_strpos($decodedLink, $param) !== false){
+                $link = str_replace($param, $value, $decodedLink);
             }else {
                 $query[] = [$alias, $value];
             }
@@ -151,14 +152,13 @@ function buildLink($action, $context): array
 
 function filterObjectProps($object,$except): Collection
 {
-   return collect(get_object_vars($object))
-           ->except($except);
+    return collect(get_object_vars($object))
+        ->except($except);
 }
 
 function filterAndMapObjectProps($object,$except): string
 {
-   return filterObjectProps($object,$except)
-              ->map(fn($value, $key) => $key . '="' . $value . '"')
-              ->implode(' ');
+    return filterObjectProps($object,$except)
+        ->map(fn($value, $key) => $key . '="' . $value . '"')
+        ->implode(' ');
 }
-
