@@ -2,11 +2,10 @@
 
 namespace PixelWrap\Laravel;
 
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class PixelWrapServiceProvider extends ServiceProvider implements DeferrableProvider
+class PixelWrapServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
