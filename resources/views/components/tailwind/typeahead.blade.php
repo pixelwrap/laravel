@@ -2,23 +2,24 @@
     if(!isset($typeahead)){
         raise(null, "You must pass \"typeahead\" when rendering the typeahead component");
     }
+    $inputErrors = [];
     if (!isset($typeahead->id) || !isset($typeahead->action)) {
-        $componentError = ["ID and Action must be set. Please check if your template is compliant with the specification."];
+        $inputErrors[] = "ID and Action must be set. Please check if your template is compliant with the specification.";
+    } else {
+        $inputId           = $typeahead->id;
+        $query             = $typeahead->query ?? "q";
+        $show              = $typeahead->show ?? "name";
+        $currentValue      = old($inputId, $$inputId ?? "");
+        $typeahead->id     = sprintf("search-input-%s",$inputId);
+        $currentValueLabel = old($typeahead->id, interpolateString($typeahead->value ?? "", get_defined_vars()));
+        $typeahead->value  = $currentValueLabel;
+        $typeahead->autocomplete = "off";
+        [$inputErrors, $action] = buildLink($typeahead->action, get_defined_vars());
+        $action .= (mb_strpos($action, "?") === false) ? "?" : "&";
     }
-    $inputId           = $typeahead->id;
-    $query             = $typeahead->query ?? "q";
-    $show              = $typeahead->show ?? "name";
-    $currentValue      = old($inputId, $$inputId ?? "");
-    $typeahead->id     = sprintf("search-input-%s",$inputId);
-    $currentValueLabel = old($typeahead->id, interpolateString($typeahead->value ?? "", get_defined_vars()));
-    $typeahead->value  = $currentValueLabel;
-    $typeahead->autocomplete = "off";
-
-    [$inputErrors, $action] = buildLink($typeahead->action, get_defined_vars());
-    $action .= (mb_strpos($action, "?") === false) ? "?" : "&";
 @endphp
 @if(count($inputErrors)>0)
-    @include("pixelwrap::components/{$theme}/exception",["errors" => $inputErrors, "component" => $input])
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $inputErrors, "component" => $typeahead])
 @else
     <div class="relative">
         @include("pixelwrap::components/{$theme}/input",["input" => $typeahead])
