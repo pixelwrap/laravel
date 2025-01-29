@@ -10,7 +10,7 @@
         $caretClass     =  "h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-slate-700 dark:text-gray-300";
         $inputId        = $select->id;
         $currentValue   = old($inputId, $$inputId ?? "");
-        $inputRequired  = $input->required ?? false;
+        $inputRequired  = $select->required ?? false;
         $selectClass    = sprintf("%s %s",
             $selectClass,
             ($select->disabled ?? false) ? "disabled:opacity-50 cursor-not-allowed bg-gray-100": null
