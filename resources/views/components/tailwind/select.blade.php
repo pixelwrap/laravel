@@ -19,7 +19,7 @@
     }
 @endphp
 @if(count($selectErrors) > 0)
-    @include("pixelwrap::components/{$theme}/exception",["errors" => $selectErrors, "component" => $section])
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $selectErrors, "component" => $select])
 @else
     <label for="{{$inputId}}" class="{{$labelClass}}">{{ $select->label }}</label>
     <div class="relative">
