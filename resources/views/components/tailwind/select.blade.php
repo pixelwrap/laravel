@@ -2,9 +2,10 @@
     if(!isset($select)){
       raise(null, "You must pass select when rendering the select component");
     }
-     if(!isset($select->options)){
-        $selectErrors   = ["Options must be set. Please check if your template is compliant with the specification."];
-    }else{
+    $selectErrors = [];
+    if(!isset($select->options)){
+        $selectErrors[]   = "Options must be set. Please check if your template is compliant with the specification.";
+    } else {
         $labelClass     =  "block my-1 text-sm font-medium text-gray-800 dark:text-gray-50";
         $selectClass    =  "w-full bg-transparent text-gray-700 dark:text-gray-200 text-sm border border-gray-600 dark:border-gray-400 rounded-sm pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-gray-400 dark:focus:border-gray-300 hover:border-gray-400 dark:hover:border-gray-300 shadow-sm focus:shadow-md appearance-none cursor-pointer dark:bg-gray-800";
         $caretClass     =  "h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-slate-700 dark:text-gray-300";
@@ -18,7 +19,7 @@
     }
 @endphp
 @if(count($selectErrors) > 0)
-    @include("pixelwrap::components/{$theme}/exception",["errors" => $sectionErrors, "component" => $section])
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $selectErrors, "component" => $section])
 @else
     <label for="{{$inputId}}" class="{{$labelClass}}">{{ $select->label }}</label>
     <div class="relative">
