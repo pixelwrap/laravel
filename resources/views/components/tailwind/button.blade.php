@@ -6,7 +6,7 @@
         "danger"    => "text-white border-red-700 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4       focus:ring-red-300 font-medium dark:bg-red-600 dark:bg-red-600          dark:hover:bg-red-700 dark:focus:ring-red-900 dark:border-red-900",
     ];
 
-    $buttonsSizes = [
+    $buttonSizes = [
         "biggest"   => "text-xl px-6 py-4",
         "bigger"    => "text-lg px-5 py-3",
         "big"       => "test-md px-4 py-2.5",
@@ -31,18 +31,19 @@
         $buttonErrors    = array_merge($buttonErrors, $errors);
     }
 
-    $options = ["link","reset","button","submit"];
-    if(!in_array($role, $options)){
-        $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst("role") , implode(", ", $options));
-    }
-
-    $sizes = array_keys($buttonsSizes);
-    if(!in_array($size, $sizes)){
-        $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst("size") , implode(", ", $sizes));
+    $validations= [
+        "role"  => ["link","reset","button","submit"],
+        "size"  => array_keys($buttonSizes),
+        "class" => array_keys($buttonClasses)
+     ];
+    foreach ($validations as $key => $options){
+        if(!in_array($role, $options)){
+            $buttonErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst("role") , implode(", ", $options));
+        }
     }
 
     $class =  $buttonClasses[$class];
-    $size  =  $buttonsSizes[$size];
+    $size  =  $buttonSizes[$size];
 @endphp
 @if(count($buttonErrors)>0)
     @include("pixelwrap::components/{$theme}/exception",["errors" => $buttonErrors, "component" => $button])
