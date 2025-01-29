@@ -10,8 +10,9 @@ use PixelWrap\Laravel\Support\InvalidPropertyValue;
 class PixelWrapRenderer
 {
     protected $theme = "tailwind";
+    protected $paths = [];
 
-    static function make($theme = "tailwind"): static
+    static function make($theme = "tailwind", $paths = []): static
     {
         return (new static)->setTheme($theme);
     }
@@ -40,7 +41,12 @@ class PixelWrapRenderer
         if (file_exists($page)) {
             $file = $page;
         } else {
-            $file = resource_path(sprintf("pixelwrap/%s.yaml", $page));
+            foreach ($this->paths as $path) {
+                $file = sprintf("%s/%s.yaml",$path, $page);
+                if(file_exists($file)) {
+                    break;
+                }
+            }
         }
         return mb_trim(file_get_contents($file));
     }
@@ -48,6 +54,12 @@ class PixelWrapRenderer
     public function setTheme(string $theme): static
     {
         $this->theme = $theme;
+        return $this;
+    }
+
+    public function setPaths(string $paths): static
+    {
+        $this->paths = $paths;
         return $this;
     }
 }

@@ -14,4 +14,7 @@ return [
 
     'theme' => "tailwind",
     'page-root' => 'app',
+    'resources' => [
+        resource_path('pixelwrap')
+    ],
 ];
