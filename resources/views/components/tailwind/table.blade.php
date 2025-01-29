@@ -15,6 +15,11 @@
     $actions     = $table->actions ?? [];
     $highlight   = $table->highlight ?? "";
     $isPaginated = $dataset instanceof \Illuminate\Pagination\LengthAwarePaginator || $dataset instanceof \Illuminate\Pagination\Paginator;
+    if(is_object($fields)){
+        $fieldCount = count(get_object_vars($fields));
+    }else{
+        $fieldCount = count($fields);
+    }
     foreach ($fields as $index => $field){
         if(is_object($field)){
            if (!isset($field->key) || !isset($field->label)) {
@@ -94,8 +99,7 @@
             </tr>
         @empty
             <tr class="bg-gray-200">
-                <td class="px-3 py-2"
-                    colspan="{{ count($fields) + ($indexed ? 1: 0) + count($actions)>0 ? 1:0 }}">
+                <td class="px-3 py-2" colspan="{{ $fieldCount + ($indexed ? 1: 0) + (count($actions)>0 ? 1:0) }}">
                     <p class="text-md font-normal">
                         {{ $table->emptyMessage ?? "Nothing here." }}
                     </p>
