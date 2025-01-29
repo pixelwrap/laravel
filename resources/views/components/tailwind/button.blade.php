@@ -52,7 +52,7 @@
     @include("pixelwrap::components/{$theme}/exception",["errors" => $buttonErrors, "component" => $button])
 @else
     @if($role === "link")
-        <a href="{{$link}}" class="border border-1 {{ $class }} {{$rounded}} {{$size}}">{{ $button->label }}</a>
+        <a href="{!!$link!!}" class="border border-1 {{ $class }} {{$rounded}} {{$size}}">{{ $button->label }}</a>
     @else
         <button type="{{$role}}" class="border border-1 {{$class}} {{$rounded}} {{$size}}" name="action" value="{{$value}}">
             {{ $button->label }}
