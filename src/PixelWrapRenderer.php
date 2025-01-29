@@ -5,7 +5,6 @@ namespace PixelWrap\Laravel;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 use Illuminate\Contracts\View\View;
-use PixelWrap\Laravel\Support\InvalidPropertyValue;
 
 class PixelWrapRenderer
 {
@@ -14,7 +13,7 @@ class PixelWrapRenderer
 
     static function make($theme = "tailwind", $paths = []): static
     {
-        return (new static)->setTheme($theme);
+        return (new static)->setTheme($theme)->setPaths($paths);
     }
 
     function render($page, $data = []): View
@@ -57,7 +56,7 @@ class PixelWrapRenderer
         return $this;
     }
 
-    public function setPaths(string $paths): static
+    public function setPaths(array $paths): static
     {
         $this->paths = $paths;
         return $this;

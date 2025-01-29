@@ -9,7 +9,7 @@
     }
 @endphp
 @if(count($sectionErrors) > 0)
-    @include("pixelwrap::components/{$theme}/exception",["errors" => $sectionErrors, "component" => $row])
+    @include("pixelwrap::components/{$theme}/exception",["errors" => $sectionErrors, "component" => $section])
 @else
     <div class="{{$border}} {{ $margin }} {{$padding}}">
         <div class="grid grid-cols-2 md:grid-cols-2 items-center gap-4">
