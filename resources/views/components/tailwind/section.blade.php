@@ -3,7 +3,7 @@
         raise(null, "You must pass section when rendering the section component");
     }
     if(!isset($section->nodes)){
-        $sectionErrors = ["Nodes must be set. Please check if your template is formated correctly."];
+        $sectionErrors = ["Nodes must be set. Please check if your template is compliant with the specification."];
     }else{
         [$sectionErrors, $border, $margin, $padding] = parseBoxModelProperties($section, get_defined_vars());
     }

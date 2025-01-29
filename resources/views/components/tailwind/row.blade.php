@@ -3,7 +3,7 @@
         raise(null, "You must pass row when rendering the row component");
     }
     if(!isset($row->nodes)){
-        $rowErrors = ["Nodes must be set. Please check if your template is formated correctly."];
+        $rowErrors = ["Nodes must be set. Please check if your template is compliant with the specification."];
     }else{
         [$rowErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($row, get_defined_vars());
     }

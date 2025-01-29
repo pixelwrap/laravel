@@ -3,7 +3,7 @@
         raise(null, "You must pass form when rendering the form component");
     }
     if(!isset($form->nodes) || !isset($form->action)|| !isset($form->method)){
-        $formErrors = ["Nodes, Action and Method must be set. Please check if your template is formated correctly."];
+        $formErrors = ["Nodes, Action and Method must be set. Please check if your template is compliant with the specification."];
     }else{
         $method = mb_strtolower($form->method ?? "post");
         [$formErrors, $action] = buildLink($form->action, get_defined_vars());

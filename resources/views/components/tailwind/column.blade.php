@@ -3,7 +3,7 @@
         raise(null, "You must pass \"column\" when rendering the column component");
     }
     if(!isset($column->nodes)){
-        $columnErrors = ["Nodes must be set. Please check if your template is formated correctly."];
+        $columnErrors = ["Nodes must be set. Please check if your template is compliant with the specification."];
     }else{
         [$columnErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($column, get_defined_vars());
     }

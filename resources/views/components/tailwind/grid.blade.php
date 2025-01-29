@@ -4,7 +4,7 @@
     }
     $gridErrors = [];
     if(!isset($grid->nodes)){
-        $gridErrors[] = "Nodes must be set. Please check if your template is formated correctly.";
+        $gridErrors[] = "Nodes must be set. Please check if your template is compliant with the specification.";
     }else{
         $ignoreNodes = true;
         [$gridErrors, $border, $margin, $padding, $gap] = parseBoxModelProperties($grid, get_defined_vars());
