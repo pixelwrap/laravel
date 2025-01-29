@@ -2,6 +2,7 @@
     "name": "pixelwrap/laravel",
     "description": "PixelWrap Laravel adapter",
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "PixelWrap\\Laravel\\": "src/"
