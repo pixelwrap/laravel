@@ -4,12 +4,12 @@
     }
 
     $headingTypes = [
-        "biggest"   => "text-5xl",
-        "bigger"    => "text-4xl",
-        "big"       => "text-3xl",
-        "small"     => "text-2xl",
-        "smaller"   => "text-xl",
-        "smallest"  => "text-md"
+        "biggest"   => "text-4xl",
+        "bigger"    => "text-3xl",
+        "big"       => "text-2xl",
+        "small"     => "text-xl",
+        "smaller"   => "text-ld",
+        "smallest"  => "text-sm"
     ];
 
     $keys   =   array_keys($headingTypes);

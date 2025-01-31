@@ -25,6 +25,9 @@ class PixelWrapRenderer
         try {
             if(view()->exists($pageContainer)) {
                 $nodes = $this->loadPage($page);
+                if(is_object($nodes)) {
+                    $nodes = [$nodes];
+                }
             }else{
                 raise(null, "The page-root view \"$pageContainer\" does not exist. Please check your config file \"config/pixelwrap.php\" and try again.");
             }

@@ -71,7 +71,7 @@
                     }
                 } catch (error) {
                     console.error("Error fetching search results:", error);
-                    searchResults.innerHTML = '<li class="px-4 py-2 text-sm text-red-500">An error occurred. Please try again. </li>';
+                    searchResults.innerHTML = '<li class="px-4 py-2 text-sm text-gray-500 text-red-500">An error occurred. Please try again. </li>';
                 }
             };
 

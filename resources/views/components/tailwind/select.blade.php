@@ -25,6 +25,12 @@
     <div class="relative">
         <select id="{{$inputId}}" name="{{ $inputId }}" class="{{$selectClass}}" @required($inputRequired)>
             @foreach($select->options as $option => $label)
+                @php
+                    if(is_object($label)){
+                       $option  = $label->key;
+                       $label   = $label->label;
+                    }
+                @endphp
                 <option value="{{$option}}" @selected($currentValue == $option)>{{ $label }}</option>
             @endforeach
         </select>

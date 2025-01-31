@@ -1,5 +1,5 @@
 @php
-    $buttonClasses  = [
+    $buttonVariants  = [
         "primary"   => "text-white border-blue-700 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4    focus:ring-blue-300 font-medium dark:border-blue-600 dark:bg-blue-600   dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800",
         "secondary" => "text-white border-gray-700 bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-4    focus:ring-gray-300 font-medium dark:bg-blue-600 dark:bg-gray-600       dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700",
         "success"   => "text-white border-green-700 bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium dark:bg-green-600 dark:bg-green-600    dark:hover:bg-green-700 dark:focus:ring-green-700 dark:border-green-700",
@@ -17,7 +17,7 @@
 
     $buttonErrors   = [];
     $rounded        =  "rounded-sm";
-    $class          =  $button->class ?? 'primary';
+    $variant        =  $button->variant ?? 'primary';
     $size           =  $button->size  ?? 'small';
     $role           =  $button->role  ?? 'submit';
     $value          =  $button->value ?? '';
@@ -31,10 +31,14 @@
         $buttonErrors    = array_merge($buttonErrors, $errors);
     }
 
+    if(!isset($button->label)){
+        $buttonErrors[]  = ["Label must be set. Please check if your template is compliant with the specification."];
+    }
+
     $validations= [
         "role"  => ["link","reset","button","submit"],
         "size"  => array_keys($buttonSizes),
-        "class" => array_keys($buttonClasses)
+        "variant" => array_keys($buttonVariants)
      ];
     foreach ($validations as $key => $options){
         if(!in_array($$key, $options)){
@@ -43,7 +47,7 @@
     }
 
     if(count($buttonErrors) === 0){
-        $class =  $buttonClasses[$class];
+        $class =  $buttonVariants[$variant];
         $size  =  $buttonSizes[$size];
     }
 
@@ -52,7 +56,7 @@
     @include("pixelwrap::components/{$theme}/exception",["errors" => $buttonErrors, "component" => $button])
 @else
     @if($role === "link")
-        <a href="{!!$link!!}" class="border border-1 {{ $class }} {{$rounded}} {{$size}}">{{ $button->label }}</a>
+        <a href="{!!$link!!}" class="border border-1 {{$class}} {{$rounded}} {{$size}}">{{ $button->label }}</a>
     @else
         <button type="{{$role}}" class="border border-1 {{$class}} {{$rounded}} {{$size}}" name="action" value="{{$value}}">
             {{ $button->label }}

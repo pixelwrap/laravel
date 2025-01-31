@@ -18,17 +18,21 @@
     }
 
     if($input->disabled ?? false){
-        $inputClass = sprintf("%s %s", $inputClass, "disabled:opacity-50 cursor-not-allowed bg-gray-100");
+        $inputClass = sprintf("%s %s", $inputClass, "bg-gray-50 dark:bg-gray-400 disabled:opacity:50 cursor-not-allowed");
     }
 
     $props = filterAndMapObjectProps($input, ['id', 'name', 'label', 'fieldType', 'type', 'required', 'action']);
 
     $inputId        = $input->id;
     $inputValue     = old($inputId, $$inputId ?? "");
-    $inputType      = $input->type ?? "text";
+    $inputType      = $input->fieldType ?? "text";
     $inputRequired  = $input->required ?? false;
     $showLabel      = $input->showLabel ?? true;
 
+    $fieldTypes     = ["text","email","password","number"];
+    if(!in_array($inputType, $fieldTypes)){
+        $inputErrors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst("fieldType") , implode(", ", $fieldTypes));
+    }
     if($showLabel && !isset($input->label)){
         $inputErrors[] = "Label must be set. Please check if your template is compliant with the specification.";
     }
