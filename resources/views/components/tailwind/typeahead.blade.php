@@ -11,7 +11,7 @@
         $show              = $typeahead->show ?? "name";
         $currentValue      = old($inputId, $$inputId ?? "");
         $typeahead->id     = sprintf("search-input-%s",$inputId);
-        $currentValueLabel = old($typeahead->id, interpolateString($typeahead->value ?? "", get_defined_vars()));
+        $currentValueLabel = "";//old($typeahead->id, interpolateString($typeahead->value ?? "", get_defined_vars()));
         $typeahead->value  = $currentValueLabel;
         $typeahead->autocomplete = "off";
         [$inputErrors, $action] = buildLink($typeahead->action, get_defined_vars());

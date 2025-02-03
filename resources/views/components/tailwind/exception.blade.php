@@ -1,16 +1,18 @@
 @php
     $ignoreNodes =  $ignoreNodes ?? true;
 @endphp
-<div class="border-2 border-red-600 dark:border-red-600">
-    <p class="text-start text-wrap text-lg p-1 bg-red-600 dark:bg-red-600 text-gray-100 dark:text-gray-900">
-        {{ implode(", ", $errors) }}
-    </p>
+<div class="border-2 border-red-600 dark:border-red-600 me-1">
+    @foreach($errors as $error)
+        <p class="text-start text-wrap text-lg p-1 bg-red-600 dark:bg-red-600 text-gray-100 dark:text-gray-900">
+            {{$error }}
+        </p>
+    @endforeach
     <p class="text-start text-sm p-1 bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
         Yaml Snippet
     </p>
     <div class="text-start text-gray-700 dark:text-gray-50 text-sm m-1 code-block">
         <code>
-            @foreach(explode("\n", renderComponentSource($component, $ignoreNodes)) as $line)
+            @foreach(explode("\n", renderComponentSource($component)) as $line)
                 <pre>{{$line}} &nbsp;</pre>
             @endforeach
         </code>
