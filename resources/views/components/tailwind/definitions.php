@@ -28,6 +28,7 @@ $colSpanOptions = [
     "10" => "col-span-10",
     "11" => "col-span-11",
     "12" => "col-span-12",
+    "default" => "",
 ];
 
 $gapOptions = [

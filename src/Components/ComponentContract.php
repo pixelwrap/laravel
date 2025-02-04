@@ -43,6 +43,7 @@ abstract class ComponentContract
             "border"  => "borderOptions",
             "margin"  => "marginOptions",
             "padding" => "paddingOptions",
+            "span"    => "colSpanOptions",
             "gap"     => "gapOptions"
         ];
         foreach ($spacing as $key => $values){
@@ -57,9 +58,10 @@ abstract class ComponentContract
             $value = implode(' ', $value);
         }
         $inputs =  mb_split(" ", mb_strtolower($value));
+        $keys   = array_keys($options);
         foreach ($inputs as $input){
-            if(!in_array($input, array_keys($options))) {
-                $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $options));
+            if(!in_array($input, $keys)) {
+                $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $keys));
             }else{
                 $this->addClass($options[$input]);
             }
@@ -74,13 +76,13 @@ abstract class ComponentContract
         return $this;
     }
 
-    public function render(): View
+    public function render(...$args): View
     {
         if(count($this->errors) > 0){
             return view("pixelwrap::components/{$this->theme}/exception", ["errors" => $this->errors, "component" => $this]);
         }else{
             $name = $this->template;
-            return view(sprintf("pixelwrap::components/%s/%s", $this->theme, $this->template),[$name => $this]);
+            return view(sprintf("pixelwrap::components/%s/%s", $this->theme, $this->template),[...$args, $name => $this]);
         }
     }
 

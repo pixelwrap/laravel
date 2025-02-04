@@ -2,17 +2,23 @@
 
 namespace PixelWrap\Laravel\Components;
 
+use Illuminate\Contracts\View\View;
+use PixelWrap\Laravel\Traits\HasLink;
+
 class Button extends ComponentContract
 {
+    use HasLink;
+
     public string $label = "Label not set";
     public string $role = "submit";
     public string $value = "";
+    public string $link = "";
     protected array $requiredFields = ["label"];
 
     public function parseProps($data): void
     {
         $size = mb_strtolower($this->node->size ?? 'small');
-        $role = mb_strtolower($this->node->role ?? 'button');
+        $role = mb_strtolower($this->node->role ?? $this->role);
         $variant = mb_strtolower($this->node->variant ?? 'primary');
         $rounded =  "rounded-sm";
         $validations= [
@@ -31,9 +37,12 @@ class Button extends ComponentContract
         $this->addClass($rounded);
         $this->addClass($this->themeDefinitions["buttonVariants"][$variant]);
         $this->addClass($this->themeDefinitions["buttonSizes"][$size]);
-
-        if($role==="link"){
-            [$errors, $link] = buildLink($this, get_defined_vars());
+    }
+    public function render(...$args): View
+    {
+        if($this->role === "link") {
+            $this->link = $this->buildLink($args);
         }
+        return parent::render(...$args);
     }
 }

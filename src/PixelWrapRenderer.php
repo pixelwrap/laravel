@@ -11,8 +11,10 @@ use PixelWrap\Laravel\Components\Grid;
 use PixelWrap\Laravel\Components\Heading;
 use PixelWrap\Laravel\Components\HorizontalRuler;
 use PixelWrap\Laravel\Components\Input;
+use PixelWrap\Laravel\Components\PlaceHolder;
 use PixelWrap\Laravel\Components\Row;
 use PixelWrap\Laravel\Components\Table;
+use PixelWrap\Laravel\Components\TypeAhead;
 use PixelWrap\Laravel\Support\NodeNotImplemented;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
@@ -32,6 +34,8 @@ class PixelWrapRenderer
         'form'      =>  Form::class,
         'table'     =>  Table::class,
         'input'     =>  Input::class,
+        'typeahead' =>  TypeAhead::class,
+        null        =>  PlaceHolder::class,
         'horizontalruler' =>  HorizontalRuler::class,
     ];
 

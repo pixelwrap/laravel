@@ -4,40 +4,53 @@ namespace PixelWrap\Laravel\Components;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use PixelWrap\Laravel\PixelWrapRenderer;
 
 class Table extends ComponentContract
 {
     public bool $isPaginated = false;
     public int $fieldCount;
     public string $highlight;
-    public int $indexed;
+    public bool $indexed;
     public array $actions;
-    public array $fields;
+    public array $fields = [];
     public array|LengthAwarePaginator|Paginator $dataset;
     protected array $requiredFields = ["fields", "dataset"];
 
     protected function parseProps($data): void
     {
         $table = $this->node;
-        $this->fields = $fields = $table->fields;
-        $dataset = $table->dataset;
-        $this->dataset = $data;
-        $this->indexed = $table->index ?? true;
+        $fields = $table->fields;
+        $this->dataset = $dataset = $data[$table->dataset];
+        $this->indexed = $table->indexed ?? true;
         $actions = $table->actions ?? [];
         $this->highlight = $table->highlight ?? "";
         $this->isPaginated = $dataset instanceof LengthAwarePaginator || $dataset instanceof Paginator;
-        $firstField = $fields[0];
-        if (is_object($firstField)) {
-            $this->fieldCount = count(get_object_vars($fields));
+        if (is_object($fields)) {
+            $this->fields = get_object_vars($fields);
+        } else {
             foreach ($fields as $index => $field) {
                 if (!isset($field->key) || !isset($field->label)) {
                     $this->errors[] = sprintf("Key and Label for field %s must be set. Please check if your template is compliant with the specification.", $index + 1);
                 } else {
-                    dd($fields);
+                    $this->fields[$field->key] = $field->label;
                 }
             }
-        } else {
-            $this->fieldCount = count($fields);
+        }
+        $this->fieldCount = count($this->fields);
+        foreach ($actions as $action) {
+            $button = (object) [
+                "type"    => "Button",
+                "variant" => $action->variant ?? "primary",
+                "size"    => $action->size,
+                "role"    => $action->role,
+                "label"   => $action->label,
+                "action"  => (object) [
+                    "link"   => $action->link,
+                    "params" => $action->params,
+                ]
+            ];
+            $this->actions[] = PixelWrapRenderer::from($data, $button, $this->theme);;
         }
     }
 }

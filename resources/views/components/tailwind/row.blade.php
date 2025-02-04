@@ -1,4 +1,4 @@
-<div class="flex items-center {{ $row->classes }}">
+<div class="flex {{ $row->classes }}">
     @foreach($row->nodes as $component)
         {{ $component->render() }}
     @endforeach

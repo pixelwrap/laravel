@@ -117,37 +117,35 @@ function buildLink($action, $context): array
     $errors = [];
     $link   = $action->link ?? '';
     $link   = BaseUri::from($link);
-//    if(!$link->isAbsolute()){
-//        $link = Http::fromBaseUri($link->getUriString(), request()->getUri());
-//    }
-//    $query  = Http::fromBaseUri($link)->getQuery();
-    dd($context );
-//    $query  = QueryString::parse(mb_strlen($query) >0 ? $query : null);
-//    if (isset($action->params)) {
-//        foreach ($action->params as $key => $alias) {
-//            if (is_object($alias)) {
-//                if (!isset($alias->key)) {
-//                    $errors[] = sprintf(
-//                        "Key field %s must be set. Please check if your template is compliant with the specification.",
-//                        $action->name
-//                    );
-//                }else{
-//                    $key = $alias->key;
-//                    $alias  = $alias->alias ?? $key;
-//                }
-//            }
-//            $value  = $context["context"][$key] ?? $context[$key] ?? $key;
-//            $param  = sprintf("{%s}",$alias);
-//            $decodedLink = urldecode($link);
-//            if(mb_strpos($decodedLink, $param) !== false){
-//                $link = str_replace($param, $value, $decodedLink);
-//            }else {
-//                $query[] = [$alias, $value];
-//            }
-//        }
-//    }
-//    $url = Http::fromBaseUri($link)->withQuery(QueryString::buildFromPairs($query) ?? "");
-    return [$errors, "url"];
+    if(!$link->isAbsolute()){
+        $link = Http::fromBaseUri($link->getUriString(), request()->getUri());
+    }
+    $query  = Http::fromBaseUri($link)->getQuery();
+    $query  = QueryString::parse(mb_strlen($query) >0 ? $query : null);
+    if (isset($action->params)) {
+        foreach ($action->params as $key => $alias) {
+            if (is_object($alias)) {
+                if (!isset($alias->key)) {
+                    $errors[] = sprintf(
+                        "Key field %s must be set. Please check if your template is compliant with the specification.",
+                        $action->name
+                    );
+                }else{
+                    $key = $alias->key;
+                    $alias  = $alias->alias ?? $key;
+                }
+            }
+            $value  = $context["context"][$key] ?? $context[$key] ?? $key;
+            $param  = sprintf("{%s}",$alias);
+            $decodedLink = urldecode($link);
+            if(mb_strpos($decodedLink, $param) !== false){
+                $link = str_replace($param, $value, $decodedLink);
+            }else {
+                $query[] = [$alias, $value];
+            }
+        }
+    }
+    $url = Http::fromBaseUri($link)->withQuery(QueryString::buildFromPairs($query) ?? "");
     return [$errors, $url];
 }
 

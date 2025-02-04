@@ -14,7 +14,7 @@ class Grid extends CompoundComponent
             $span = $node->span ?? 3;
             if (!in_array($span, $options)) {
                 $this->errors[] = sprintf("Grid span for node \"%s\" only allows one of %s.", $index + 1, implode(", ", $options));
-                $ignoreNodes = false;
+                $this->ignoreNodes = false;
             }
         }
     }

@@ -1,6 +1,6 @@
-<div class="grid align-top {{$grid->classes}}">
+<div class="grid align-bottom items-end  {{$grid->classes}}">
     @foreach($grid->nodes as $component)
-        <div class="{{$node->span ?? 3}}">
+        <div class="{{$component->classes}}">
             {{ $component->render() }}
         </div>
     @endforeach
