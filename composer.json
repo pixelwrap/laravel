@@ -19,7 +19,7 @@
     ],
     "require": {
         "ext-mbstring": "*",
-        "symfony/yaml": "^7.2",
+        "symfony/yaml": "^6.0||^7.0",
         "league/uri": "^7.5"
     },
     "extra": {
