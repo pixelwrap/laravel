@@ -73,7 +73,7 @@ class PixelWrapRenderer
                     $components[] = static::from($data, $node, $this->theme);
                 }
             }else{
-                raise(null, "The page-root view \"$pageContainer\" does not exist. Please check your config file \"config/pixelwrap.php\" and try again.");
+                raise(null, sprintf("The page-root view \"%s\".blade.php does not exist. Please check your config file \"config/pixelwrap.php\" and try again.", $pageContainer));
             }
         } catch (ParseException $exception) {
             $errors     = [$exception->getMessage()];

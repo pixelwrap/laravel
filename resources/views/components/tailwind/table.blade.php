@@ -52,7 +52,7 @@
     @empty
         <tr class="bg-gray-200">
             <td class="px-3 py-2" colspan="{{ $table->fieldCount + ($table->indexed ? 1: 0) + (count($table->actions)>0 ? 1:0) }}">
-                <p class="text-md font-normal">
+                <p class="text-md font-normal text-gray-900 dark:text-white">
                     {{ $table->table->emptyMessage ?? "Nothing here." }}
                 </p>
             </td>

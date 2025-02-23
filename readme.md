@@ -19,7 +19,7 @@ Once the package is installed, you need to publish the necessary assets, such as
 
 Run the following Artisan command to publish the assets:
 ```shell
-php artisan vendor:publish --provider="PixelWrap\ServiceProvider"
+php artisan vendor:publish --provider="PixelWrap\Laravel\PixelWrapServiceProvider"
 ```
 This will publish the configuration file into your Laravel application.
 
@@ -78,7 +78,7 @@ Where you have your javascript files include this in your imports.
 import '../../vendor/pixelwrap/laravel/resources/js/tailwind.js'
 ```
 
-Even better to add this this inline in `head` tag to avoid FOUC
+Optionally, Add this inline in `head` tag to avoid FOUC
 
 ```js
 if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
