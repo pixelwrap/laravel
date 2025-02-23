@@ -220,3 +220,13 @@ $buttonSizes = [
     "smaller"   => "text-sm px-3 py-1.5",
     "smallest"  => "text-xs px-3 py-1"
 ];
+
+$inputVariants  = [
+    "primary"   => "w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-600 rounded-sm shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none",
+    "disabled"  => "bg-gray-50 dark:bg-gray-400 disabled:opacity:50 cursor-not-allowed"
+];
+
+$inputLabelVariants  = [
+    "primary"   => "block my-1 text-sm font-medium text-gray-800 dark:text-gray-50",
+    "disabled"  => "disabled:opacity:50 cursor-not-allowed"
+];

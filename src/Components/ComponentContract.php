@@ -16,28 +16,30 @@ abstract class ComponentContract
     public string $name;
     public string $theme;
     public string $classes = "";
+    public string $id = "";
     public mixed $node;
     public bool $ignoreNodes = true;
     public function __construct($data, $node, $theme = "tailwind")
     {
+        $this->node = $node;
         $this->template = mb_strtolower(class_basename(static::class));
         $this->name = $this->template;
+        $this->id = $node->id ??  $this->id;
         if (in_array($theme, $this->supportedThemes)) {
             $this->theme = $theme;
-            $this->node  = $node;
             $this->setThemeDefinitions();
-            $this->validateModel();
-            $this->parseBoxModelProperties();
-            $this->parseProps($data);
+            $this->validateModel($node);
+            $this->parseBoxModelProperties($node);
+            $this->parseProps($node, $data);
         } else {
             throw new InvalidValue("Theme '{$theme}' is not supported");
         }
     }
 
-    protected abstract function parseProps($data): void;
+    protected abstract function parseProps($node, $data): void;
 
 
-    protected function parseBoxModelProperties(): void
+    protected function parseBoxModelProperties($node): void
     {
         $spacing = [
             "border"  => "borderOptions",
@@ -47,13 +49,13 @@ abstract class ComponentContract
             "gap"     => "gapOptions"
         ];
         foreach ($spacing as $key => $values){
-            $this->validateAndParseBoxModel($key, $values);
+            $this->validateAndParseBoxModel($node, $key, $values);
         }
     }
-    protected function validateAndParseBoxModel($key, $map): void
+    protected function validateAndParseBoxModel($node, $key, $map): void
     {
         $options  =  $this->themeDefinitions[$map];
-        $value    = $this->node->{$key} ?? 'default';
+        $value    = $node->{$key} ?? 'default';
         if(is_array($value)){
             $value = implode(' ', $value);
         }
@@ -63,16 +65,18 @@ abstract class ComponentContract
             if(!in_array($input, $keys)) {
                 $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $keys));
             }else{
-                $this->addClass($options[$input]);
+                if($key === "span"){
+                    $this->addClass($options[$input],"spanClasses");
+                }else {
+                    $this->addClass($options[$input]);
+                }
             }
         }
     }
 
-    protected function addClass(string $class): static
+    protected function addClass(string $class, $field = "classes"): static
     {
-        if($class) {
-            $this->classes = sprintf("%s %s", $this->classes, $class);
-        }
+        $this->{$field} = mb_trim(sprintf("%s %s", $this->{$field} ?? '', $class));
         return $this;
     }
 
@@ -86,11 +90,11 @@ abstract class ComponentContract
         }
     }
 
-    protected function validateModel(): void
+    protected function validateModel($node): void
     {
         $message = "%s must be set. Please check if your template is compliant with the specification.";
         foreach ($this->requiredFields as $field){
-            if(!isset($this->node->{$field})){
+            if(!isset($node->{$field})){
                 $this->errors[] = sprintf($message, mb_ucfirst($field));
             }
         }

@@ -15,5 +15,5 @@ class HorizontalRuler extends ComponentContract
         $this->template = "hr";
     }
 
-    protected function parseProps($data): void{}
+    protected function parseProps($node, $data): void {}
 }

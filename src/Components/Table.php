@@ -17,9 +17,8 @@ class Table extends ComponentContract
     public array|LengthAwarePaginator|Paginator $dataset;
     protected array $requiredFields = ["fields", "dataset"];
 
-    protected function parseProps($data): void
+    protected function parseProps($table, $data): void
     {
-        $table = $this->node;
         $fields = $table->fields;
         $this->dataset = $dataset = $data[$table->dataset];
         $this->indexed = $table->indexed ?? true;
@@ -42,8 +41,8 @@ class Table extends ComponentContract
             $button = (object) [
                 "type"    => "Button",
                 "variant" => $action->variant ?? "primary",
-                "size"    => $action->size,
-                "role"    => $action->role,
+                "size"    => $action->size ?? "small",
+                "role"    => "link",
                 "label"   => $action->label,
                 "action"  => (object) [
                     "link"   => $action->link,

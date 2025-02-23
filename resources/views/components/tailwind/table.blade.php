@@ -33,18 +33,18 @@
             @foreach($table->fields as $key => $field)
                 @if($key === $table->highlight)
                     <th scope="row" class="px-3 py-2 font-bold text-gray-900 whitespace-nowrap dark:text-white text-left">
-                        {{ $row[$key] }}
+                        {{ ((array) $row)[$key] }}
                     </th>
                 @else
                     <td class="px-3 py-2 text-left">
-                        {{ $row[$key] }}
+                        {{ ((array) $row)[$key] }}
                     </td>
                 @endif
             @endforeach
             @if(count($table->actions)>0)
                 <td class="py-1 flex flex-row justify-center gap-x-2">
                     @foreach($table->actions as $action)
-                        {{$action->render(...$row)}}
+                        {{$action->render(...((array) $row))}}
                     @endforeach
                 </td>
             @endif

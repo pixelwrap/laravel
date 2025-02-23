@@ -8,9 +8,8 @@ use League\Uri\QueryString;
 
 trait HasLink
 {
-    public function buildLink($context): string
+    public function buildLink($action, $context): string
     {
-        $action = $this->node->action;
         $link   = $action->link;
         $link   = BaseUri::from($link);
         if(!$link->isAbsolute()){

@@ -10,12 +10,12 @@ class Form extends CompoundComponent
 
     public string $action;
     public string $method = "post";
+    public bool $autocomplete = false;
     protected array $requiredFields = ["nodes", "method", "action"];
-
-    public function parseProps($data):void
+    public function parseProps($node, $data): void
     {
-        parent::parseProps($data);
-        $this->method = $this->node->method ?? $this->method;
-        $this->action = $this->buildLink($data);
+        parent::parseProps($node, $data);
+        $this->method = $node->method ?? $this->method;
+        $this->action = $this->buildLink($node->action ?? $this->action, $data);
     }
 }

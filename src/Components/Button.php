@@ -13,13 +13,14 @@ class Button extends ComponentContract
     public string $role = "submit";
     public string $value = "";
     public string $link = "";
+    public mixed  $action;
     protected array $requiredFields = ["label"];
 
-    public function parseProps($data): void
+    public function parseProps($node, $data): void
     {
-        $size = mb_strtolower($this->node->size ?? 'small');
-        $role = mb_strtolower($this->node->role ?? $this->role);
-        $variant = mb_strtolower($this->node->variant ?? 'primary');
+        $size = mb_strtolower($node->size ?? 'small');
+        $role = mb_strtolower($node->role ?? $this->role);
+        $variant = mb_strtolower($node->variant ?? 'primary');
         $rounded =  "rounded-sm";
         $validations= [
             "role"    => ["link","reset","button","submit"],
@@ -31,17 +32,28 @@ class Button extends ComponentContract
                 $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $options));
             }
         }
-        $this->label = $this->node->label;
-        $this->value = $this->node->value ?? "";
-        $this->role  = $role;
+        $this->label   = $node->label;
+        $this->value   = $node->value ?? "";
+        $this->role    = $role;
         $this->addClass($rounded);
         $this->addClass($this->themeDefinitions["buttonVariants"][$variant]);
         $this->addClass($this->themeDefinitions["buttonSizes"][$size]);
+
+        if($this->role === "link") {
+            $field = "action";
+            if(isset($node->{$field})) {
+                $this->action = $node->action;
+            } else {
+                $message = "Action must be set. Please check if your template is compliant with the specification.";
+                $this->errors[] = $message;
+            }
+        }
     }
+
     public function render(...$args): View
     {
         if($this->role === "link") {
-            $this->link = $this->buildLink($args);
+            $this->link = $this->buildLink($this->action, $args);
         }
         return parent::render(...$args);
     }

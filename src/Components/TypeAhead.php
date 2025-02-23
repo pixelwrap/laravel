@@ -14,29 +14,35 @@ class TypeAhead extends Input
     public string $action;
     public string $query = "q";
     public string $attach = "attach";
-    public string $show = "name";
     public string $list = "name";
+    public string $show = "name";
     public ComponentContract $input;
 
     /**
      * @throws NodeNotImplemented
      */
-    public function parseProps($data): void
+    public function parseProps($node, $data): void
     {
-        parent::parseProps($data);
-        $inputId =  sprintf("autocomplete-input-%s",$this->id);
+        parent::parseProps($node, $data);
         $input = (object) [
             "type"          => "Input",
-            "id"            => $inputId,
-            "label"         => $this->label,
+            "id"            => sprintf("type-ahead-%s", $node->id),
+            "label"         => $node->label,
+            "placeholder"   => $node->placeholder,
             "autocomplete"  => false,
-            "value"         => old($inputId, interpolateString($typeahead->value ?? "", $data))
+            "value"         => old($this->id, interpolateString($typeahead->value ?? "", $data))
         ];
-        $this->query    =  $this->node->query ??  $this->query;
-        $this->attach   =  $this->node->attach ??  $this->attach;
-        $this->show     =  $this->node->show ??  $this->show;
-        $this->list     =  $this->node->list ??  $this->list;
+
+        // What to send to server as query field
+        $this->query    =  $node->query  ??  $this->query;
+        // Field we attach as value to input field from results.
+        $this->attach   =  $node->attach ??  $this->attach;
+        // What field to show on input field.
+        $this->show     =  $node->show   ??  $this->show;
+        // What field to show on search results window.
+        $this->list     =  $node->list   ??  $this->list;
+
         $this->input    =  PixelWrapRenderer::from($data, $input, $this->theme);
-        $this->action   = $this->buildLink($data);
+        $this->action   =  $this->buildLink($node->action, $data);
     }
 }

@@ -13,6 +13,7 @@ use PixelWrap\Laravel\Components\HorizontalRuler;
 use PixelWrap\Laravel\Components\Input;
 use PixelWrap\Laravel\Components\PlaceHolder;
 use PixelWrap\Laravel\Components\Row;
+use PixelWrap\Laravel\Components\Select;
 use PixelWrap\Laravel\Components\Table;
 use PixelWrap\Laravel\Components\TypeAhead;
 use PixelWrap\Laravel\Support\NodeNotImplemented;
@@ -34,6 +35,7 @@ class PixelWrapRenderer
         'form'      =>  Form::class,
         'table'     =>  Table::class,
         'input'     =>  Input::class,
+        'select'    =>  Select::class,
         'typeahead' =>  TypeAhead::class,
         null        =>  PlaceHolder::class,
         'horizontalruler' =>  HorizontalRuler::class,

@@ -1,6 +1,6 @@
 # PixelWrap for Laravel
 
-**PixelWrap** allows you to build dynamic and customizable front-end interfaces using simple YAML schemas. No need to write individual HTML components—just define your UI structure in a YAML file, and let **PixelWrap** generate the layout, components, and interactions for you.
+**PixelWrap** allows you to quickly build dynamic front-end of your application using simple YAML schemas. No need to write individual HTML components—just define your UI structure in a YAML file, and let **PixelWrap** do the rest of thw work for you. It will handle creation the layouts, related components, and user interactions for you.
 
 With built-in support for **Tailwind CSS**, **PixelWrap** streamlines the process of building user interfaces, saving developers time and effort.
 PixelWrap ensures that the final product is both visually appealing and highly functional, without sacrificing design integrity or user interaction quality. Perfect for developers who want to move quickly and efficiently.
@@ -59,12 +59,32 @@ You can modify these settings based on your project’s design requirements.
 To ensure live reloading when editing the `yaml` templated and avoid purging the required CSS during production builds, you need to update the content array in your `tailwind.config.js` file. This will ensure Tailwind picks up the package and YAML files correctly.
 ```js
 module.exports = {
+    darkMode: 'class', // Dark mode support.
     content: [
-        // Your existing config
+        /* Your existing config */
+        // Our config next
         './vendor/pixelwrap/laravel/resources/**/*.php',
         './resources/**/*.yaml',
         // Add any other paths where your content lives
     ],
+}
+```
+
+### Tailwind dark mode and light mode support.
+
+Where you have your javascript files include this in your imports.
+
+```
+import '../../vendor/pixelwrap/laravel/resources/js/tailwind.js'
+```
+
+Even better to add this this inline in `head` tag to avoid FOUC
+
+```js
+if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+} else {
+    document.documentElement.classList.remove('dark')
 }
 ```
 
@@ -88,13 +108,13 @@ nodes:
       id: email
       label: 'Email Address'
       fieldType: email
-    - type: Dropdown
+    - type: Select
       id: role
       label: 'User Role'
       options:
           admin: 'Administrator'
-          user: 'User'
-          guest: 'Guest'
+          user:  'Accountant'
+          customer: 'Customer'
 ```
 This schema will generate a grid with three columns, containing an input for name, email, and a dropdown for user roles.
 
@@ -148,7 +168,7 @@ Clone this repository locally
 ```shell
 git clone git@github.com:pixelwrap/laravel.git packages/pixelwrap/laravel
 ```
-### 3. Add the Repository to composer.json of the newly created Laravel project.
+### 3. Add the Repository to `composer.json` of the newly created project.
 ```json
 "repositories": [
     {
@@ -177,4 +197,6 @@ Once you’re ready to submit your changes:
 - Push your branch to your forked repository `git push origin your-feature-branch`
 - Open a pull request to the main repository’s main branch.
 
-Thank you for contributing! We appreciate your help in improving the PixelWrap Laravel package. If you have any questions or run into issues, feel free to ask for help in the issues section of the repository.
+Thank you for contributing! We appreciate your help in improving the PixelWrap.
+
+If you have any questions or run into issues, feel free to ask for help in the issues section of this repository.
