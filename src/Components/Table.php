@@ -2,6 +2,7 @@
 
 namespace PixelWrap\Laravel\Components;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use PixelWrap\Laravel\PixelWrapRenderer;
@@ -14,7 +15,7 @@ class Table extends ComponentContract
     public bool $indexed;
     public array $actions;
     public array $fields = [];
-    public array|LengthAwarePaginator|Paginator $dataset;
+    public array|LengthAwarePaginator|Paginator|Collection $dataset;
     protected array $requiredFields = ["fields", "dataset"];
 
     protected function parseProps($table, $data): void
