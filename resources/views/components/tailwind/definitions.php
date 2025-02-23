@@ -28,6 +28,7 @@ $colSpanOptions = [
     "10" => "col-span-10",
     "11" => "col-span-11",
     "12" => "col-span-12",
+    "default" => "",
 ];
 
 $gapOptions = [
@@ -193,4 +194,39 @@ $borderOptions = [
     "left-big"          => "border-l border-l-8",
     "left-bigger"       => "border-l border-l-16",
     "left-none"         => "border-l-0",
+];
+
+$headingTypes = [
+    "biggest"   => "text-4xl",
+    "bigger"    => "text-3xl",
+    "big"       => "text-2xl",
+    "small"     => "text-xl",
+    "smaller"   => "text-ld",
+    "smallest"  => "text-sm"
+];
+
+$buttonVariants  = [
+    "primary"   => "text-white border-blue-700 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4    focus:ring-blue-300 font-medium dark:border-blue-600 dark:bg-blue-600   dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800",
+    "secondary" => "text-white border-gray-700 bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-4    focus:ring-gray-300 font-medium dark:bg-blue-600 dark:bg-gray-600       dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700",
+    "success"   => "text-white border-green-700 bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium dark:bg-green-600 dark:bg-green-600    dark:hover:bg-green-700 dark:focus:ring-green-700 dark:border-green-700",
+    "danger"    => "text-white border-red-700 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4       focus:ring-red-300 font-medium dark:bg-red-600 dark:bg-red-600          dark:hover:bg-red-700 dark:focus:ring-red-900 dark:border-red-900",
+];
+
+$buttonSizes = [
+    "biggest"   => "text-xl px-6 py-4",
+    "bigger"    => "text-lg px-5 py-3",
+    "big"       => "test-md px-4 py-2.5",
+    "small"     => "text-sm px-3 py-2",
+    "smaller"   => "text-sm px-3 py-1.5",
+    "smallest"  => "text-xs px-3 py-1"
+];
+
+$inputVariants  = [
+    "primary"   => "w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-600 rounded-sm shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none",
+    "disabled"  => "bg-gray-50 dark:bg-gray-400 disabled:opacity:50 cursor-not-allowed"
+];
+
+$inputLabelVariants  = [
+    "primary"   => "block my-1 text-sm font-medium text-gray-800 dark:text-gray-50",
+    "disabled"  => "disabled:opacity:50 cursor-not-allowed"
 ];

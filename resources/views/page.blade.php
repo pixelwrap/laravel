@@ -1,10 +1,6 @@
-@php
-    if (!isset($theme)){
-        $theme = "tailwind";
-    }
-    require pixelwrap_resource("components/{$theme}/definitions.php");
-@endphp
-@extends($pixelWrapContainer)
+@extends($pageContainer)
 @section('pixelwrap-container')
-    @include("pixelwrap::components.nodes",['nodes' => $nodes])
+    @foreach($components as $component)
+        {{ $component->render() }}
+    @endforeach
 @endsection
