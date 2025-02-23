@@ -50,9 +50,9 @@
             @endif
         </tr>
     @empty
-        <tr class="bg-gray-200">
+        <tr class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
             <td class="px-3 py-2" colspan="{{ $table->fieldCount + ($table->indexed ? 1: 0) + (count($table->actions)>0 ? 1:0) }}">
-                <p class="text-md font-normal text-gray-900 dark:text-white">
+                <p class="text-md font-normal">
                     {{ $table->table->emptyMessage ?? "Nothing here." }}
                 </p>
             </td>
