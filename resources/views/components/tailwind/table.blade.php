@@ -33,11 +33,11 @@
             @foreach($table->fields as $key => $field)
                 @if($key === $table->highlight)
                     <th scope="row" class="px-3 py-2 font-bold text-gray-900 whitespace-nowrap dark:text-white text-left">
-                        {{ ((array) $row)[$key] }}
+                        {{ ((array) $row)[$key] ?? null }}
                     </th>
                 @else
                     <td class="px-3 py-2 text-left">
-                        {{ ((array) $row)[$key] }}
+                        {{ ((array) $row)[$key] ?? null }}
                     </td>
                 @endif
             @endforeach
