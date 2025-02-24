@@ -222,7 +222,7 @@ $buttonSizes = [
 ];
 
 $inputVariants  = [
-    "primary"   => "w-full px-4 py-2 text-sm text-gray-900 bg-white border border-gray-600 rounded-sm shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none",
+    "primary"   => "w-full px-4 py-2 text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none",
     "disabled"  => "bg-gray-50 dark:bg-gray-400 disabled:opacity:50 cursor-not-allowed"
 ];
 

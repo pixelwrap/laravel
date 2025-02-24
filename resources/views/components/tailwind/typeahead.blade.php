@@ -16,6 +16,8 @@
         const resultsWindow = valueInput.closest(".type-ahead").querySelector(".type-ahead-results");
         const results       = resultsWindow.querySelector("ul");
         const url           = new URL(endPoint);
+        let currentLabel    = "{!!$typeahead->input->value ?? ''!!}";
+        let currenValue     = "{{$typeahead->value ?? ''}}";
         let currentWorkId   = 0;
         let searchTimeout;
 
@@ -36,6 +38,8 @@
                             li.addEventListener("click", () => {
                                 searchInput.value = result.{{$typeahead->show}};
                                 valueInput.value  = result.{{$typeahead->attach}};
+                                currentLabel      = searchInput.value;
+                                currentValue      = valueInput.value;
                                 resultsWindow.classList.add("hidden");
                             });
                             results.appendChild(li);
@@ -77,8 +81,8 @@
             // Hide dropdown when clicking outside the search box and reset input value
             if (!resultsWindow.classList.contains("hidden") && !resultsWindow.contains(event.target) && event.target !== searchInput) {
                 resultsWindow.classList.add("hidden");
-                searchInput.value = ""
-                valueInput.value  = "";
+                searchInput.value = currentLabel
+                valueInput.value  = currenValue;
             }
         });
     }
