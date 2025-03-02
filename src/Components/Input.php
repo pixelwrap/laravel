@@ -2,7 +2,7 @@
 
 namespace PixelWrap\Laravel\Components;
 
-class Input extends InputContract
+class Input extends TextArea
 {
     public string $fieldType = "text";
     public bool $autocomplete = false;
@@ -19,13 +19,6 @@ class Input extends InputContract
         $this->fieldType    = $node->fieldType ?? $this->fieldType;
         if ($this->fieldType == "hidden") {
             $this->showLabel = false;
-        }
-        $this->addClass($this->themeDefinitions["inputVariants"]["primary"]);
-        $this->addClass($this->themeDefinitions["inputLabelVariants"]["primary"], "labelClasses");
-
-        if ($input->disabled ?? false) {
-            $this->addClass($this->themeDefinitions["inputVariants"]["disabled"]);
-            $this->addClass($this->themeDefinitions["inputLabelVariants"]["disabled"], "labelClasses");
         }
     }
 }

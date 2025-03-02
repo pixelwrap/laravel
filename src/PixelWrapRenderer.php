@@ -9,6 +9,7 @@ use PixelWrap\Laravel\Components\Column;
 use PixelWrap\Laravel\Components\ComponentContract;
 use PixelWrap\Laravel\Components\Form;
 use PixelWrap\Laravel\Components\Image;
+use PixelWrap\Laravel\Components\TextArea;
 use PixelWrap\Laravel\Components\Grid;
 use PixelWrap\Laravel\Components\Card;
 use PixelWrap\Laravel\Components\Listing;
@@ -32,6 +33,7 @@ class PixelWrapRenderer
     protected $paths = [];
     static $map = [
         'text'      =>  Text::class,
+        'textarea'  =>  TextArea::class,
         'image'     =>  Image::class,
         'badge'     =>  Badge::class,
         'heading'   =>  Heading::class,
