@@ -2,8 +2,12 @@
 
 namespace PixelWrap\Laravel\Components;
 
+use PixelWrap\Laravel\Traits\HasText;
+
 class Text extends ComponentContract
 {
+    use HasText;
+
     public string $label = "Label not set";
     protected array $requiredFields = ["label"];
 
@@ -12,8 +16,4 @@ class Text extends ComponentContract
         $this->label = $node->label ?? $this->label;
     }
 
-    public function text()
-    {
-        return $this->label;
-    }
 }

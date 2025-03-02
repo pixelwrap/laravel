@@ -69,7 +69,7 @@ function interpolateString($format, $variables): string
 }
 
 
-function filter($filters, $value): string
+function filter($filters, $value): string | null
 {
     foreach ($filters as $rawFilter) {
         if(Str::contains($rawFilter, ':')) {
@@ -80,13 +80,16 @@ function filter($filters, $value): string
             $params = [];
         }
         switch ($filter) {
-            case 'lowercase':
-                $value = Str::lower($value);
-                break;
             case 'bool':
             case 'boolean':
                 $params = [...$params, 'False', 'True'];
                 $value  = $params[$value];
+                break;
+            case 'number':
+                $value = number_format(floatval($value),2);
+                break;
+            case 'lowercase':
+                $value = Str::lower($value);
                 break;
             case 'uppercase':
                 $value = Str::upper($value);

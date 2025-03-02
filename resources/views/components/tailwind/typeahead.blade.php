@@ -1,5 +1,5 @@
 <div class="relative type-ahead">
-    {{ $typeahead->input->render() }}
+    {{ $typeahead->input->render(get_defined_vars()) }}
     <div
         class="absolute z-10 hidden w-full mt-1 bg-white border border-gray-300 rounded-sm shadow-lg dark:bg-gray-700 dark:border-gray-800 type-ahead-results">
         <ul class="divide-y divide-gray-200 dark:divide-gray-600"></ul>

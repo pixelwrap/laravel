@@ -8,7 +8,10 @@ use PixelWrap\Laravel\Components\Button;
 use PixelWrap\Laravel\Components\Column;
 use PixelWrap\Laravel\Components\ComponentContract;
 use PixelWrap\Laravel\Components\Form;
+use PixelWrap\Laravel\Components\Image;
 use PixelWrap\Laravel\Components\Grid;
+use PixelWrap\Laravel\Components\Card;
+use PixelWrap\Laravel\Components\Listing;
 use PixelWrap\Laravel\Components\Text;
 use PixelWrap\Laravel\Components\Heading;
 use PixelWrap\Laravel\Components\HorizontalRuler;
@@ -29,12 +32,15 @@ class PixelWrapRenderer
     protected $paths = [];
     static $map = [
         'text'      =>  Text::class,
+        'image'     =>  Image::class,
         'badge'     =>  Badge::class,
         'heading'   =>  Heading::class,
         'button'    =>  Button::class,
         'column'    =>  Column::class,
+        'listing'   =>  Listing::class,
         'row'       =>  Row::class,
         'grid'      =>  Grid::class,
+        'card'      =>  Card::class,
         'hr'        =>  HorizontalRuler::class,
         'form'      =>  Form::class,
         'table'     =>  Table::class,

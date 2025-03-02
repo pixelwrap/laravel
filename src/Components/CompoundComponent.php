@@ -15,10 +15,11 @@ class CompoundComponent extends ComponentContract
      */
     public function parseProps($node, $data): void
     {
-        $this->nodes = [];
-        foreach ($node->nodes as $node) {
-            $inflatedNode  = PixelWrapRenderer::from($data, $node, $this->theme);
-            $this->nodes[] =  $inflatedNode;
+        if(isset($node->nodes)) {
+            foreach ($node->nodes as $node) {
+                $inflatedNode = PixelWrapRenderer::from($data, $node, $this->theme);
+                $this->nodes[] = $inflatedNode;
+            }
         }
     }
 }

@@ -12,8 +12,8 @@ abstract class ComponentContract
     protected array $requiredFields = [];
     protected mixed $showIf = [];
     protected mixed $hideIf = [];
-    public array $errors = [];
-
+    public array $errors  = [];
+    public array $filters = [];
     public string $template;
     public string $name;
     public string $theme;
@@ -29,8 +29,9 @@ abstract class ComponentContract
         $this->template = mb_strtolower(class_basename(static::class));
         $this->name = $this->template;
         $this->id = $node->id ??  $this->id;
-        $this->showIf = $node->{"show-if"} ??  $this->showIf;
-        $this->hideIf = $node->{"hide-if"} ??  $this->hideIf;
+        $this->showIf  = $node->{"show-if"} ??  $this->showIf;
+        $this->hideIf  = $node->{"hide-if"} ??  $this->hideIf;
+        $this->filters = explode("|", $node->filters ?? null);
         if (in_array($theme, $this->supportedThemes)) {
             $this->theme = $theme;
             $this->setThemeDefinitions();

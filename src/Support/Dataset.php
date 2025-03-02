@@ -14,6 +14,13 @@ class Dataset implements \ArrayAccess, \IteratorAggregate
     public function __construct($data = [])
     {
         foreach ($data as $value) {
+            if (is_object($value)) {
+                if (method_exists($value, 'toArray')) {
+                    $value = $value->toArray();
+                } else {
+                    $value = get_object_vars($value);
+                }
+            }
             $this->rows[] = new Row($value);
         }
     }

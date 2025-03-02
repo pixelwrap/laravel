@@ -1,5 +1,5 @@
 <div class="relative z-0 w-full group">
-    <label for="{{$select->id}}" class="{{$select->labelClasses}}">{{ $select->text() }}</label>
+    <label for="{{$select->id}}" class="{{$select->labelClasses}}">{{ $select->text(get_defined_vars()) }}</label>
     <div class="relative">
         <select id="{{$select->id}}" name="{{ $select->id }}" class="{{$select->classes}}" @required($select->required)>
             @if($select->placeholder)
