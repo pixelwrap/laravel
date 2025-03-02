@@ -18,25 +18,28 @@ trait HasLink
         $query  = Http::fromBaseUri($link)->getQuery();
         $query  = QueryString::parse(mb_strlen($query) >0 ? $query : null);
         if (isset($action->params)) {
-            foreach ($action->params as $key => $alias) {
-                if (is_object($alias)) {
-                    if (!isset($alias->key)) {
+            foreach ($action->params as $key => $value) {
+                if (is_object($value)) {
+                    if (!isset($value->key)) {
                         $this->errors[] = sprintf(
                             "Key field %s must be set. Please check if your template is compliant with the specification.",
                             $action->name
                         );
                     }else{
-                        $key = $alias->key;
-                        $alias  = $alias->alias ?? $key;
+                        $key    = $value->key;
+                        $value  = $value->alias ?? $value->value ?? $key;
                     }
                 }
-                $value  = $context["context"][$key] ?? $context[$key] ?? $key;
-                $param  = sprintf("{%s}",$alias);
+
+                $param  =  sprintf("{%s}", $key);
+                if(isset($context[$value])){
+                    $value  =  $context[$value];
+                }
                 $decodedLink = urldecode($link);
                 if(mb_strpos($decodedLink, $param) !== false){
                     $link = str_replace($param, $value, $decodedLink);
                 }else {
-                    $query[] = [$alias, $value];
+                    $query[] = [$key, $value];
                 }
             }
         }

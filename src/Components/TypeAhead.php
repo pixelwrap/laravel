@@ -28,8 +28,9 @@ class TypeAhead extends Input
             "type"          => "Input",
             "id"            => sprintf("type-ahead-%s", $node->id),
             "label"         => $node->label,
-            "placeholder"   => $node->placeholder,
+            "placeholder"   => $node->placeholder ?? $this->placeholder,
             "autocomplete"  => false,
+            "required"      => false,
             "value"         => old(sprintf("type-ahead-%s", $node->id), interpolateString($node->currentLabel ?? "", $data))
         ];
 
@@ -43,6 +44,8 @@ class TypeAhead extends Input
         $this->list     =  $node->list   ??  $this->list;
 
         $this->input    =  PixelWrapRenderer::from($data, $input, $this->theme);
-        $this->action   =  $this->buildLink($node->action, $data);
+        if(isset($node->action)) {
+            $this->action = $this->buildLink($node->action, $data);
+        }
     }
 }

@@ -3,11 +3,13 @@
 namespace PixelWrap\Laravel;
 
 use Exception;
+use PixelWrap\Laravel\Components\Badge;
 use PixelWrap\Laravel\Components\Button;
 use PixelWrap\Laravel\Components\Column;
 use PixelWrap\Laravel\Components\ComponentContract;
 use PixelWrap\Laravel\Components\Form;
 use PixelWrap\Laravel\Components\Grid;
+use PixelWrap\Laravel\Components\Text;
 use PixelWrap\Laravel\Components\Heading;
 use PixelWrap\Laravel\Components\HorizontalRuler;
 use PixelWrap\Laravel\Components\Input;
@@ -26,6 +28,8 @@ class PixelWrapRenderer
     protected $theme = "tailwind";
     protected $paths = [];
     static $map = [
+        'text'      =>  Text::class,
+        'badge'     =>  Badge::class,
         'heading'   =>  Heading::class,
         'button'    =>  Button::class,
         'column'    =>  Column::class,

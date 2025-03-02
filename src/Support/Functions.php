@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Symfony\Component\Yaml\Yaml;
+use Illuminate\Support\Collection;
 use PixelWrap\Laravel\Support\InvalidValue;
 use PixelWrap\Laravel\Support\NodeNotImplemented;
 
@@ -45,7 +46,6 @@ function renderComponentSource($component): string
     }
 }
 
-
 function interpolateString($format, $variables): string
 {
     // Match placeholders like {branch.name}
@@ -60,7 +60,7 @@ function interpolateString($format, $variables): string
             } elseif (is_array($value) && isset($value[$key])) {
                 $value = $value[$key]; // Access array elements
             } else {
-                return $matches[0]; // Return the placeholder if not found
+                return ''; // Return an empty string if not found
             }
         }
 
@@ -68,15 +68,34 @@ function interpolateString($format, $variables): string
     }, $format);
 }
 
-function filterObjectProps($object,$except): Collection
+
+function filter($filters, $value): string
 {
-    return collect(get_object_vars($object))
-        ->except($except);
+    foreach ($filters as $rawFilter) {
+        if(Str::contains($rawFilter, ':')) {
+            [$filter, $params] = explode(':', $rawFilter);
+            $params = explode(',', $params);
+        }else{
+            $filter = $rawFilter;
+            $params = [];
+        }
+        switch ($filter) {
+            case 'lowercase':
+                $value = Str::lower($value);
+                break;
+            case 'bool':
+            case 'boolean':
+                $params = [...$params, 'False', 'True'];
+                $value  = $params[$value];
+                break;
+            case 'uppercase':
+                $value = Str::upper($value);
+                break;
+            case 'capitalize':
+                $value = Str::title($value);
+                break;
+        }
+    }
+    return $value;
 }
 
-function filterAndMapObjectProps($object,$except): string
-{
-    return filterObjectProps($object,$except)
-        ->map(fn($value, $key) => $key . '="' . $value . '"')
-        ->implode(' ');
-}

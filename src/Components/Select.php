@@ -5,8 +5,6 @@ namespace PixelWrap\Laravel\Components;
 class Select extends InputContract
 {
     public string $id;
-    public string $label = "Label not set";
-    public string $value = "";
     public bool $showLabel = true;
     public bool $required = true;
     public array $options = [];

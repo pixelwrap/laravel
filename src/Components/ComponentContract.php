@@ -10,6 +10,8 @@ abstract class ComponentContract
     protected array $supportedThemes = ["tailwind"];
     protected array $themeDefinitions = [];
     protected array $requiredFields = [];
+    protected mixed $showIf = [];
+    protected mixed $hideIf = [];
     public array $errors = [];
 
     public string $template;
@@ -18,13 +20,17 @@ abstract class ComponentContract
     public string $classes = "";
     public string $id = "";
     public mixed $node;
+    public mixed $data;
     public bool $ignoreNodes = true;
     public function __construct($data, $node, $theme = "tailwind")
     {
         $this->node = $node;
+        $this->data = $data;
         $this->template = mb_strtolower(class_basename(static::class));
         $this->name = $this->template;
         $this->id = $node->id ??  $this->id;
+        $this->showIf = $node->{"show-if"} ??  $this->showIf;
+        $this->hideIf = $node->{"hide-if"} ??  $this->hideIf;
         if (in_array($theme, $this->supportedThemes)) {
             $this->theme = $theme;
             $this->setThemeDefinitions();
@@ -80,13 +86,34 @@ abstract class ComponentContract
         return $this;
     }
 
-    public function render(...$args): View
+    public function render($args = []): View | null
     {
         if(count($this->errors) > 0){
             return view("pixelwrap::components/{$this->theme}/exception", ["errors" => $this->errors, "component" => $this]);
         }else{
-            $name = $this->template;
-            return view(sprintf("pixelwrap::components/%s/%s", $this->theme, $this->template),[...$args, $name => $this]);
+            $showIf = $this->showIf ?? false;
+            $hideIf = $this->hideIf ?? false;
+            $show = $showIf ? false: true;
+            if($showIf || $hideIf) {
+                $conditions = $showIf ? $showIf: $hideIf;
+                foreach ($conditions as $key => $condition){
+                    if(is_scalar($condition)) {
+                        $condition = [$key => $condition];
+                    }
+                    foreach ($condition as $key => $value){
+                        if(isset($args[$key]) && $args[$key] === $value){
+                            $show = $showIf ? true: false;
+                            break 2;
+                        }
+                    }
+                }
+            }
+            if($show) {
+                $name = $this->template;
+                return view(sprintf("pixelwrap::components/%s/%s", $this->theme, $this->template),[...$args, $name => $this]);
+            }else{
+                return null;
+            }
         }
     }
 

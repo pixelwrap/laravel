@@ -1,6 +1,6 @@
 @extends($pageContainer)
 @section('pixelwrap-container')
     @foreach($components as $component)
-        {{ $component->render() }}
+        {{ $component->render($data) }}
     @endforeach
 @endsection

@@ -5,21 +5,22 @@ namespace PixelWrap\Laravel\Components;
 use Illuminate\Contracts\View\View;
 use PixelWrap\Laravel\Traits\HasLink;
 
-class Button extends ComponentContract
+class Button extends Text
 {
     use HasLink;
 
     public string $label = "Label not set";
-    public string $role = "submit";
+    public string $role  = "submit";
     public string $value = "";
-    public string $link = "";
+    public string $link  = "";
+    public string $name  = "action";
     public mixed  $action;
-    protected array $requiredFields = ["label"];
 
     public function parseProps($node, $data): void
     {
-        $size = mb_strtolower($node->size ?? 'small');
-        $role = mb_strtolower($node->role ?? $this->role);
+        parent::parseProps($node, $data);
+        $size    = mb_strtolower($node->size ?? 'small');
+        $role    = mb_strtolower($node->role ?? $this->role);
         $variant = mb_strtolower($node->variant ?? 'primary');
         $rounded =  "rounded-sm";
         $validations= [
@@ -32,9 +33,9 @@ class Button extends ComponentContract
                 $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $options));
             }
         }
-        $this->label   = $node->label;
-        $this->value   = $node->value ?? "";
+        $this->value   = $node->value ?? $this->value;
         $this->role    = $role;
+        $this->name    = $node->name ?? $this->id ?? $this->name;
         $this->addClass($rounded);
         $this->addClass($this->themeDefinitions["buttonVariants"][$variant]);
         $this->addClass($this->themeDefinitions["buttonSizes"][$size]);
@@ -50,11 +51,12 @@ class Button extends ComponentContract
         }
     }
 
-    public function render(...$args): View
+    public function render($args = []): View| null
     {
         if($this->role === "link") {
-            $this->link = $this->buildLink($this->action, $args);
+            $this->link = $this->buildLink($this->action, [...$this->data,...$args]);
         }
-        return parent::render(...$args);
+
+        return parent::render($args);
     }
 }

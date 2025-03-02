@@ -8,7 +8,7 @@
         @endif
         @foreach($table->fields as $key => $field)
             <th scope="col" class="px-3 py-3 text-left">
-                {{$field}}
+                {{$field->label}}
             </th>
         @endforeach
         @if(count($table->actions)>0)
@@ -32,19 +32,19 @@
             @endif
             @foreach($table->fields as $key => $field)
                 @if($key === $table->highlight)
-                    <th scope="row" class="px-3 py-2 font-bold text-gray-900 whitespace-nowrap dark:text-white text-left">
-                        {{ ((array) $row)[$key] ?? null }}
+                    <th scope="row" class="px-3 py-2 font-bold text-gray-900 whitespace-nowrap dark:text-gray-200 text-left">
+                        {{$field->value($row)}}
                     </th>
                 @else
                     <td class="px-3 py-2 text-left">
-                        {{ ((array) $row)[$key] ?? null }}
+                        {{$field->value($row)}}
                     </td>
                 @endif
             @endforeach
             @if(count($table->actions)>0)
                 <td class="py-1 flex flex-row justify-center gap-x-2">
                     @foreach($table->actions as $action)
-                        {{$action->render(...((array) $row))}}
+                        {{$action->render($row->toArray())}}
                     @endforeach
                 </td>
             @endif

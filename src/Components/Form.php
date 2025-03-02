@@ -2,6 +2,7 @@
 
 namespace PixelWrap\Laravel\Components;
 
+use Illuminate\Contracts\View\View;
 use PixelWrap\Laravel\Traits\HasLink;
 
 class Form extends CompoundComponent
@@ -12,10 +13,16 @@ class Form extends CompoundComponent
     public string $method = "post";
     public bool $autocomplete = false;
     protected array $requiredFields = ["nodes", "method", "action"];
+
     public function parseProps($node, $data): void
     {
         parent::parseProps($node, $data);
         $this->method = $node->method ?? $this->method;
-        $this->action = $this->buildLink($node->action ?? $this->action, $data);
+    }
+
+    public function render($args = []): View
+    {
+        $this->action = $this->buildLink($this->node->action, [...$this->data,...$args]);
+        return parent::render($args);
     }
 }
