@@ -21,8 +21,10 @@ class Listing extends CompoundComponent
             if(isset($data[$listing->dataset])) {
                 $dataset           = $data[$listing->dataset];
                 $this->dataset     = new Dataset($dataset);
-                $this->paginator   = $dataset;
                 $this->isPaginated = $dataset instanceof Paginator || $dataset instanceof LengthAwarePaginator;
+                if($this->isPaginated){
+                    $this->paginator = $dataset;
+                }
             } else {
                 $this->errors[] = sprintf("A dataset called %s not found in context", $listing->dataset);
             }
