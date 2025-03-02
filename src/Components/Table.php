@@ -8,9 +8,11 @@ use Illuminate\Pagination\Paginator;
 use PixelWrap\Laravel\PixelWrapRenderer;
 use PixelWrap\Laravel\Support\Dataset;
 use PixelWrap\Laravel\Support\Field;
+use PixelWrap\Laravel\Traits\HasAction;
 
 class Table extends Listing
 {
+    use HasAction;
     public int $fieldCount;
     public string $highlight;
     public bool $indexed;
@@ -55,38 +57,6 @@ class Table extends Listing
             }
         }
         $this->fieldCount = count($this->fields);
-        foreach ($actions as $action) {
-            if (mb_strtolower($action->role) === "form") {
-                $node = (object)[
-                    "type"   => "Form",
-                    "action" => $action,
-                    "method" => $action->method ?? "post",
-                    "nodes"  => [
-                        (object)[
-                            "type"      => "Button",
-                            "variant"   => $action->variant ?? "primary",
-                            "size"      => $action->size ?? "small",
-                            "role"      => "submit",
-                            "label"     => $action->label,
-                            "value"     => $action->value ?? null,
-                        ]
-                    ]
-                ];
-            } else {
-                $node = (object)[
-                    "type"      => "Button",
-                    "action"    => $action,
-                    "type"      => "Button",
-                    "variant"   => $action->variant ?? "primary",
-                    "size"      => $action->size ?? "small",
-                    "role"      => $action->role ?? "link",
-                    "label"     => $action->label,
-                    "value"     => $action->value ?? null,
-                    "show-if"   => $action->{"show-if"} ?? [],
-                    "hide-if"   => $action->{"hide-if"} ?? [],
-                ];
-            }
-            $this->actions[] = PixelWrapRenderer::from($data, $node, $this->theme);;
-        }
+        $this->buildActions($actions);
     }
 }

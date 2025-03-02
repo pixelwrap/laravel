@@ -206,10 +206,11 @@ $headingTypes = [
 ];
 
 $buttonVariants  = [
-    "primary"   => "text-white border-blue-700 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4    focus:ring-blue-300 font-medium dark:border-blue-600 dark:bg-blue-600   dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800",
-    "secondary" => "text-white border-gray-700 bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-4    focus:ring-gray-300 font-medium dark:bg-blue-600 dark:bg-gray-600       dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700",
-    "success"   => "text-white border-green-700 bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium dark:bg-green-600 dark:bg-green-600    dark:hover:bg-green-700 dark:focus:ring-green-700 dark:border-green-700",
-    "danger"    => "text-white border-red-700 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4       focus:ring-red-300 font-medium dark:bg-red-600 dark:bg-red-600          dark:hover:bg-red-700 dark:focus:ring-red-900 dark:border-red-900",
+    "primary"   => "rounded-sm text-white border border-1 border-blue-700 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4    focus:ring-blue-300 font-medium dark:border-blue-600 dark:bg-blue-600   dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800",
+    "secondary" => "rounded-sm text-white border border-1 border-gray-700 bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-4    focus:ring-gray-300 font-medium dark:bg-blue-600 dark:bg-gray-600       dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700",
+    "success"   => "rounded-sm text-white border border-1 border-green-700 bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium dark:bg-green-600 dark:bg-green-600    dark:hover:bg-green-700 dark:focus:ring-green-700 dark:border-green-700",
+    "danger"    => "rounded-sm text-white border border-1 border-red-700 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4       focus:ring-red-300 font-medium dark:bg-red-600 dark:bg-red-600          dark:hover:bg-red-700 dark:focus:ring-red-900 dark:border-red-900",
+    "icon"      => "rounded-full text-gray-500 border-gray-500 border border-1  bg-white flex justify-center items-center p-2 hover:text-gray-900 dark:border-gray-400 shadow-xs dark:hover:text-white dark:text-gray-50 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-950 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400",
 ];
 
 $buttonSizes = [
@@ -221,8 +222,17 @@ $buttonSizes = [
     "smallest"  => "text-xs px-3 py-1"
 ];
 
+$iconSizes = [
+    "biggest"   => "p-6",
+    "bigger"    => "p-5",
+    "big"       => "p-4",
+    "small"     => "p-3",
+    "smaller"   => "p-2",
+    "smallest"  => "p-1"
+];
+
 $inputVariants  = [
-    "primary"   => "w-full px-4 py-2 text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none",
+    "primary"   => "w-full p-2 text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 border border-gray-600 dark:border-gray-400 rounded-sm shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none",
     "disabled"  => "bg-gray-50 dark:bg-gray-400 disabled:opacity:50 cursor-not-allowed"
 ];
 

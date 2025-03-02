@@ -13,7 +13,9 @@ class Button extends Text
     public string $role  = "submit";
     public string $value = "";
     public string $link  = "";
+    public string $icon  = "";
     public string $name  = "action";
+    public bool $showLabel = true;
     public mixed  $action;
 
     public function parseProps($node, $data): void
@@ -22,7 +24,6 @@ class Button extends Text
         $size    = mb_strtolower($node->size ?? 'small');
         $role    = mb_strtolower($node->role ?? $this->role);
         $variant = mb_strtolower($node->variant ?? 'primary');
-        $rounded =  "rounded-sm";
         $validations= [
             "role"    => ["link","reset","button","submit"],
             "size"    => array_keys($this->themeDefinitions["buttonSizes"]),
@@ -33,13 +34,22 @@ class Button extends Text
                 $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key) , implode(", ", $options));
             }
         }
-        $this->value   = $node->value ?? $this->value;
-        $this->role    = $role;
-        $this->name    = $node->name ?? $this->id ?? $this->name;
-        $this->addClass($rounded);
-        $this->addClass($this->themeDefinitions["buttonVariants"][$variant]);
-        $this->addClass($this->themeDefinitions["buttonSizes"][$size]);
+        $this->icon         = $node->icon ?? $this->icon;
+        $this->value        = $node->value ?? $this->value;
+        $this->role         = $role;
+        $this->name         = $node->name ?? $this->id ?? $this->name;
+        $this->showLabel    = $node->showLabel   ?? $this->showLabel;
 
+        $this->addClass($this->themeDefinitions["buttonVariants"][$variant]);
+        if($variant === "icon"){
+            if(!isset($node->icon)) {
+                $message = "Icon must be set. Please check if your template is compliant with the specification.";
+                $this->errors[] = $message;
+            }
+            $this->addClass($this->themeDefinitions["iconSizes"][$size]);
+        }else{
+            $this->addClass($this->themeDefinitions["buttonSizes"][$size]);
+        }
         if($this->role === "link") {
             $field = "action";
             if(isset($node->{$field})) {

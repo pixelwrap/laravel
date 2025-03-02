@@ -10,7 +10,7 @@ class Input extends TextArea
     public function parseProps($node, $data): void
     {
         parent::parseProps($node, $data);
-        $fieldTypes = ["text", "email", "password", "number", "hidden", "date", "email"];
+        $fieldTypes = ["text", "email", "password", "number", "hidden", "date", "email", "readonly"];
         $fieldType = $node->fieldType ?? $this->fieldType;
         if (!in_array($fieldType, $fieldTypes)) {
             $this->errors[] = sprintf("\"%s\" only allows one of %s.", "Field Type", implode(", ", $fieldTypes));

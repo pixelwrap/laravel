@@ -1,12 +1,17 @@
 <?php
 
 namespace PixelWrap\Laravel\Components;
+use PixelWrap\Laravel\Traits\HasAction;
 
 class Heading extends Text
 {
+    use HasAction;
+    public array $actions = [];
+
     public function parseProps($node, $data): void
     {
         parent::parseProps($node, $data);
+        $actions = $node->actions ?? [];
         $size = mb_strtolower($this->node->size ?? 'small');
         $keys = array_keys($this->themeDefinitions["headingTypes"]);
         if (!in_array($size, $keys)) {
@@ -14,5 +19,6 @@ class Heading extends Text
         } else {
             $this->addClass($this->themeDefinitions["headingTypes"][$size]);
         }
+        $this->buildActions($actions);
     }
 }
