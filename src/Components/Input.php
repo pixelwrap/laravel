@@ -21,4 +21,10 @@ class Input extends TextArea
             $this->showLabel = false;
         }
     }
+
+    public function value($args = [])
+    {
+        $value = interpolateString($this->value, $args);
+        return filter($this->filters, $value);
+    }
 }

@@ -30,4 +30,10 @@ class InputContract extends Text
         $this->value    = is_object($value)  || is_array($value) ? json_encode($value) : $value;
         $this->value    = $this->value ===   "" ? $this->default : $this->value;
     }
+
+
+    public function placeholder($args = [])
+    {
+        return interpolateString($this->placeholder, [...$args, ...$this->data]);
+    }
 }

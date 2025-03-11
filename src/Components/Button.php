@@ -64,7 +64,11 @@ class Button extends Text
     public function render($args = []): View| null
     {
         if($this->role === "link") {
-            $this->link = $this->buildLink($this->action, [...$this->data,...$args]);
+            if(isset($this->action)) {
+                $this->link = $this->buildLink($this->action, [...$this->data,...$args]);
+            }else{
+                $this->errors[] = "Action must be set. Please check if your template is compliant with the specification.";
+            }
         }
 
         return parent::render($args);

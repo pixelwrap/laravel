@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use PixelWrap\Laravel\PixelWrapRenderer;
 use Symfony\Component\Yaml\Yaml;
 use Illuminate\Support\Collection;
 use PixelWrap\Laravel\Support\InvalidValue;
@@ -33,6 +34,22 @@ function renderPixelWrapPage($page, $data = []): View
     return app('pixelwrap')->render($page, $data);
 }
 
+function pixelwrap(): PixelWrapRenderer
+{
+    return app('pixelwrap');
+}
+
+function pixel_insert_icon($icon)
+{
+    foreach ( app('pixelwrap')->paths as $path) {
+        $file = sprintf("%s/%s.svg", $path, $icon);
+        if(file_exists($file)){
+            return file_get_contents($file);
+        }
+    }
+    throw new Exception(sprintf("Unable to locate pixel icon '%s'.", $icon));
+}
+
 function renderComponentSource($component): string
 {
     if(is_string($component)) {
@@ -48,26 +65,29 @@ function renderComponentSource($component): string
 
 function interpolateString($format, $variables): string
 {
-    // Match placeholders like {branch.name}
-    return preg_replace_callback('/\{([\w\.]+)\}/', function ($matches) use ($variables) {
-        $keys = explode('.', $matches[1]); // Split by dot for nested keys
+    // This pattern matches placeholders like {invoiceable-type} or {invoiceable_type}
+    // by allowing letters, digits, underscore, dash, and dot.
+    $pattern = '/\{([\w.\-]+)\}/';
+
+    return preg_replace_callback($pattern, function ($matches) use ($variables) {
+        $keys = explode('.', $matches[1]);
         $value = $variables;
 
-        // Traverse the object/array hierarchy to resolve the value
         foreach ($keys as $key) {
             if (is_object($value) && isset($value->$key)) {
-                $value = $value->$key; // Access object properties
-            } elseif (is_array($value) && isset($value[$key])) {
-                $value = $value[$key]; // Access array elements
+                $value = $value->$key;
+            } elseif (is_array($value) && array_key_exists($key, $value)) {
+                $value = $value[$key];
             } else {
-                return ''; // Return an empty string if not found
+                // Return an empty string if any key isn't found
+                return '';
             }
         }
 
-        return $value; // Return the resolved value
+        // Cast to string to avoid issues if $value is not a string
+        return (string) $value;
     }, $format);
 }
-
 
 function filter($filters, $value): string | null
 {
@@ -82,11 +102,15 @@ function filter($filters, $value): string | null
         switch ($filter) {
             case 'bool':
             case 'boolean':
-                $params = [...$params, 'False', 'True'];
-                $value  = $params[$value];
+                if(is_numeric($value)) {
+                    $params = [...$params, 'False', 'True'];
+                    $value = $params[$value];
+                }
                 break;
             case 'number':
-                $value = number_format(floatval($value),2);
+                if(is_numeric($value)) {
+                    $value = number_format(floatval($value), 2);
+                }
                 break;
             case 'lowercase':
                 $value = Str::lower($value);

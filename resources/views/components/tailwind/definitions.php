@@ -1,33 +1,51 @@
 <?php
-
 $columnOptions = [
+    // Small grids (1-4): Progressive steps with simple responsive scaling
     "1"  => "grid-cols-1",
-    "2"  => "grid-cols-2",
-    "3"  => "grid-cols-3",
-    "4"  => "grid-cols-4",
-    "5"  => "grid-cols-5",
-    "6"  => "grid-cols-6",
-    "7"  => "grid-cols-7",
-    "8"  => "grid-cols-8",
-    "9"  => "grid-cols-9",
-    "10" => "grid-cols-10",
-    "11" => "grid-cols-11",
-    "12" => "grid-cols-12",
+    "2"  => "grid-cols-1 sm:grid-cols-2",
+    "3"  => "grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
+    "4"  => "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+
+    // Medium grids (5-8): More columns on larger screens, but careful growth on smaller ones
+    "5"  => "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5",
+    "6"  => "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6",
+    "7"  => "grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7",
+    "8"  => "grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8",
+
+    // Large grids (9-12): Advanced layouts for larger screens
+    "9"  => "grid-cols-3 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9",
+    "10" => "grid-cols-3 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10",
+    "11" => "grid-cols-3 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-11",
+    "12" => "grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12",
 ];
 
 $colSpanOptions = [
+    // Small spans - carefully designed to work across any grid size
     "1"  => "col-span-1",
     "2"  => "col-span-2",
-    "3"  => "col-span-3",
-    "4"  => "col-span-4",
-    "5"  => "col-span-5",
-    "6"  => "col-span-6",
-    "7"  => "col-span-7",
-    "8"  => "col-span-8",
-    "9"  => "col-span-9",
-    "10" => "col-span-10",
-    "11" => "col-span-11",
-    "12" => "col-span-12",
+    "3"  => "col-span-6 md:col-span-6 lg:col-span-3",
+
+    // Medium spans - balanced for different grid sizes
+    "4"  => "col-span-6 sm:col-span-4 md:col-span-4",
+    "5"  => "col-span-full sm:col-span-5 md:col-span-5",
+    "6"  => "col-span-full sm:col-span-6 md:col-span-6",
+
+    // Large spans - designed to work with 12-column grid
+    "7"  => "col-span-full md:col-span-7",
+    "8"  => "col-span-full md:col-span-8",
+    "9"  => "col-span-full md:col-span-9",
+
+    // Full width control with breakpoints
+    "10" => "col-span-full md:col-span-10",
+    "11" => "col-span-full md:col-span-11",
+    "12" => "col-span-full",
+
+    // Special cases
+    "1/4" => "col-span-full sm:col-span-6 md:col-span-3",
+    "1/3" => "col-span-full sm:col-span-6 md:col-span-4",
+    "1/2" => "col-span-full sm:col-span-6",
+    "2/3" => "col-span-full md:col-span-8",
+    "3/4" => "col-span-full md:col-span-9",
     "default" => "",
 ];
 
@@ -206,11 +224,11 @@ $headingTypes = [
 ];
 
 $buttonVariants  = [
-    "primary"   => "rounded-sm text-white border border-1 border-blue-700 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4    focus:ring-blue-300 font-medium dark:border-blue-600 dark:bg-blue-600   dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800",
-    "secondary" => "rounded-sm text-white border border-1 border-gray-700 bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-4    focus:ring-gray-300 font-medium dark:bg-blue-600 dark:bg-gray-600       dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700",
-    "success"   => "rounded-sm text-white border border-1 border-green-700 bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium dark:bg-green-600 dark:bg-green-600    dark:hover:bg-green-700 dark:focus:ring-green-700 dark:border-green-700",
-    "danger"    => "rounded-sm text-white border border-1 border-red-700 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4       focus:ring-red-300 font-medium dark:bg-red-600 dark:bg-red-600          dark:hover:bg-red-700 dark:focus:ring-red-900 dark:border-red-900",
-    "icon"      => "rounded-full text-gray-500 border-gray-500 border border-1  bg-white flex justify-center items-center p-2 hover:text-gray-900 dark:border-gray-400 shadow-xs dark:hover:text-white dark:text-gray-50 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-950 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400",
+    "primary"   => "rounded-sm text-white border border-1 border-blue-700 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-1    focus:ring-blue-300 font-medium dark:border-blue-600 dark:bg-blue-600   dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 print:hidden",
+    "secondary" => "rounded-sm text-white border border-1 border-gray-700 bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-1    focus:ring-gray-300 font-medium dark:bg-blue-600 dark:bg-gray-600       dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 print:hidden",
+    "success"   => "rounded-sm text-white border border-1 border-green-700 bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-1 focus:ring-green-300 font-medium dark:bg-green-600 dark:bg-green-600    dark:hover:bg-green-700 dark:focus:ring-green-700 dark:border-green-700 print:hidden",
+    "danger"    => "rounded-sm text-white border border-1 border-red-700 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-1       focus:ring-red-300 font-medium dark:bg-red-600 dark:bg-red-600          dark:hover:bg-red-700 dark:focus:ring-red-900 dark:border-red-900 print:hidden",
+    "icon"      => "rounded-full text-gray-500 border-gray-500 border border-1 bg-white flex justify-center items-center p-2 hover:text-gray-900 dark:border-gray-400 shadow-xs dark:hover:text-white dark:text-gray-50 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-950 focus:ring-1 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400 print:hidden",
 ];
 
 $buttonSizes = [

@@ -10,7 +10,7 @@ trait HasText
 {
     public function text($args)
     {
-        $value = interpolateString($this->label, $args);
+        $value = interpolateString($this->label, [...$args, ...$this->data ?? []]);
         return filter($this->filters, $value);
     }
 }

@@ -1,4 +1,4 @@
-<div class="flex {{$listing->classes}}">
+<div class="grid {{$listing->classes}}">
     @forelse($listing->dataset as $index => $row)
         @foreach($listing->nodes as $node)
             {{ $node->render($row->toArray()) }}

@@ -7,7 +7,7 @@ use Illuminate\Pagination\Paginator;
 use PixelWrap\Laravel\PixelWrapRenderer;
 use PixelWrap\Laravel\Support\Dataset;
 
-class Listing extends CompoundComponent
+class Listing extends Grid
 {
     public bool $isPaginated = false;
     public  Paginator|LengthAwarePaginator $paginator;
@@ -18,15 +18,16 @@ class Listing extends CompoundComponent
     {
         parent::parseProps($listing, $data);
         if (isset($listing->dataset)){
-            if(isset($data[$listing->dataset])) {
-                $dataset           = $data[$listing->dataset];
+            $datasetName = interpolateString($listing->dataset, $data);
+            if(isset($data[$datasetName])) {
+                $dataset           = $data[$datasetName];
                 $this->dataset     = new Dataset($dataset);
                 $this->isPaginated = $dataset instanceof Paginator || $dataset instanceof LengthAwarePaginator;
                 if($this->isPaginated){
                     $this->paginator = $dataset;
                 }
             } else {
-                $this->errors[] = sprintf("A dataset called %s not found in context", $listing->dataset);
+                $this->errors[] = sprintf("A dataset called %s not found in context", $datasetName);
             }
         }
     }

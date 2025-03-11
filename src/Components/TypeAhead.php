@@ -30,7 +30,8 @@ class TypeAhead extends Input
             "label"         => $node->label,
             "placeholder"   => $node->placeholder ?? $this->placeholder,
             "autocomplete"  => false,
-            "required"      => false,
+            "required"      => $node->required ?? $this->required,
+            "disabled"      => $node->disabled ?? $this->disabled,
             "value"         => old(sprintf("type-ahead-%s", $node->id), interpolateString($node->currentLabel ?? "", $data))
         ];
 

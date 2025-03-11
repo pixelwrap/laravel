@@ -27,7 +27,7 @@ class Select extends InputContract
                         foreach ($dataset as $row) {
                             $obj = (object)$row;
                             if (isset($obj->{$key}) && isset($obj->{$label})) {
-                                $options[] = $obj->{$key} = $obj->{$label};
+                                $options[$obj->{$key}] = $obj->{$label};
                             } else {
                                 $this->errors[] = sprintf(
                                     "The label and key defined in optionsMap is required in your dataset records (%s)"

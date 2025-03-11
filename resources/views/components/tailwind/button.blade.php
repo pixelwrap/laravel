@@ -4,7 +4,7 @@
             <i class="ti ti-{{ $button->icon }}"></i>
         @endif
         @if($button->showLabel)
-            {{ $button->label }}
+            {{ $button->text(get_defined_vars()) }}
         @endif
     </a>
 @else

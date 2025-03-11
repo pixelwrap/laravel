@@ -3,11 +3,12 @@
 namespace PixelWrap\Laravel\Support;
 
 use ArrayAccess;
+use Countable;
 use Traversable;
 use ArrayIterator;
 use IteratorAggregate;
 
-class Dataset implements \ArrayAccess, \IteratorAggregate
+class Dataset implements \ArrayAccess, \IteratorAggregate, Countable
 {
     public array $rows = [];
 
@@ -52,5 +53,15 @@ class Dataset implements \ArrayAccess, \IteratorAggregate
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->rows);
+    }
+
+    public function count()
+    {
+        return count($this->rows);
+    }
+
+    public function toArray(): array
+    {
+        return $this->rows;
     }
 }

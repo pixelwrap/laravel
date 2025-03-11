@@ -11,10 +11,10 @@ trait HasLink
     public function buildLink($action, $context): string
     {
         $link   = $action->link;
+        $link   = interpolateString($link, $context);
         $link   = BaseUri::from($link);
-        if(!$link->isAbsolute()){
-            $link = Http::fromBaseUri($link->getUriString(), request()->getUri());
-        }
+        $link   = Http::fromBaseUri($link->getUriString(), request()->getUri());
+        $link   = $link->withPath(rtrim($link->getPath(), '/'));
         $query  = Http::fromBaseUri($link)->getQuery();
         $query  = QueryString::parse(mb_strlen($query) >0 ? $query : null);
         if (isset($action->params)) {
