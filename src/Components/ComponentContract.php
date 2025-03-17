@@ -97,13 +97,14 @@ abstract class ComponentContract
             $show = $showIf ? false: true;
             if($showIf || $hideIf) {
                 $conditions = $showIf ? $showIf: $hideIf;
+                $context  = [...$args, ...$this->data];
                 foreach ($conditions as $key => $condition){
-                    if(is_scalar($condition)) {
+                    if(is_scalar($condition) || is_null($condition)) {
                         $condition = [$key => $condition];
                     }
                     foreach ($condition as $key => $value){
-                        if(isset($args[$key]) && $args[$key] === $value){
-                            $show = $showIf ? true: false;
+                        if ((isset($context[$key]) && $context[$key] === $value) || (!isset($context[$key])) && $value === null) {
+                            $show = $showIf ? true : false;
                             break 2;
                         }
                     }

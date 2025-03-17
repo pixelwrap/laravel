@@ -12,28 +12,29 @@
                     </th>
                 @endif
                 @foreach($table->fields as $key => $field)
-                    <th scope="col" class="px-3 py-3 text-left {{ $table->headingClasses ?? '' }}">
+                    <th scope="col" class="{{$field->classes ?? ''}} {{ $table->headingClasses ?? '' }}">
                         {{$field->text(get_defined_vars())}}
                     </th>
                 @endforeach
                 @if(count($table->actions)>0)
-                    <th scope="col" class="px-2 py-3 text-center {{ $table->headingClasses ?? '' }}">
+                    <th scope="col" class="px-2 py-3 text-center print:hidden {{ $table->headingClasses ?? '' }}">
                         Actions
                     </th>
                 @endif
             </tr>
         </thead>
         @endif
-        <tbody>
         @foreach($table->dataset as $datasetIndex => $dataset)
+            <tbody class="border-y-2 border-gray-400 dark:border-gray-600">
             @if(count($table->headers) > 0)
-                <tr>
-                    <td class="px-3 py-2 w-1 font-extrabold"
+                <tr class="">
+                    <td class="px-3 py-2 font-extrabold border-e-2 border-gray-400 dark:border-gray-600"
                         rowspan="{{ count($dataset) + (($table->aggregated && count($dataset)> 0) ? (1 + count($table->aggregate[$datasetIndex])): 1) + (count($dataset) > 0 ? 0 : 1) }}">
                         {{ $table->headers[$datasetIndex] }}
                     </td>
-                    @if(count($dataset) ===0)
-                        <td> {{ $table->emptyMessage }}</td>
+                    @if(count($dataset) === 0)
+                        <td class="px-3 py-2 w-1"
+                            colspan="{{ $table->fieldCount + ($table->indexed ? 1: 0) + (count($table->actions)>0 ? 1:0) }}"> {{ $table->emptyMessage }}</td>
                     @endif
                 </tr>
             @endif
@@ -51,17 +52,23 @@
                     @foreach($table->fields as $key => $field)
                         @if($key === $table->highlight)
                             <th scope="row"
-                                class="px-3 py-2 font-bold text-gray-900 whitespace-nowrap dark:text-gray-200 text-left">
-                                {{$field->value($row)}}
+                                class="px-3 py-2 font-semibold text-gray-900 whitespace-nowrap dark:text-gray-200 text-left">
+                                @if($table->highlightAction)
+                                    <a href="{{ $table->buildHighlightAction($row) }}">
+                                        {{$field->value($row)}}
+                                    </a>
+                                @else
+                                    {{$field->value($row)}}
+                                @endif
                             </th>
                         @else
-                            <td class="px-3 py-2 text-left">
+                            <td class="{{$field->classes ?? ''}} {{ $table->cellClasses ?? '' }}">
                                 {{$field->value($row)}}
                             </td>
                         @endif
                     @endforeach
                     @if(count($table->actions)>0)
-                        <td class="py-1 flex flex-row justify-center gap-x-2">
+                        <td class="py-1 flex flex-row justify-center gap-x-2 print:hidden">
                             @foreach($table->actions as $action)
                                 {{$action->render($row->toArray())}}
                             @endforeach
@@ -106,8 +113,8 @@
                     @endif
                 @endforeach
             @endif
+            </tbody>
         @endforeach
-        </tbody>
     </table>
 
     @if($table->isPaginated)

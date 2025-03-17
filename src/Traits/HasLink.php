@@ -11,7 +11,6 @@ trait HasLink
     public function buildLink($action, $context): string
     {
         $link   = $action->link;
-        $link   = interpolateString($link, $context);
         $link   = BaseUri::from($link);
         $link   = Http::fromBaseUri($link->getUriString(), request()->getUri());
         $link   = $link->withPath(rtrim($link->getPath(), '/'));
@@ -43,6 +42,8 @@ trait HasLink
                 }
             }
         }
+        $link = urldecode($link);
+        $link = interpolateString($link, $context);
         return Http::fromBaseUri($link)->withQuery(QueryString::buildFromPairs($query) ?? "");
     }
 

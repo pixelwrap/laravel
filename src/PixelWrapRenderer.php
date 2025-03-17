@@ -24,6 +24,7 @@ use PixelWrap\Laravel\Components\PlaceHolder;
 use PixelWrap\Laravel\Components\Row;
 use PixelWrap\Laravel\Components\Select;
 use PixelWrap\Laravel\Components\Table;
+use PixelWrap\Laravel\Components\Timeline;
 use PixelWrap\Laravel\Components\Toggle;
 use PixelWrap\Laravel\Components\TypeAhead;
 use PixelWrap\Laravel\Support\InvalidValue;
@@ -58,6 +59,7 @@ class PixelWrapRenderer
         'input'     =>  Input::class,
         'select'    =>  Select::class,
         'typeahead' =>  TypeAhead::class,
+        'timeline'  =>  Timeline::class,
         null        =>  PlaceHolder::class,
         'exception' =>  \PixelWrap\Laravel\Components\Exception::class,
         'horizontalruler' =>  HorizontalRuler::class,
@@ -73,6 +75,7 @@ class PixelWrapRenderer
      */
     static function from($data, $component, $theme): ComponentContract
     {
+        $component = (object) $component;
         if(isset($component->type) || $component->type === null){
             $nodeName= mb_strtolower($component->type);
             if(isset(static::$map[$nodeName])) {

@@ -2,6 +2,7 @@
 
 namespace PixelWrap\Laravel\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
@@ -52,7 +53,7 @@ class FileController extends Controller
 
     public function index()
     {
-        $query = $this->class::query();
+        $query = $this->class::query()->latest('id');
         $details = [];
         if (method_exists($this, "listingQuery")) {
             $query = $this->listingQuery($query);

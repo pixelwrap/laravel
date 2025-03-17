@@ -1,9 +1,9 @@
-<ul @class(['font-medium space-y-1', 'hidden' => !$menu->expanded,'bg-gray-500 dark:bg-gray-950' => $menu->selected]) id="{{ $menu->id }}">
+<ul @class(['font-normal space-y-1', 'hidden' => !$menu->expanded,'bg-gray-950/15 dark:bg-gray-950' => $menu->selected]) id="{{ $menu->id }}">
     @foreach($menu->items as $item)
         @php
             $menuLevels = [
-                'flex w-full items-center px-2 py-2 rounded-none hover:bg-gray-400 hover:text-gray-50 dark:hover:bg-gray-900',
-                'dark:text-white text-gray-50 bg-gray-500 dark:bg-gray-950' => $item->selected, // Ensure item selection is checked
+                'flex w-full text-sm items-center px-2 py-2 rounded-none hover:bg-gray-400 hover:text-gray-50 dark:hover:bg-gray-900',
+                'dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-950' => $item->selected, // Ensure item selection is checked
                 'opacity-100 dark:opacity-50' => !$item->selected && $menu->expanded && $item->level > 1,
                 'text-gray-700 dark:text-gray-50' => !$item->selected,
                 'pl-6' => $item->level === 2,

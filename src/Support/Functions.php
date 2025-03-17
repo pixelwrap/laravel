@@ -118,6 +118,13 @@ function filter($filters, $value): string | null
             case 'uppercase':
                 $value = Str::upper($value);
                 break;
+            case 'null':
+                if(!$value) {
+                    $params = [...$params, '-'];
+                    $value = $params[0];
+                }
+                break;
+            case 'capitalize':
             case 'capitalize':
                 $value = Str::title($value);
                 break;
