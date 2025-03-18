@@ -96,7 +96,7 @@ class Table extends Listing
         }
         $this->fieldCount = count($this->fields);
         $this->buildActions($actions);
-        $this->addClass('min-w-full table-auto text-sm text-left rtl:text-right text-gray-800 dark:text-gray-200');
+        $this->addClass('w-full table-auto text-sm text-left rtl:text-right text-gray-800 dark:text-gray-200');
         if($this->variant === "primary") {
             $this->addClass('text-xs font-bold text-gray-700 uppercase bg-gray-300 dark:bg-gray-800 dark:text-gray-100', 'headingClasses');
             $this->addClass('odd:bg-gray-50 odd:dark:bg-gray-900 even:bg-gray-100 even:dark:bg-gray-700 border-b dark:border-gray-700 border-gray-200', 'rowClasses');

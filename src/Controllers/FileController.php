@@ -20,6 +20,7 @@ class FileController extends Controller
     protected $file;
     protected $resources;
     protected $perPage = 15;
+    public string $primaryKey = "id";
 
     public function __construct()
     {
@@ -48,12 +49,12 @@ class FileController extends Controller
 
     public function route($route, $params = [], $status = 302, $headers = []): RedirectResponse
     {
-        return redirect()->route("{$this->file}.$route", $params, $status, $headers);
+        return redirect()->action([static::class, $route], $params, $status, $headers);
     }
 
     public function index()
     {
-        $query = $this->class::query()->latest('id');
+        $query = $this->class::query()->latest($this->primaryKey);
         $details = [];
         if (method_exists($this, "listingQuery")) {
             $query = $this->listingQuery($query);
@@ -76,7 +77,7 @@ class FileController extends Controller
     protected function getFile(Request $request)
     {
         $id = $request->route(Str::slug($this->file,'_'));
-        return $this->class::query()->findOrFail($id);
+        return $this->class::query()->where($this->primaryKey, $id)->firstOrFail();
     }
     public function store(Request $request)
     {
