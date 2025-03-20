@@ -20,6 +20,12 @@ function raise($code, $message)
     };
 }
 
+function explode_prop($prop): array
+{
+    // Split by space or comma
+    return preg_split('/[\s,]+/', $prop, -1, PREG_SPLIT_NO_EMPTY);
+}
+
 function pixelwrap_resource($path = null): string
 {
     $base = realpath(__DIR__ . "/../../resources/views");

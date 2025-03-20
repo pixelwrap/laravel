@@ -1,51 +1,56 @@
 <?php
 $columnOptions = [
-    // Small grids (1-4): Progressive steps with simple responsive scaling
+    "full"              => "grid-cols-12",
+    "half"              => "grid-cols-6",
+    "quarter"           => "grid-cols-3",
+    "small-full"        => "sm:grid-cols-12",
+    "small-half"        => "sm:grid-cols-6",
+    "small-quarter"     => "sm:grid-cols-3",
+    "medium-full"       => "md:grid-cols-12",
+    "medium-half"       => "md:grid-cols-6",
+    "medium-quarter"    => "md:grid-cols-3",
+    "large-full"        => "lg:grid-cols-12",
+    "large-half"        => "lg:grid-cols-6",
+    "large-quarter"     => "lg:grid-cols-3",
     "1"  => "grid-cols-1",
-    "2"  => "grid-cols-1 sm:grid-cols-2",
-    "3"  => "grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
-    "4"  => "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
-
-    // Medium grids (5-8): More columns on larger screens, but careful growth on smaller ones
-    "5"  => "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5",
-    "6"  => "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6",
-    "7"  => "grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7",
-    "8"  => "grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8",
-
-    // Large grids (9-12): Advanced layouts for larger screens
-    "9"  => "grid-cols-3 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9",
-    "10" => "grid-cols-3 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10",
-    "11" => "grid-cols-3 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-11",
-    "12" => "grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12",
+    "2"  => "grid-cols-2",
+    "3"  => "grid-cols-3",
+    "4"  => "grid-cols-4",
+    "5"  => "grid-cols-5",
+    "6"  => "grid-cols-6",
+    "7"  => "grid-cols-7",
+    "8"  => "grid-cols-8",
+    "9"  => "grid-cols-9",
+    "10" => "grid-cols-10",
+    "11" => "grid-cols-11",
+    "12" => "grid-cols-12",
 ];
 
 $colSpanOptions = [
-    // Small spans - carefully designed to work across any grid size
-    "1"  => "col-span-1",
+    "full"              => "col-span-12",
+    "half"              => "col-span-6",
+    "quarter"           => "col-span-full",
+    "small-full"        => "sm:col-span-12",
+    "small-half"        => "sm:col-span-6",
+    "small-quarter"     => "sm:col-span-3",
+    "medium-full"       => "md:col-span-full",
+    "medium-half"       => "md:col-span-6",
+    "medium-quarter"    => "md:col-span-3",
+    "large-full"        => "lg:col-span-full",
+    "large-half"        => "lg:col-span-6",
+    "large-quarter"     => "lg:col-span-3",
+    "1"  => "col-span-12",
     "2"  => "col-span-2",
-    "3"  => "col-span-6 md:col-span-6 lg:col-span-3",
-
-    // Medium spans - balanced for different grid sizes
-    "4"  => "col-span-6 sm:col-span-4 md:col-span-4",
-    "5"  => "col-span-full sm:col-span-5 md:col-span-5",
-    "6"  => "col-span-full sm:col-span-6 md:col-span-6",
-
-    // Large spans - designed to work with 12-column grid
-    "7"  => "col-span-full md:col-span-7",
-    "8"  => "col-span-full md:col-span-8",
-    "9"  => "col-span-full md:col-span-9",
-
-    // Full width control with breakpoints
-    "10" => "col-span-full md:col-span-10",
-    "11" => "col-span-full md:col-span-11",
-    "12" => "col-span-full",
-
-    // Special cases
-    "1/4" => "col-span-full sm:col-span-6 md:col-span-3",
-    "1/3" => "col-span-full sm:col-span-6 md:col-span-4",
-    "1/2" => "col-span-full sm:col-span-6",
-    "2/3" => "col-span-full md:col-span-8",
-    "3/4" => "col-span-full md:col-span-9",
+    "3"  => "col-span-3",
+    "4"  => "col-span-4",
+    "5"  => "col-span-5",
+    "6"  => "col-span-6",
+    "7"  => "col-span-7",
+    "8"  => "col-span-8",
+    "9"  => "col-span-9",
+    "10" => "col-span-10",
+    "11" => "col-span-11",
+    "12" => "col-span-12",
     "default" => "",
 ];
 

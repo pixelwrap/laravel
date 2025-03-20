@@ -20,9 +20,14 @@ class Form extends CompoundComponent
         $this->method = $node->method ?? $this->method;
     }
 
-    public function render($args = []): View
+    public function render($args = []): View|null
     {
-        $this->action = $this->buildLink($this->node->action, [...$this->data,...$args]);
+        if (isset($this->node->action)) {
+            $this->action = $this->buildLink($this->node->action, [
+                ...$this->data,
+                ...$args,
+            ]);
+        }
         return parent::render($args);
     }
 }

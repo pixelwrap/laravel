@@ -4,14 +4,23 @@ if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localS
 } else {
     document.documentElement.classList.remove('dark')
 }
+function getWordLetters(str) {
+    if (!str || typeof str !== "string") return "";
 
-function setupTypeAhead(searchInputId, endPoint, queryName, list, show, attach, label, value) {
-    const valueInput    = document.getElementById(searchInputId);
-    const searchInput   = valueInput.closest('.type-ahead').querySelector("input");
+    return str
+        .trim()
+        .split(/\s+/)  // Split by spaces (handles multiple spaces)
+        .map(word => word.charAt(0)) // Get first letter of each word
+        .join("");  // Join letters into a string
+}
+
+function setupTypeAhead(searchInputId, endPoint, queryName, list, imageKey, show, attach, label, value) {
+    const valueInput = document.getElementById(searchInputId);
+    const searchInput = valueInput.closest('.type-ahead').querySelector("input");
     const resultsWindow = valueInput.closest(".type-ahead").querySelector(".type-ahead-results");
-    const results       = resultsWindow.querySelector("ul");
-    const url           = new URL(endPoint);
-    let currentWorkId   = 0;
+    const results = resultsWindow.querySelector("ul");
+    const url = new URL(endPoint);
+    let currentWorkId = 0;
     let searchTimeout;
     let currentValue = value;
     let currentLabel = label;
@@ -21,20 +30,44 @@ function setupTypeAhead(searchInputId, endPoint, queryName, list, show, attach, 
         url.searchParams.set(queryName, query);
         try {
             const response = await fetch(url).then(res => res.json());
-            if(workId >= currentWorkId ){
+            if (workId >= currentWorkId) {
                 if (response.length > 0) {
                     results.innerHTML = "";
-                    response.forEach((result) => {
+                    response.slice(0, 10).forEach((result) => {
                         const li = document.createElement("li");
-                        li.className = "px-4 py-2 text-sm text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer";
-                        li.textContent = result[list];
+                        const item = document.createElement("div");
+                        const label = document.createElement("span");
+                        li.className = "text-sm text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-900 cursor-pointer";
+                        label.textContent = result[list];
+                        item.className = "flex items-center";
+                        if (imageKey && result[imageKey]) {
+                            const image = document.createElement("img");
+                            const avator = document.createElement("span");
+                            const imageContainer = document.createElement("div");
+                            imageContainer.className = "mx-2 my-1 relative inline-flex items-center justify-center size-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600";
+                            avator.className = "font-medium text-gray-600 dark:text-gray-300"
+                            avator.textContent = getWordLetters(result[list]).substring(0, 2).toUpperCase();
+                            image.src = result[imageKey];
+                            imageContainer.appendChild(avator);
+
+                            // When the image loads successfully, replace avatar with image
+                            image.onload = function() {
+                                imageContainer.innerHTML = ""; // Remove the avatar
+                                imageContainer.appendChild(image); // Append the loaded image
+                            };
+                            item.appendChild(imageContainer);
+                        } else {
+                            label.className = "m-2";
+                        }
+                        item.appendChild(label);
+                        li.appendChild(item);
 
                         // Add click event to handle user selection
                         li.addEventListener("click", () => {
                             searchInput.value = result[show];
-                            valueInput.value  = result[attach];
-                            currentLabel      = searchInput.value;
-                            currentValue      = valueInput.value;
+                            valueInput.value = result[attach];
+                            currentLabel = searchInput.value;
+                            currentValue = valueInput.value;
                             resultsWindow.classList.add("hidden");
                         });
                         results.appendChild(li);
@@ -77,7 +110,7 @@ function setupTypeAhead(searchInputId, endPoint, queryName, list, show, attach, 
         if (!resultsWindow.classList.contains("hidden") && !resultsWindow.contains(event.target) && event.target !== searchInput) {
             resultsWindow.classList.add("hidden");
             searchInput.value = currentLabel
-            valueInput.value  = currentValue;
+            valueInput.value = currentValue;
         }
     });
 }

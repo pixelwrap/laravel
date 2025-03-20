@@ -16,6 +16,7 @@ class TypeAhead extends Input
     public string $attach = "attach";
     public string $list = "name";
     public string $show = "name";
+    public string|null $image = null;
     public ComponentContract $input;
 
     /**
@@ -43,6 +44,8 @@ class TypeAhead extends Input
         $this->show     =  $node->show   ??  $this->show;
         // What field to show on search results window.
         $this->list     =  $node->list   ??  $this->list;
+        // What image? to show on search results window.
+        $this->image    =  $node->image  ??  $this->image;
 
         $this->input    =  PixelWrapRenderer::from($data, $input, $this->theme);
         if(isset($node->action)) {
