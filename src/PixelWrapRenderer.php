@@ -12,6 +12,8 @@ use PixelWrap\Laravel\Components\Image;
 use PixelWrap\Laravel\Components\Navbar;
 use PixelWrap\Laravel\Components\Sidebar;
 use PixelWrap\Laravel\Components\Progress;
+use PixelWrap\Laravel\Components\Tab;
+use PixelWrap\Laravel\Components\Tabs;
 use PixelWrap\Laravel\Components\TextArea;
 use PixelWrap\Laravel\Components\Grid;
 use PixelWrap\Laravel\Components\Card;
@@ -38,6 +40,8 @@ class PixelWrapRenderer
     protected $theme = "tailwind";
     public $paths = [];
     static $map = [
+        'tab'       =>  Tab::class,
+        'tabs'      =>  Tabs::class,
         'switch'    =>  Toggle::class,
         'text'      =>  Text::class,
         'progress'  =>  Progress::class,

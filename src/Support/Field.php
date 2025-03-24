@@ -23,7 +23,8 @@ class Field
 
     public function value($data)
     {
-        $val = interpolateString("{{$this->key}}", $data->toArray()) ?? null;
+        $data = is_array($data) ? $data : $data->toArray();
+        $val = interpolateString("{{$this->key}}", $data) ?? null;
         return filter($this->filters, $val);
     }
 }
