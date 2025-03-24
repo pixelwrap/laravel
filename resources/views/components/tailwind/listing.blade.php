@@ -1,7 +1,14 @@
 <div class="grid {{$listing->classes}}">
     @forelse($listing->dataset as $index => $row)
         @foreach($listing->nodes as $node)
-            {{ $node->render($row->toArray()) }}
+            @php
+                $rendered = $node->render($row->toArray());
+            @endphp
+            @if($rendered)
+            <div class="{{$node->spanClasses}}">
+                {{$rendered}}
+            </div>
+            @endif
         @endforeach
     @empty
         <div class="px-3 py-2">

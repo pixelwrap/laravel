@@ -14,6 +14,7 @@ class FileController extends PixelController
     protected $file;
     protected $perPage = 15;
     public string $primaryKey = "id";
+    public $relationships = [];
 
     public function __construct(PixelWrapRenderer $pixel)
     {
@@ -31,7 +32,7 @@ class FileController extends PixelController
 
     public function index()
     {
-        $query = $this->class::query()->latest($this->primaryKey);
+        $query = $this->class::query()->with($this->relationships)->latest($this->primaryKey);
         $details = [];
         if (method_exists($this, "listingQuery")) {
             $query = $this->listingQuery($query);
@@ -71,7 +72,7 @@ class FileController extends PixelController
     {
         $file = $this->getFile($request);
         if (method_exists($this, "editDetails")) {
-            $details = $this->editDetails($file);
+            $details = [...$this->editDetails($file), ...$file->toArray()];
         } else {
             $details = $file->toArray();
         }
@@ -83,7 +84,7 @@ class FileController extends PixelController
         $file = $this->getFile($request);
         $details = $file->toArray();
         if (method_exists($this, "getDetails")) {
-            $details = $this->getDetails($file);
+            $details = [...$this->getDetails($file), ...$file->toArray()];
         }
         return $this->render("show", $details);
     }

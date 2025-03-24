@@ -69,11 +69,7 @@ abstract class ComponentContract
         $keys = array_keys($options);
         foreach ($inputs as $input) {
             if (!in_array($input, $keys)) {
-                $this->errors[] = sprintf(
-                    "\"%s\" only allows one of %s.",
-                    mb_ucfirst($key),
-                    implode(", ", $keys)
-                );
+                $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key), implode(", ", $keys));
             } else {
                 if ($key === "span") {
                     $this->addClass($options[$input], "spanClasses");
@@ -86,9 +82,7 @@ abstract class ComponentContract
 
     protected function addClass(string $class, $field = "classes"): static
     {
-        $this->{$field} = mb_trim(
-            sprintf("%s %s", $this->{$field} ?? "", $class)
-        );
+        $this->{$field} = mb_trim(sprintf("%s %s", $this->{$field} ?? "", $class));
         return $this;
     }
 
@@ -111,11 +105,7 @@ abstract class ComponentContract
                         $condition = [$key => $condition];
                     }
                     foreach ($condition as $key => $value) {
-                        if (
-                            (isset($context[$key]) &&
-                                $context[$key] === $value) ||
-                            (!isset($context[$key]) && $value === null)
-                        ) {
+                        if ((isset($context[$key]) && $context[$key] === $value) || (!isset($context[$key]) && $value === null)) {
                             $show = $showIf ? true : false;
                             break 2;
                         }
@@ -124,14 +114,7 @@ abstract class ComponentContract
             }
             if ($show) {
                 $name = $this->template;
-                return view(
-                    sprintf(
-                        "pixelwrap::components/%s/%s",
-                        $this->theme,
-                        $this->template
-                    ),
-                    [...$args, $name => $this]
-                );
+                return view(sprintf("pixelwrap::components/%s/%s", $this->theme, $this->template), [...$args, $name => $this]);
             } else {
                 return null;
             }
@@ -140,8 +123,7 @@ abstract class ComponentContract
 
     protected function validateModel($node): void
     {
-        $message =
-            "%s must be set. Please check if your template is compliant with the specification.";
+        $message = "%s must be set. Please check if your template is compliant with the specification.";
         foreach ($this->requiredFields as $field) {
             if (!isset($node->{$field})) {
                 $this->errors[] = sprintf($message, mb_ucfirst($field));
@@ -153,9 +135,6 @@ abstract class ComponentContract
     {
         $vars = get_defined_vars();
         require pixelwrap_resource("components/{$this->theme}/definitions.php");
-        $this->themeDefinitions = array_diff_key(get_defined_vars(), [
-            ...$vars,
-            "vars" => $vars,
-        ]);
+        $this->themeDefinitions = array_diff_key(get_defined_vars(), [...$vars, "vars" => $vars]);
     }
 }

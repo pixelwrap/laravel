@@ -4,7 +4,6 @@ namespace PixelWrap\Laravel\Components;
 
 class InputContract extends Text
 {
-    public string $id;
     public string $placeholder = "";
     public string $value = "";
     public string $default = "";

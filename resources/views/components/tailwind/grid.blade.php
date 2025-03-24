@@ -1,7 +1,12 @@
 <div class="grid items-start  {{$grid->classes}}">
     @foreach($grid->nodes as $component)
+        @php
+            $rendered = $component->render(get_defined_vars());
+        @endphp
+        @if($rendered)
         <div class="{{$component->spanClasses}}">
-            {{ $component->render(get_defined_vars()) }}
+            {{$rendered}}
         </div>
+        @endif
     @endforeach
 </div>
