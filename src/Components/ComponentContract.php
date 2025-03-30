@@ -22,6 +22,8 @@ abstract class ComponentContract
     public mixed $node;
     public mixed $data;
     public bool $ignoreNodes = true;
+    public $roundClasses = "rounded-none";
+
     public function __construct($data, $node, $theme = "tailwind")
     {
         $this->node = $node;
@@ -61,7 +63,7 @@ abstract class ComponentContract
     protected function validateAndParseBoxModel($node, $key, $map): void
     {
         $options = $this->themeDefinitions[$map];
-        $value = $node->{$key} ?? "default";
+        $value = $node->{$key} ?? ($this->{$key} ?? "default");
         if (is_array($value)) {
             $value = implode(" ", $value);
         }
@@ -69,7 +71,7 @@ abstract class ComponentContract
         $keys = array_keys($options);
         foreach ($inputs as $input) {
             if (!in_array($input, $keys)) {
-                $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key), implode(", ", $keys));
+                $this->errors[] = sprintf("\"%s\" only allows one of %s. Found '%s'.", mb_ucfirst($key), implode(", ", $keys), $input);
             } else {
                 if ($key === "span") {
                     $this->addClass($options[$input], "spanClasses");

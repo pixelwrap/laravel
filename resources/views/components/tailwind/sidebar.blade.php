@@ -11,7 +11,7 @@
 
 <aside id="{{$sidebar->id}}"
        class="min-w-64 {{ $sidebar->classes }}">
-    <div class="h-full overflow-y-auto bg-gray-200 dark:bg-gray-800 pt-2">
+    <div class="h-full overflow-y-auto bg-gray-100 dark:bg-gray-800 pt-0">
         @include("pixelwrap::components/{$sidebar->theme}/sidebar-item",["menu" => $sidebar->menu])
     </div>
 </aside>

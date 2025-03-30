@@ -31,10 +31,10 @@
                         {!! __('to') !!}
                         <span class="font-medium">{{ $paginator->lastItem() }}</span>
                     @else
-                        {{ $paginator->count() }}
+                        {{ number_format($paginator->count()) }}
                     @endif
                     {!! __('of') !!}
-                    <span class="font-medium">{{ $paginator->total() }}</span>
+                    <span class="font-medium">{{ number_format($paginator->total()) }}</span>
                     {!! __('results') !!}
                 </p>
             </div>

@@ -1,4 +1,4 @@
-<div class="overflow-x-auto">
+<div class="overflow-x-auto w-full">
     <table class="{{$table->classes ?? '' }}">
         <thead>
         @if($table->showHeader === true)
@@ -93,15 +93,15 @@
                     @if(count($dataset) > 0)
                         <tr class="">
                             @if($table->indexed === true)
-                                <td class="px-3 py-2" colspan="2">{{ $key }}</td>
+                                <td class="{{ $table->cellClasses ?? '' }}" colspan="2">{{ $key }}</td>
                             @else
-                                <td class="px-3 py-2">{{ $key }}</td>
+                                <td class="">{{ $key }}</td>
                             @endif
                             @foreach(array_slice($table->fields, 1) as $field)
                                 @if(in_array($field->key, array_keys($agg)))
-                                    <td class="px-3 py-2">{{ $field->value($agg) }}</td>
+                                    <td class="{{$field->classes ?? ''}} {{ $table->cellClasses ?? '' }}">{{ $field->value($agg) }}</td>
                                 @else
-                                    <td class="px-3 py-2">-</td>
+                                    <td class="{{$field->classes ?? ''}} {{ $table->cellClasses ?? '' }}">-</td>
                                 @endif
                             @endforeach
                             @if(count($table->actions)>0)

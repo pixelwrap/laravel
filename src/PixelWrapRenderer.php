@@ -29,7 +29,7 @@ use PixelWrap\Laravel\Components\Table;
 use PixelWrap\Laravel\Components\Timeline;
 use PixelWrap\Laravel\Components\Toggle;
 use PixelWrap\Laravel\Components\TypeAhead;
-use PixelWrap\Laravel\Support\InvalidValue;
+use PixelWrap\Laravel\Components\Modal;
 use PixelWrap\Laravel\Support\NodeNotImplemented;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
@@ -54,6 +54,7 @@ class PixelWrapRenderer
         'button'    =>  Button::class,
         'column'    =>  Column::class,
         'listing'   =>  Listing::class,
+        'modal'     =>  Modal::class,
         'row'       =>  Row::class,
         'grid'      =>  Grid::class,
         'card'      =>  Card::class,

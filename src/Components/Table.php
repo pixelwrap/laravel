@@ -54,7 +54,7 @@ class Table extends Listing
             }
         }
 
-        $fields = $table->fields;
+        $fields = $table->fields ?? $this->fields;
         $this->indexed = $table->indexed ?? $this->indexed;
         $this->showHeader = $table->showHeader ?? $this->showHeader;
         $this->emptyMessage = $table->emptyMessage ?? $this->emptyMessage;

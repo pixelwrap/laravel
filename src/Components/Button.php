@@ -10,6 +10,7 @@ class Button extends Text
     use HasLink;
 
     public string $role = "submit";
+    public string $props = "";
     public string $value = "";
     public string $link = "";
     public string $icon = "";
@@ -30,7 +31,7 @@ class Button extends Text
         ];
         foreach ($validations as $key => $options) {
             if (!in_array($$key, $options)) {
-                $this->errors[] = sprintf("\"%s\" only allows one of %s.", mb_ucfirst($key), implode(", ", $options));
+                $this->errors[] = sprintf("\"%s\" only allows one of %s. Found '%s'.", mb_ucfirst($key), implode(", ", $options), $$key);
             }
         }
         $this->icon = $node->icon ?? $this->icon;
@@ -47,6 +48,7 @@ class Button extends Text
             }
             $this->addClass($this->themeDefinitions["iconSizes"][$size]);
         } else {
+            $this->addClass($this->roundClasses);
             $this->addClass($this->themeDefinitions["buttonSizes"][$size]);
         }
         if ($this->role === "link") {
@@ -56,6 +58,16 @@ class Button extends Text
             } else {
                 $message = "Action must be set. Please check if your template is compliant with the specification.";
                 $this->errors[] = $message;
+            }
+        } elseif ($role === "button") {
+            if ($node->{'modalHide'} ?? false) {
+                $this->props .= sprintf("data-modal-hide=%s", $node->{'modalHide'});
+            }
+            if ($node->{'modalShow'} ?? false) {
+                $this->props .= sprintf("data-modal-show=%s", $node->{'modalShow'});
+            }
+            if ($node->{'modalToggle'} ?? false) {
+                $this->props .= sprintf("data-modal-toggle=%s", $node->{'modalToggle'});
             }
         }
     }

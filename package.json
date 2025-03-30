@@ -1,0 +1,23 @@
+{
+  "name": "pixelwrap",
+  "version": "1.0.0",
+  "description": "**PixelWrap** allows you to quickly build dynamic front-end of your application using simple YAML schemas. No need to write individual HTML components—just define your UI structure in a YAML file, and let **PixelWrap** do the rest of thw work for you. It will handle creation the layouts, related components, and user interactions for you.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixelwrap/laravel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pixelwrap/laravel/issues"
+  },
+  "homepage": "https://github.com/pixelwrap/laravel#readme",
+  "devDependencies": {
+    "@popperjs/core": "^2.11.8",
+    "flowbite-datepicker": "^1.3.2"
+  }
+}

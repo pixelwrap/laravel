@@ -4,7 +4,7 @@ namespace PixelWrap\Laravel\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\RedirectResponse;
 use PixelWrap\Laravel\PixelWrapRenderer;
 

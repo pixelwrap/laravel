@@ -10,10 +10,11 @@ class TextArea extends InputContract
     {
         parent::parseProps($node, $data);
         $this->rows = $node->rows ?? $this->rows;
+        $this->addClass($this->roundClasses);
         $this->addClass($this->themeDefinitions["inputVariants"]["primary"]);
         $this->addClass($this->themeDefinitions["inputLabelVariants"]["primary"], "labelClasses");
 
-        if ($input->disabled ?? false) {
+        if ($node->disabled ?? false) {
             $this->addClass($this->themeDefinitions["inputVariants"]["disabled"]);
             $this->addClass($this->themeDefinitions["inputLabelVariants"]["disabled"], "labelClasses");
         }

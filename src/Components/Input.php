@@ -6,6 +6,7 @@ class Input extends TextArea
 {
     public string $fieldType = "text";
     public bool $autocomplete = false;
+    public string|null $icon = null;
 
     public function parseProps($node, $data): void
     {
@@ -16,9 +17,14 @@ class Input extends TextArea
             $this->errors[] = sprintf("\"%s\" only allows one of %s.", "Field Type", implode(", ", $fieldTypes));
         }
         $this->autocomplete = $node->autocomplete ?? $this->autocomplete;
-        $this->fieldType    = $node->fieldType ?? $this->fieldType;
+        $this->fieldType = $node->fieldType ?? $this->fieldType;
+        $this->icon = $node->icon ?? $this->icon;
         if ($this->fieldType == "hidden") {
             $this->showLabel = false;
+        }
+
+        if ($this->icon) {
+            $this->addClass('ps-10');
         }
     }
 }
