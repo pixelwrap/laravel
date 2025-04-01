@@ -67,7 +67,7 @@ class PixelWrapRenderer
         'typeahead' =>  TypeAhead::class,
         'timeline'  =>  Timeline::class,
         null        =>  PlaceHolder::class,
-        'exception' =>  \PixelWrap\Laravel\Components\Exception::class,
+        'exception' =>  Components\Exception::class,
         'horizontalruler' =>  HorizontalRuler::class,
     ];
 
