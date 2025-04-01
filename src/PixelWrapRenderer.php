@@ -40,6 +40,7 @@ class PixelWrapRenderer
     protected $theme = "tailwind";
     public $paths = [];
     static $map = [
+        'view'      =>  Components\View::class,
         'tab'       =>  Tab::class,
         'tabs'      =>  Tabs::class,
         'switch'    =>  Toggle::class,
