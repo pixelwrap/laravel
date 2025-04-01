@@ -15,9 +15,4 @@ class View extends ComponentContract
     {
         $this->view = $node->view ?? $this->view;
     }
-
-    public function render($args = []): \Illuminate\Contracts\View\View|null
-    {
-        return view($this->view, $args);
-    }
 }
