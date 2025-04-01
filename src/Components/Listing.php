@@ -1,11 +1,11 @@
 <?php
 
-namespace PixelWrap\Laravel\Components;
+namespace PixelWrap\Laravel\Facades\Components;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
-use PixelWrap\Laravel\Support\Dataset;
+use PixelWrap\Laravel\Facades\Support\Dataset;
 
 class Listing extends Grid
 {

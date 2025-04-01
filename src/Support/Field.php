@@ -1,8 +1,8 @@
 <?php
 
-namespace PixelWrap\Laravel\Support;
+namespace PixelWrap\Laravel\Facades\Support;
 
-use PixelWrap\Laravel\Traits\HasText;
+use PixelWrap\Laravel\Facades\Traits\HasText;
 
 class Field
 {

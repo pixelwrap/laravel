@@ -119,9 +119,10 @@ nodes:
 This schema will generate a grid with three columns, containing an input for name, email, and a dropdown for user roles.
 
 Now create a rew route in `web.php` and navigate your browser to your web application `/`
+
 ```php
 use Illuminate\Support\Facades\Route;
-use PixelWrap\Laravel\PixelWrapRenderer;
+use PixelWrap\Laravel\Facades\PixelWrapRenderer;
 
 Route::get('/', function (PixelWrapRenderer $res) {
     return $res->render('test');

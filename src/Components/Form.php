@@ -1,9 +1,9 @@
 <?php
 
-namespace PixelWrap\Laravel\Components;
+namespace PixelWrap\Laravel\Facades\Components;
 
 use Illuminate\Contracts\View\View;
-use PixelWrap\Laravel\Traits\HasLink;
+use PixelWrap\Laravel\Facades\Traits\HasLink;
 
 class Form extends CompoundComponent
 {

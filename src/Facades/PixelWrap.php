@@ -1,6 +1,6 @@
 <?php
 
-namespace PixelWrap\Laravel;
+namespace PixelWrap\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade as BaseFacade;
  *
  * @see \Illuminate\View\Factory
  */
-class Facade extends BaseFacade
+class PixelWrap extends BaseFacade
 {
     /**
      * Get the registered name of the component.

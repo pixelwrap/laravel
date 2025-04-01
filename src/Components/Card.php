@@ -1,11 +1,11 @@
 <?php
 
-namespace PixelWrap\Laravel\Components;
+namespace PixelWrap\Laravel\Facades\Components;
 
 use Illuminate\Pagination\Paginator;
-use PixelWrap\Laravel\PixelWrapRenderer;
-use PixelWrap\Laravel\Support\Dataset;
-use PixelWrap\Laravel\Traits\HasText;
+use PixelWrap\Laravel\Facades\PixelWrapRenderer;
+use PixelWrap\Laravel\Facades\Support\Dataset;
+use PixelWrap\Laravel\Facades\Traits\HasText;
 
 class Card extends CompoundComponent
 {

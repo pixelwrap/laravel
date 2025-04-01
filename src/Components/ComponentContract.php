@@ -1,9 +1,9 @@
 <?php
 
-namespace PixelWrap\Laravel\Components;
+namespace PixelWrap\Laravel\Facades\Components;
 
 use Illuminate\Contracts\View\View;
-use PixelWrap\Laravel\Support\InvalidValue;
+use PixelWrap\Laravel\Facades\Support\InvalidValue;
 
 abstract class ComponentContract
 {

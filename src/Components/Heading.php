@@ -1,7 +1,7 @@
 <?php
 
-namespace PixelWrap\Laravel\Components;
-use PixelWrap\Laravel\Traits\HasAction;
+namespace PixelWrap\Laravel\Facades\Components;
+use PixelWrap\Laravel\Facades\Traits\HasAction;
 
 class Heading extends Text
 {

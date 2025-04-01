@@ -1,6 +1,6 @@
 <?php
 
-namespace PixelWrap\Laravel\Components;
+namespace PixelWrap\Laravel\Facades\Components;
 
 class Grid extends CompoundComponent
 {

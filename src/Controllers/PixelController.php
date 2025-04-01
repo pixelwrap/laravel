@@ -1,12 +1,12 @@
 <?php
 
-namespace PixelWrap\Laravel\Controllers;
+namespace PixelWrap\Laravel\Facades\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\RedirectResponse;
-use PixelWrap\Laravel\PixelWrapRenderer;
+use PixelWrap\Laravel\Facades\PixelWrapRenderer;
 
 class PixelController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PixelWrap\Laravel\Support;
+namespace PixelWrap\Laravel\Facades\Support;
 
 use ArrayAccess;
 use Countable;

@@ -1,9 +1,9 @@
 <?php
 
-namespace PixelWrap\Laravel\Components;
+namespace PixelWrap\Laravel\Facades\Components;
 
-use PixelWrap\Laravel\Support\MenuItem;
-use PixelWrap\Laravel\Traits\HasText;
+use PixelWrap\Laravel\Facades\Support\MenuItem;
+use PixelWrap\Laravel\Facades\Traits\HasText;
 
 class Sidebar extends ComponentContract
 {
