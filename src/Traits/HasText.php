@@ -1,6 +1,6 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Traits;
+namespace PixelWrap\Laravel\Traits;
 
 use League\Uri\BaseUri;
 use League\Uri\Http;

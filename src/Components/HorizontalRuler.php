@@ -1,8 +1,8 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Components;
+namespace PixelWrap\Laravel\Components;
 
-use PixelWrap\Laravel\Facades\Support\InvalidValue;
+use PixelWrap\Laravel\Support\InvalidValue;
 
 class HorizontalRuler extends ComponentContract
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Components;
+namespace PixelWrap\Laravel\Components;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
-use PixelWrap\Laravel\Facades\PixelWrapRenderer;
-use PixelWrap\Laravel\Facades\Support\Dataset;
-use PixelWrap\Laravel\Facades\Support\Field;
-use PixelWrap\Laravel\Facades\Traits\HasAction;
-use PixelWrap\Laravel\Facades\Traits\HasLink;
+use PixelWrap\Laravel\PixelWrapRenderer;
+use PixelWrap\Laravel\Support\Dataset;
+use PixelWrap\Laravel\Support\Field;
+use PixelWrap\Laravel\Traits\HasAction;
+use PixelWrap\Laravel\Traits\HasLink;
 
 class Table extends Listing
 {

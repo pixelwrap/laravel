@@ -1,6 +1,6 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Support;
+namespace PixelWrap\Laravel\Support;
 
 use ArrayAccess;
 use Traversable;

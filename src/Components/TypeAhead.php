@@ -1,11 +1,11 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Components;
+namespace PixelWrap\Laravel\Components;
 
 
-use PixelWrap\Laravel\Facades\PixelWrapRenderer;
-use PixelWrap\Laravel\Facades\Support\NodeNotImplemented;
-use PixelWrap\Laravel\Facades\Traits\HasLink;
+use PixelWrap\Laravel\PixelWrapRenderer;
+use PixelWrap\Laravel\Support\NodeNotImplemented;
+use PixelWrap\Laravel\Traits\HasLink;
 
 class TypeAhead extends Input
 {

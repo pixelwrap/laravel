@@ -1,8 +1,8 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Components;
+namespace PixelWrap\Laravel\Components;
 
-use PixelWrap\Laravel\Facades\PixelWrapRenderer;
+use PixelWrap\Laravel\PixelWrapRenderer;
 
 class Tabs extends CompoundComponent
 {

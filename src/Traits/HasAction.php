@@ -1,8 +1,8 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Traits;
+namespace PixelWrap\Laravel\Traits;
 
-use PixelWrap\Laravel\Facades\PixelWrapRenderer;
+use PixelWrap\Laravel\PixelWrapRenderer;
 
 trait HasAction
 {

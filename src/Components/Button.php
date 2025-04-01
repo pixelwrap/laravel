@@ -1,9 +1,9 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Components;
+namespace PixelWrap\Laravel\Components;
 
 use Illuminate\Contracts\View\View;
-use PixelWrap\Laravel\Facades\Traits\HasLink;
+use PixelWrap\Laravel\Traits\HasLink;
 
 class Button extends Text
 {

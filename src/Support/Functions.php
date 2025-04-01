@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Str;
 use Illuminate\View\View;
-use PixelWrap\Laravel\Facades\PixelWrapRenderer;
+use PixelWrap\Laravel\PixelWrapRenderer;
 use Symfony\Component\Yaml\Yaml;
-use PixelWrap\Laravel\Facades\Support\InvalidValue;
-use PixelWrap\Laravel\Facades\Support\NodeNotImplemented;
+use PixelWrap\Laravel\Support\InvalidValue;
+use PixelWrap\Laravel\Support\NodeNotImplemented;
 
 /**
  * @throws Exception

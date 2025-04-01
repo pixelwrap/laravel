@@ -1,6 +1,6 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Components;
+namespace PixelWrap\Laravel\Components;
 
 class Input extends TextArea
 {

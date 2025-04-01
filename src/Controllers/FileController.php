@@ -1,11 +1,11 @@
 <?php
 
-namespace PixelWrap\Laravel\Facades\Controllers;
+namespace PixelWrap\Laravel\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use PixelWrap\Laravel\Facades\PixelWrapRenderer;
+use PixelWrap\Laravel\PixelWrapRenderer;
 
 class FileController extends PixelController
 {
