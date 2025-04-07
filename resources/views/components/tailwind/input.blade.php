@@ -8,7 +8,7 @@
             <p class="w-full py-2 text-sm text-gray-900 dark:text-gray-50">{{ $input->value }}</p>
             <input type="hidden" value="{{$input->value}}" name="{{$input->name}}" id="{{$input->id}} @required($input->required)"/>
         @else
-            <div class="relative max-w-sm">
+            <div class="relative w-full">
                 @if($input->icon)
                     <div class="absolute inset-y-0 start-0 flex items-center ps-2 pointer-events-none">
                         @pixelicon($input->icon)
