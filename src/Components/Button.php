@@ -59,17 +59,6 @@ class Button extends Text
                 $message = "Action must be set. Please check if your template is compliant with the specification.";
                 $this->errors[] = $message;
             }
-        } elseif ($role === "button") {
-            if ($node->{'modalHide'} ?? false) {
-                $this->props .= sprintf("data-modal-hide=%s", $node->{'modalHide'});
-            }
-            if ($node->{'modalShow'} ?? false) {
-                $this->props .= sprintf("data-modal-show=%s", $node->{'modalShow'});
-            }
-            if ($node->{'modalToggle'} ?? false) {
-                $id =  interpolateString($node->{'modalToggle'}, [...($this->data ?? [])]);
-                $this->props .= sprintf("data-modal-toggle=%s", $id);
-            }
         }
     }
 
@@ -80,6 +69,17 @@ class Button extends Text
                 $this->link = $this->buildLink($this->action, [...$this->data, ...$args]);
             } else {
                 $this->errors[] = "Action must be set. Please check if your template is compliant with the specification.";
+            }
+        } elseif ($this->role === "button") {
+            if ($node->{'modalHide'} ?? false) {
+                $this->props .= sprintf("data-modal-hide=%s", $node->{'modalHide'});
+            }
+            if ($node->{'modalShow'} ?? false) {
+                $this->props .= sprintf("data-modal-show=%s", $node->{'modalShow'});
+            }
+            if ($node->{'modalToggle'} ?? false) {
+                $id =  interpolateString($node->{'modalToggle'}, [...($this->data ?? []), ...$args]);
+                $this->props .= sprintf("data-modal-toggle=%s", $id);
             }
         }
 
