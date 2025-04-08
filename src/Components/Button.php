@@ -72,10 +72,12 @@ class Button extends Text
             }
         } elseif ($this->role === "button") {
             if ($this->node->{'modalHide'} ?? false) {
-                $this->props .= sprintf(" data-modal-hide=%s", $this->node->{'modalHide'});
+                $id =  interpolateString($this->node->{'modalHide'}, [...($this->data ?? []), ...$args]);
+                $this->props .= sprintf(" data-modal-hide=%s", $id);
             }
             if ($this->node->{'modalShow'} ?? false) {
-                $this->props .= sprintf(" data-modal-show=%s", $this->node->{'modalShow'});
+                $id =  interpolateString($this->node->{'modalShow'}, [...($this->data ?? []), ...$args]);
+                $this->props .= sprintf(" data-modal-show=%s", $id);
             }
             if ($this->node->{'modalToggle'} ?? false) {
                 $id =  interpolateString($this->node->{'modalToggle'}, [...($this->data ?? []), ...$args]);
