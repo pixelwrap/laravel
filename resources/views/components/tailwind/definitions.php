@@ -285,12 +285,12 @@ $inputVariants = [
 ];
 
 $inputLabelVariants = [
-    "primary" => "block my-1 text-sm font-medium text-gray-800 dark:text-gray-50",
+    "primary"  => "block my-1 text-sm font-medium text-gray-800 dark:text-gray-50",
     "disabled" => "disabled:opacity:50 cursor-not-allowed",
 ];
 
 $modalSizes = [
-    "bigger" => "max-w-7xl",
+    "bigger"  =>  "max-w-7xl",
     "default" => "max-w-4xl",
     "smaller" => "max-w-2xl",
 ];
