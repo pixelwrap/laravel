@@ -32,7 +32,7 @@ class Modal extends CompoundComponent
         $this->id = $modal->id ?? sprintf("modal_%s", uniqid());
         $options = $this->themeDefinitions["modalSizes"];
         if (!in_array($size, array_keys($options))) {
-            $this->errors[] = sprintf("\"%s\" only allows one of %s. Found '%s'.", mb_ucfirst($size), implode(", ", $options), $size);
+            $this->errors[] = sprintf("\"%s\" only allows one of %s. Found '%s'.", "Size", implode(", ", array_keys($options)), $size);
         } else {
             $this->addClass($options[$size], "sizeClasses");
         }
