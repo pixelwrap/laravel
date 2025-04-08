@@ -12,7 +12,10 @@ class Modal extends CompoundComponent
 
     public $label = "Title Not Set";
     public $padding = "x-smaller y-smaller";
+
+    public $icon = null;
     public $footer = null;
+
     public $static = false;
     public $showClose = true;
 
@@ -23,6 +26,7 @@ class Modal extends CompoundComponent
         parent::parseProps($modal, $data);
         $size = mb_strtolower($modal->size ?? "default");
         $this->label = $modal->label ?? $this->label;
+        $this->icon = $modal->icon ?? $this->icon;
         $this->showClose = $modal->showClose ?? $this->showClose;
         $this->static = $modal->static ?? $this->static;
         $this->id = $modal->id ?? sprintf("modal_%s", uniqid());

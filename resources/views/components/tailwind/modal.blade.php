@@ -2,7 +2,11 @@
     <div class="relative w-full max-h-full {{$modal->sizeClasses}}">
         <div class="relative bg-gray-200 {{$modal->roundClasses ?? ''}} shadow-sm dark:bg-gray-700">
             <div class="flex items-center justify-between px-4 py-4 md:px-5 md:py-3 border-b dark:border-gray-600 border-gray-300">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex flex-row gap-x-2 items-center">
+                    @if($modal->icon)
+                        @pixelicon("trash")
+                    @endif
+
                     {{$modal->text(get_defined_vars())}}
                 </h3>
                 @if($modal->showClose)
