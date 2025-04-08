@@ -71,14 +71,14 @@ class Button extends Text
                 $this->errors[] = "Action must be set. Please check if your template is compliant with the specification.";
             }
         } elseif ($this->role === "button") {
-            if ($node->{'modalHide'} ?? false) {
-                $this->props .= sprintf("data-modal-hide=%s", $node->{'modalHide'});
+            if ($this->node->{'modalHide'} ?? false) {
+                $this->props .= sprintf("data-modal-hide=%s", $this->node->{'modalHide'});
             }
-            if ($node->{'modalShow'} ?? false) {
-                $this->props .= sprintf("data-modal-show=%s", $node->{'modalShow'});
+            if ($this->node->{'modalShow'} ?? false) {
+                $this->props .= sprintf("data-modal-show=%s", $this->node->{'modalShow'});
             }
-            if ($node->{'modalToggle'} ?? false) {
-                $id =  interpolateString($node->{'modalToggle'}, [...($this->data ?? []), ...$args]);
+            if ($this->node->{'modalToggle'} ?? false) {
+                $id =  interpolateString($this->node->{'modalToggle'}, [...($this->data ?? []), ...$args]);
                 $this->props .= sprintf("data-modal-toggle=%s", $id);
             }
         }
