@@ -67,7 +67,8 @@ class Button extends Text
                 $this->props .= sprintf("data-modal-show=%s", $node->{'modalShow'});
             }
             if ($node->{'modalToggle'} ?? false) {
-                $this->props .= sprintf("data-modal-toggle=%s", $node->{'modalToggle'});
+                $id =  interpolateString($node->{'modalToggle'}, [...($this->data ?? [])]);
+                $this->props .= sprintf("data-modal-toggle=%s", $id);
             }
         }
     }

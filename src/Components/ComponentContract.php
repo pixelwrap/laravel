@@ -139,4 +139,9 @@ abstract class ComponentContract
         require pixelwrap_resource("components/{$this->theme}/definitions.php");
         $this->themeDefinitions = array_diff_key(get_defined_vars(), [...$vars, "vars" => $vars]);
     }
+
+    public function id($args)
+    {
+        return interpolateString($this->id, [...($this->data ?? []), ...$args]);
+    }
 }
