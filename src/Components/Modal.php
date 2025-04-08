@@ -12,7 +12,6 @@ class Modal extends CompoundComponent
 
     public $label = "Title Not Set";
     public $padding = "x-smaller y-smaller";
-    public $sizeClasses = "";
     public $footer = null;
     public $static = false;
     public $showClose = true;

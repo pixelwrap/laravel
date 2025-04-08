@@ -84,7 +84,6 @@ class Button extends Text
                 $this->props .= sprintf(" data-modal-toggle=%s", $id);
             }
         }
-
         return parent::render($args);
     }
 }
