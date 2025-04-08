@@ -37,8 +37,8 @@ class Modal extends CompoundComponent
     public function render($args = []): View|null
     {
         if (isset($this->node->footer)) {
-            if ($this->node->footer != null && isset($modal->footer->nodes)) {
-                $node = ["type" => "Row", "gap" => "smaller", ...get_object_vars($modal->footer)];
+            if ($this->node->footer != null && isset($this->node->footer->nodes)) {
+                $node = ["type" => "Row", "gap" => "smaller", ...get_object_vars($this->node->footer)];
                 $this->footer = PixelWrapRenderer::from($this->data, $node, $this->theme);
             }
         } else {
