@@ -2,6 +2,7 @@
 
 namespace PixelWrap\Laravel\Components;
 
+use Illuminate\Contracts\View\View;
 use PixelWrap\Laravel\PixelWrapRenderer;
 use PixelWrap\Laravel\Traits\HasText;
 
@@ -32,20 +33,24 @@ class Modal extends CompoundComponent
         } else {
             $this->addClass($options[$size], "sizeClasses");
         }
-        if (isset($modal->footer)) {
-            if ($modal->footer != null && isset($modal->footer->nodes)) {
+    }
+    public function render($args = []): View|null
+    {
+        if (isset($this->node->footer)) {
+            if ($this->node->footer != null && isset($modal->footer->nodes)) {
                 $node = ["type" => "Row", "gap" => "smaller", ...get_object_vars($modal->footer)];
-                $this->footer = PixelWrapRenderer::from($data, $node, $this->theme);
+                $this->footer = PixelWrapRenderer::from($this->data, $node, $this->theme);
             }
         } else {
             $node = [
                 "type" => "Row",
                 "padding" => $this->padding,
                 "nodes" => [
-                    ["type" => "Button", "role" => "button", "size" => "big", "padding" => "x-big", "label" => "Dismiss", "modalHide" => $this->id],
+                    ["type" => "Button", "role" => "button", "size" => "big", "padding" => "x-big", "label" => "Dismiss", "modalHide" => $this->id($args)],
                 ],
             ];
-            $this->footer = PixelWrapRenderer::from($data, $node, $this->theme);
+            $this->footer = PixelWrapRenderer::from($this->data, $node, $this->theme);
         }
+        return parent::render($args);
     }
 }
