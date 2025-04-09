@@ -11,10 +11,12 @@
             @endif
         @endforeach
     @empty
-        <div class="px-3 py-2">
-            <p class="text-md font-normal">
-                {{ $listing->emptyMessage ?? "Nothing here." }}
-            </p>
-        </div>
+        @if($listing->showEmptyMessage)
+            <div class="px-3 py-2">
+                <p class="text-md font-normal dark:text-gray-50">
+                    {{ $listing->emptyMessage ?? "Nothing here." }}
+                </p>
+            </div>
+        @endif
     @endforelse
 </div>

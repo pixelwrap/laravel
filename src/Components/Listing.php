@@ -10,9 +10,16 @@ use PixelWrap\Laravel\Support\Dataset;
 class Listing extends Grid
 {
     public bool $isPaginated = false;
+    public bool $showEmptyMessage = true;
     public Paginator|LengthAwarePaginator $paginator;
     public mixed $dataset;
     protected array $requiredFields = ["dataset", "nodes"];
+
+    public function parseProps($listing, $data): void
+    {
+        parent::parseProps($listing, $data);
+        $this->showEmptyMessage = $listing->showEmptyMessage ?? $this->showEmptyMessage;
+    }
 
     public function parseDataset($args): void
     {
