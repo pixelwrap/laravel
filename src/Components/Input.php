@@ -14,7 +14,7 @@ class Input extends TextArea
         $fieldTypes = ["text", "email", "password", "number", "hidden", "date", "email", "readonly"];
         $fieldType = $node->fieldType ?? $this->fieldType;
         if (!in_array($fieldType, $fieldTypes)) {
-            $this->errors[] = sprintf("\"%s\" only allows one of %s.", "Field Type", implode(", ", $fieldTypes));
+            $this->errors[] = sprintf("\"%s\" only allows one of %s.", "TableField Type", implode(", ", $fieldTypes));
         }
         $this->autocomplete = $node->autocomplete ?? $this->autocomplete;
         $this->fieldType = $node->fieldType ?? $this->fieldType;

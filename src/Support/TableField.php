@@ -4,7 +4,7 @@ namespace PixelWrap\Laravel\Support;
 
 use PixelWrap\Laravel\Traits\HasText;
 
-class Field
+class TableField
 {
     use HasText;
 

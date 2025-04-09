@@ -38,7 +38,7 @@ class TypeAhead extends Input
 
         // What to send to server as query field
         $this->query    =  $node->query  ??  $this->query;
-        // Field we attach as value to input field from results.
+        // TableField we attach as value to input field from results.
         $this->attach   =  $node->attach ??  $this->attach;
         // What field to show on input field.
         $this->show     =  $node->show   ??  $this->show;

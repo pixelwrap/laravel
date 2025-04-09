@@ -7,7 +7,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use PixelWrap\Laravel\PixelWrapRenderer;
 use PixelWrap\Laravel\Support\Dataset;
-use PixelWrap\Laravel\Support\Field;
+use PixelWrap\Laravel\Support\TableField;
 use PixelWrap\Laravel\Traits\HasAction;
 use PixelWrap\Laravel\Traits\HasLink;
 
@@ -71,7 +71,7 @@ class Table extends Listing
         if (is_object($fields)) {
             $fields = get_object_vars($fields);
             foreach ($fields as $key => $label) {
-                $this->fields[$key] = new Field($key, $label, "left", []);
+                $this->fields[$key] = new TableField($key, $label, "left", []);
             }
         } else {
             foreach ($fields as $index => $field) {
@@ -81,7 +81,7 @@ class Table extends Listing
                         $index + 1
                     );
                 } else {
-                    $this->fields[$field->key] = new Field(
+                    $this->fields[$field->key] = new TableField(
                         $field->key,
                         $field->label,
                         $field->alignment ?? "left",
