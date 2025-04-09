@@ -318,3 +318,28 @@ $modalSizes = [
     "default" => "max-w-4xl",
     "smaller" => "max-w-2xl",
 ];
+
+$flexGrowOptions = [
+    "none" => "flex-grow-0",
+    "default" => "flex-grow",
+    "1" => "flex-grow",
+    "2" => "flex-grow-[2]",
+    "3" => "flex-grow-[3]",
+];
+
+$alignmentOptions = [
+    "start" => "items-start",
+    "center" => "items-center",
+    "end" => "items-end",
+    "stretch" => "items-stretch",
+    "baseline" => "items-baseline",
+];
+
+$justifyOptions = [
+    "start" => "justify-start",
+    "center" => "justify-center",
+    "end" => "justify-end",
+    "between" => "justify-between",
+    "around" => "justify-around",
+    "evenly" => "justify-evenly",
+];
