@@ -29,7 +29,7 @@ class CompoundComponent extends ComponentContract
                 if (!in_array($input, $keys)) {
                     $this->errors[] = sprintf("\"%s\" only allows one of %s. Found '%s'.", mb_ucfirst($name), implode(", ", $keys), $input);
                 } else {
-                    $this->addClass($options[$name]);
+                    $this->addClass($options[$input]);
                 }
             }
         }
