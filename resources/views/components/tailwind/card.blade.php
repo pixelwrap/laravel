@@ -1,4 +1,4 @@
-<div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm dark:bg-gray-800 dark:border-gray-700 {{ $card->classes }}">
+<div class="w-full bg-white border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700 {{ $card->classes }}">
     @if($card->showLabel)
         <div class="flex items-center justify-between p-2">
             {{ \PixelWrap\Laravel\PixelWrapRenderer::from(get_defined_vars(),['type' => 'heading','label' => $card->text(get_defined_vars())], $card->theme)->render() }}
