@@ -23,12 +23,14 @@ class CompoundComponent extends ComponentContract
         $utilityClasses = ['grow' => 'flexGrowOptions', 'align' => 'alignmentOptions', 'justify' => 'justifyOptions'];
         foreach ($utilityClasses as $name => $class) {
             $options = $this->themeDefinitions[$class];
-            $input = mb_strtolower($name);
-            $keys = array_keys($options);
-            if (!in_array($input, $keys)) {
-                $this->errors[] = sprintf("\"%s\" only allows one of %s. Found '%s'.", mb_ucfirst($name), implode(", ", $keys), $input);
-            } else {
-                $this->addClass($options[$name]);
+            $input = mb_strtolower($node->{$name} ?? $this->{$name} ?? '');
+            if ($input !== '') {
+                $keys = array_keys($options);
+                if (!in_array($input, $keys)) {
+                    $this->errors[] = sprintf("\"%s\" only allows one of %s. Found '%s'.", mb_ucfirst($name), implode(", ", $keys), $input);
+                } else {
+                    $this->addClass($options[$name]);
+                }
             }
         }
     }
