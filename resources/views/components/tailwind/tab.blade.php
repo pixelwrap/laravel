@@ -1,4 +1,4 @@
-<div class="flex flex-column {{ $tab->classes }}">
+<div class="flex flex-col {{ $tab->classes }}">
     @foreach($tab->nodes as $component)
         {{ $component->render(get_defined_vars()) }}
     @endforeach

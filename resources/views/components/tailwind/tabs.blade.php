@@ -25,7 +25,7 @@
     </ul>
 </div>
 
-<div id="{{$tabs->id}}-content">
+<div id="{{$tabs->id}}-content" class="">
     @foreach($tabs->tabs as $tab)
         <div class="hidden"
              id="{{$tab->id}}"
