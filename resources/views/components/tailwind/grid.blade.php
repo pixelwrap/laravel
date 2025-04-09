@@ -1,4 +1,4 @@
-<div class="grid items-start  {{$grid->classes}}">
+<div class="grid {{$grid->classes}}">
     @foreach($grid->nodes as $component)
         @php
             $rendered = $component->render(get_defined_vars());
