@@ -1,4 +1,4 @@
-<nav class="bg-gray-300 dark:bg-gray-900 print:hidden {{ $navbar->classes }}">
+<nav class="bg-gray-300 dark:bg-gray-950 print:hidden {{ $navbar->classes }}">
     <div class="relative flex h-auto items-center justify-between">
         <div class="flex flex-1 sm:items-stretch sm:justify-start">
             <div class="hidden sm:block">
@@ -36,7 +36,7 @@
                     @class([
                        'block px-3 py-2 text-sm font-medium',
                        'bg-gray-800 text-gray-50 dark:bg-gray-50 dark:text-gray-950' => $item->selected,
-                       'bg-gray-300 text-gray-950 dark:bg-gray-900 dark:text-gray-50' =>!$item->selected ])>
+                       'bg-gray-300 text-gray-950 dark:bg-gray-950 dark:text-gray-50' =>!$item->selected ])>
                     {{ $item->label }}
                 </a>
             @endforeach
