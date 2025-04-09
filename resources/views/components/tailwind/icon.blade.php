@@ -1,3 +1,3 @@
 <div class="{{ $icon->classes }}">
-    @pixelicon($icon->name)
+    @pixelicon($icon->icon(get_defined_vars()))
 </div>
