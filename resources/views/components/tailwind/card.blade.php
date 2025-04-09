@@ -4,7 +4,7 @@
             {{ \PixelWrap\Laravel\PixelWrapRenderer::from(get_defined_vars(),['type' => 'heading','label' => $card->text(get_defined_vars())], $card->theme)->render() }}
         </div>
     @endif
-    <div class="flow-root px-2 pb-2">
+    <div class="flow-root">
         @foreach($card->nodes as $component)
             {{ $component->render(get_defined_vars()) }}
         @endforeach
