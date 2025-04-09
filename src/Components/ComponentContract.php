@@ -81,7 +81,7 @@ abstract class ComponentContract
                 if ($key === "span") {
                     $this->addClass($options[$input], "spanClasses");
                 } else if ($key === "rounded") {
-                    $moderated = in_array($input, ["full", "jumbo"]) ? "bigger" : $input;
+                    $moderated = in_array($input, ["full", "jumbo", "biggest"]) ? "bigger" : $input;
                     $this->addClass($options[$input],'roundClasses');
                     $this->addClass($options[$moderated],'roundModeratedClasses');
                     if ($this->rounding) {
