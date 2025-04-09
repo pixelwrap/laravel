@@ -1,4 +1,5 @@
 <?php
+
 $columnOptions = [
     "full" => "grid-cols-12",
     "half" => "grid-cols-6",
@@ -27,19 +28,44 @@ $columnOptions = [
 ];
 
 $colSpanOptions = [
+    // General
     "full" => "col-span-12",
     "half" => "col-span-6",
-    "quarter" => "col-span-full",
+    "third" => "col-span-4",
+    "quarter" => "col-span-3",
+    "fifth" => "col-span-2.4",
+    "sixth" => "col-span-2",
+    "twelfth" => "col-span-1",
+
+    // Small screens
     "small-full" => "sm:col-span-12",
     "small-half" => "sm:col-span-6",
+    "small-third" => "sm:col-span-4",
     "small-quarter" => "sm:col-span-3",
-    "medium-full" => "md:col-span-full",
+    "small-fifth" => "sm:col-span-[2.4]",
+    "small-sixth" => "sm:col-span-2",
+    "small-twelfth" => "sm:col-span-1",
+
+    // Medium screens
+    "medium-full" => "md:col-span-12",
     "medium-half" => "md:col-span-6",
+    "medium-third" => "md:col-span-4",
     "medium-quarter" => "md:col-span-3",
-    "large-full" => "lg:col-span-full",
+    "medium-fifth" => "md:col-span-[2.4]",
+    "medium-sixth" => "md:col-span-2",
+    "medium-twelfth" => "md:col-span-1",
+
+    // Large screens
+    "large-full" => "lg:col-span-12",
     "large-half" => "lg:col-span-6",
+    "large-third" => "lg:col-span-4",
     "large-quarter" => "lg:col-span-3",
-    "1" => "col-span-12",
+    "large-fifth" => "lg:col-span-[2.4]",
+    "large-sixth" => "lg:col-span-2",
+    "large-twelfth" => "lg:col-span-1",
+
+    // Numeric spans
+    "1" => "col-span-1",
     "2" => "col-span-2",
     "3" => "col-span-3",
     "4" => "col-span-4",
@@ -51,6 +77,8 @@ $colSpanOptions = [
     "10" => "col-span-10",
     "11" => "col-span-11",
     "12" => "col-span-12",
+
+    // Fallback
     "default" => "",
 ];
 
