@@ -75,7 +75,7 @@ $colSpanOptions = [
     "12" => "col-span-12",
 
     // Fallback
-    "default" => "",
+    "default" => "full",
 ];
 
 $gapOptions = [
