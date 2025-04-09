@@ -7,6 +7,7 @@ class Input extends TextArea
     public string $fieldType = "text";
     public bool $autocomplete = false;
     public string|null $icon = null;
+    public bool $rounding = true;
 
     public function parseProps($node, $data): void
     {

@@ -6,11 +6,12 @@ class TextArea extends InputContract
 {
     public $rows = 3;
 
+    public bool $rounding = false;
+
     public function parseProps($node, $data): void
     {
         parent::parseProps($node, $data);
         $this->rows = $node->rows ?? $this->rows;
-        $this->addClass($this->roundClasses);
         $this->addClass($this->themeDefinitions["inputVariants"]["primary"]);
         $this->addClass($this->themeDefinitions["inputLabelVariants"]["primary"], "labelClasses");
 
