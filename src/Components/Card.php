@@ -17,7 +17,7 @@ class Card extends CompoundComponent
     public function parseProps($card, $data): void
     {
         parent::parseProps($card, $data);
-        $this->showLabel = $card->showTitle ?? $this->showLabel;
+        $this->showLabel = $card->showLabel ?? $this->showLabel;
         $this->label = $card->label ?? $this->label;
     }
 }
