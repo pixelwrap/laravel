@@ -21,6 +21,7 @@ abstract class ComponentContract
     public string $id = "";
     public mixed $node;
     public mixed $data;
+    public $span = "full";
     public bool $ignoreNodes = true;
     public $roundClasses = "rounded-none";
 
