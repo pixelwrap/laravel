@@ -23,16 +23,17 @@ abstract class ComponentContract
     public mixed $data;
     public $span = "full";
     public bool $ignoreNodes = true;
-    public $roundClasses = "rounded-none";
-    public bool $rounded = true;
+    public $rounded = "none";
+    public bool $rounding = true;
 
-    public function __construct($data, $node, $theme = "tailwind")
+    public function __construct($data, $node, $theme = "tailwind", $rounded = "none")
     {
         $this->node = $node;
         $this->data = $data;
         $this->template = mb_strtolower(class_basename(static::class));
         $this->name = $this->template;
         $this->id = $node->id ?? $this->id;
+        $this->rounded = $node->rounded ?? $rounded;
         $this->showIf = $node->{"show-if"} ?? $this->showIf;
         $this->hideIf = $node->{"hide-if"} ?? $this->hideIf;
         $this->filters = explode("|", $node->filters ?? null);
@@ -42,9 +43,6 @@ abstract class ComponentContract
             $this->validateModel($node);
             $this->parseBoxModelProperties($node);
             $this->parseProps($node, $data);
-            if($this->rounded){
-                $this->addClass($this->roundClasses);
-            }
         } else {
             throw new InvalidValue("Theme '{$theme}' is not supported");
         }
@@ -60,11 +58,13 @@ abstract class ComponentContract
             "padding" => "paddingOptions",
             "span" => "colSpanOptions",
             "gap" => "gapOptions",
+            "rounded" => "borderRadiusOptions",
         ];
         foreach ($spacing as $key => $values) {
             $this->validateAndParseBoxModel($node, $key, $values);
         }
     }
+
     protected function validateAndParseBoxModel($node, $key, $map): void
     {
         $options = $this->themeDefinitions[$map];
@@ -80,6 +80,10 @@ abstract class ComponentContract
             } else {
                 if ($key === "span") {
                     $this->addClass($options[$input], "spanClasses");
+                } else if ($key === "rounded") {
+                    if ($this->rounding) {
+                        $this->addClass($options[$input]);
+                    }
                 } else {
                     $this->addClass($options[$input]);
                 }

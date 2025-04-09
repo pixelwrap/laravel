@@ -47,7 +47,7 @@ class TypeAhead extends Input
         // What image? to show on search results window.
         $this->image    =  $node->image  ??  $this->image;
 
-        $this->input    =  PixelWrapRenderer::from($data, $input, $this->theme);
+        $this->input    =  PixelWrapRenderer::from($data, $input, $this->theme, $this->rounded);
         if(isset($node->action)) {
             $this->action = $this->buildLink($node->action, $data);
         }

@@ -17,7 +17,7 @@ class Button extends Text
     public string $name = "action";
     public bool $showLabel = true;
     public mixed $action;
-    public bool $rounded = false;
+    public bool $rounding = false;
 
     public function parseProps($node, $data): void
     {

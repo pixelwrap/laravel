@@ -8,6 +8,7 @@ class Tabs extends CompoundComponent
 {
     public $tabs = [];
     protected array $requiredFields = ["tabs"];
+    public bool $rounding = false;
 
     public function parseProps($node, $data): void
     {
@@ -16,7 +17,7 @@ class Tabs extends CompoundComponent
         if (isset($node->tabs)) {
             foreach ($node->tabs as $node) {
                 $node->type = 'Tab';
-                $this->tabs[] = PixelWrapRenderer::from($data, $node, $this->theme);
+                $this->tabs[] = PixelWrapRenderer::from($data, $node, $this->theme,$this->rounded);
             }
         }
     }

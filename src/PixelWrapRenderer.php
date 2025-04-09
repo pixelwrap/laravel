@@ -39,38 +39,39 @@ use Illuminate\Contracts\View\View;
 class PixelWrapRenderer
 {
     protected $theme = "tailwind";
+    protected $rounded = "none";
     public $paths = [];
     static $map = [
-        'view'      =>  Components\View::class,
-        'tab'       =>  Tab::class,
-        'tabs'      =>  Tabs::class,
-        'switch'    =>  Toggle::class,
-        'text'      =>  Text::class,
-        'progress'  =>  Progress::class,
-        'navbar'    =>  Navbar::class,
-        'sidebar'   =>  Sidebar::class,
-        'textarea'  =>  TextArea::class,
-        'image'     =>  Image::class,
-        'badge'     =>  Badge::class,
-        'heading'   =>  Heading::class,
-        'button'    =>  Button::class,
-        'column'    =>  Column::class,
-        'listing'   =>  Listing::class,
-        'modal'     =>  Modal::class,
-        'row'       =>  Row::class,
-        'grid'      =>  Grid::class,
-        'card'      =>  Card::class,
-        'hr'        =>  HorizontalRuler::class,
-        'form'      =>  Form::class,
-        'table'     =>  Table::class,
-        'input'     =>  Input::class,
-        'field'     =>  Field::class,
-        'select'    =>  Select::class,
-        'typeahead' =>  TypeAhead::class,
-        'timeline'  =>  Timeline::class,
-        null        =>  PlaceHolder::class,
-        'exception' =>  Components\Exception::class,
-        'horizontalruler' =>  HorizontalRuler::class,
+        'view' => Components\View::class,
+        'tab' => Tab::class,
+        'tabs' => Tabs::class,
+        'switch' => Toggle::class,
+        'text' => Text::class,
+        'progress' => Progress::class,
+        'navbar' => Navbar::class,
+        'sidebar' => Sidebar::class,
+        'textarea' => TextArea::class,
+        'image' => Image::class,
+        'badge' => Badge::class,
+        'heading' => Heading::class,
+        'button' => Button::class,
+        'column' => Column::class,
+        'listing' => Listing::class,
+        'modal' => Modal::class,
+        'row' => Row::class,
+        'grid' => Grid::class,
+        'card' => Card::class,
+        'hr' => HorizontalRuler::class,
+        'form' => Form::class,
+        'table' => Table::class,
+        'input' => Input::class,
+        'field' => Field::class,
+        'select' => Select::class,
+        'typeahead' => TypeAhead::class,
+        'timeline' => Timeline::class,
+        null => PlaceHolder::class,
+        'exception' => Components\Exception::class,
+        'horizontalruler' => HorizontalRuler::class,
     ];
 
     static function make($theme = "tailwind", $paths = []): static
@@ -81,59 +82,60 @@ class PixelWrapRenderer
     /**
      * @throws NodeNotImplemented
      */
-    static function from($data, $component, $theme): ComponentContract
+    static function from($data, $component, $theme, $rounded = "none"): ComponentContract
     {
-        $component = (object) $component;
-        if(isset($component->type) || $component->type === null){
-            $nodeName= mb_strtolower($component->type);
-            if(isset(static::$map[$nodeName])) {
-                return new (static::$map[$nodeName])($data, $component, $theme);
-            }else{
+        $component = (object)$component;
+        if (isset($component->type) || $component->type === null) {
+            $nodeName = mb_strtolower($component->type);
+            if (isset(static::$map[$nodeName])) {
+                return new (static::$map[$nodeName])($data, $component, $theme, $rounded);
+            } else {
                 throw new NodeNotImplemented(sprintf("Node \"%s\" is not implemented.", mb_ucfirst($component->type)));
             }
-        }else{
+        } else {
             $errors = ["Node type is not set"];
-            $component = [(object) $component];
+            $component = [(object)$component];
             $data = compact('errors', 'component');
-            return new (static::$map["exception"])($data, $component, $theme);;
+            return new (static::$map["exception"])($data, $component, $theme, $rounded);
         }
     }
 
     /**
      * @throws Exception
      */
-    function renderPage($page, $data = [], $options = []): View
+    function renderPage($page, $data = []): View
     {
         $pageContainer = config('pixelwrap.page-root');
-        if(view()->exists($pageContainer)) {
-            $pageHtml = $this->render($page, $data, $options);
-            return view('pixelwrap::page', compact('pageContainer','pageHtml', 'options'));
-        }else{
+        $rounded = config('pixelwrap.rounded');
+        if (view()->exists($pageContainer)) {
+            $pageHtml = $this->render($page, $data, $rounded);
+            return view('pixelwrap::page', compact('pageContainer', 'pageHtml', 'options'));
+        } else {
             raise(null, sprintf("The page-root view \"%s\".blade.php does not exist. Please check your config file \"config/pixelwrap.php\" and try again.", $pageContainer));
         }
     }
 
-    function renderComponent($component, $data = [], $options = []): string
+    function renderComponent($component, $data = []): string
     {
         return $this->renderComponents([$component], $data);
     }
 
-    function render($page, $data = [], $options = []): string
+    function render($page, $data = [], $rounded = "none"): string
     {
         $nodes = $this->loadPage($page);
-        return $this->renderComponents($nodes, $data, $page);
+        return $this->renderComponents($nodes, $data, $rounded, $page);
     }
 
-    private function renderComponents($nodes, $data, $page = null) :string
+    private function renderComponents($nodes, $data, $rounded = "none", $page = null): string
     {
         try {
             // Ensure $nodes is always an array of objects
-            $nodes = array_map(fn($node) => is_array($node) ? (object) $node : $node, (array) $nodes);
-            $components = array_map(fn($node) => static::from($data, $node, $this->theme), $nodes);
+            $nodes = array_map(fn($node) => is_array($node) ? (object)$node : $node, (array)$nodes);
+            $components = array_map(fn($node) => static::from($data, $node, $this->theme, $rounded), $nodes);
         } catch (ParseException $exception) {
             $errors = [$exception->getMessage()];
             $component = $this->loadFile($page);
-            $components = [(object) ["type" => "Exception"]];
+            $components = [(object)["type" => "Exception"]];
             $data = compact('errors', 'component');
         }
 
@@ -142,8 +144,8 @@ class PixelWrapRenderer
 
     function loadPage($page)
     {
-       $nodes = Yaml::parse($this->loadFile($page), Yaml::PARSE_OBJECT_FOR_MAP);
-        if(is_object($nodes)) {
+        $nodes = Yaml::parse($this->loadFile($page), Yaml::PARSE_OBJECT_FOR_MAP);
+        if (is_object($nodes)) {
             $nodes = [$nodes];
         }
         return $nodes;
@@ -155,13 +157,13 @@ class PixelWrapRenderer
             $file = $page;
         } else {
             foreach ($this->paths as $path) {
-                $file = sprintf("%s/%s.yaml",$path, $page);
-                if(file_exists($file)) {
+                $file = sprintf("%s/%s.yaml", $path, $page);
+                if (file_exists($file)) {
                     break;
                 }
             }
         }
-        if(file_exists($file)) {
+        if (file_exists($file)) {
             return mb_trim(file_get_contents($file));
         } else {
             throw new Exception(sprintf('File "%s" not found. Searched in %s', $page, implode(", ", $this->paths)));
@@ -171,6 +173,12 @@ class PixelWrapRenderer
     public function setTheme(string $theme): static
     {
         $this->theme = $theme;
+        return $this;
+    }
+
+    public function setRounded(string $rounded): static
+    {
+        $this->rounded = $rounded;
         return $this;
     }
 

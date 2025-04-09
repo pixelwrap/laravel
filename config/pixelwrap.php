@@ -13,6 +13,7 @@ return [
     */
 
     'theme' => "tailwind",
+    'rounded' => "none",
     'page-root' => 'app',
     'resources' => [
         resource_path('pixelwrap')

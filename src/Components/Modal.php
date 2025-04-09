@@ -42,7 +42,7 @@ class Modal extends CompoundComponent
         if (isset($this->node->footer)) {
             if ($this->node->footer != null && isset($this->node->footer->nodes)) {
                 $node = ["type" => "Row", "gap" => "smaller", ...get_object_vars($this->node->footer)];
-                $this->footer = PixelWrapRenderer::from($this->data, $node, $this->theme);
+                $this->footer = PixelWrapRenderer::from($this->data, $node, $this->theme, $this->rounded);
             }
         } else {
             $node = [
@@ -52,7 +52,7 @@ class Modal extends CompoundComponent
                     ["type" => "Button", "role" => "button", "size" => "big", "padding" => "x-big", "label" => "Dismiss", "modalHide" => $this->id($args)],
                 ],
             ];
-            $this->footer = PixelWrapRenderer::from($this->data, $node, $this->theme);
+            $this->footer = PixelWrapRenderer::from($this->data, $node, $this->theme, $this->rounded);
         }
         return parent::render($args);
     }

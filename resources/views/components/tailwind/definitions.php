@@ -309,12 +309,12 @@ $inputVariants = [
 ];
 
 $inputLabelVariants = [
-    "primary"  => "block my-1 text-sm font-medium text-gray-800 dark:text-gray-50",
+    "primary" => "block my-1 text-sm font-medium text-gray-800 dark:text-gray-50",
     "disabled" => "disabled:opacity:50 cursor-not-allowed",
 ];
 
 $modalSizes = [
-    "bigger"  =>  "max-w-7xl",
+    "bigger" => "max-w-7xl",
     "default" => "max-w-4xl",
     "smaller" => "max-w-2xl",
 ];
@@ -342,4 +342,16 @@ $justifyOptions = [
     "between" => "justify-between",
     "around" => "justify-around",
     "evenly" => "justify-evenly",
+];
+
+$borderRadiusOptions = [
+    "none" => "rounded-none",
+    "smallest" => "rounded-sm",
+    "small" => "rounded",
+    "medium" => "rounded-md",
+    "big" => "rounded-lg",
+    "bigger" => "rounded-xl",
+    "biggest" => "rounded-2xl",
+    "jumbo" => "rounded-3xl",
+    "circle" => "rounded-full",
 ];

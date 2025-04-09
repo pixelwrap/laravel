@@ -13,11 +13,12 @@ class Card extends CompoundComponent
 
     public bool $showLabel = true;
     public string $label = "Title not set";
+    public bool $rounding = true;
 
-    public function parseProps($card, $data): void
+    public function parseProps($node, $data): void
     {
-        parent::parseProps($card, $data);
-        $this->showLabel = $card->showLabel ?? $this->showLabel;
-        $this->label = $card->label ?? $this->label;
+        parent::parseProps($node, $data);
+        $this->showLabel = $node->showLabel ?? $this->showLabel;
+        $this->label = $node->label ?? $this->label;
     }
 }

@@ -9,7 +9,7 @@ class CompoundComponent extends ComponentContract
 {
     protected array $requiredFields = ["nodes"];
     public array $nodes = [];
-    public bool $rounded = false;
+    public bool $rounding = false;
 
     /**
      * @throws NodeNotImplemented
@@ -32,7 +32,7 @@ class CompoundComponent extends ComponentContract
 
         if (isset($node->nodes)) {
             foreach ($node->nodes as $childNode) {
-                $this->nodes[] = PixelWrapRenderer::from($data, $childNode, $this->theme);
+                $this->nodes[] = PixelWrapRenderer::from($data, $childNode, $this->theme, $this->rounded);
             }
         }
     }
