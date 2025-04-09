@@ -294,12 +294,12 @@ $buttonSizes = [
 ];
 
 $iconSizes = [
-    "biggest" => "p-6",
-    "bigger" => "p-5",
-    "big" => "p-4",
-    "small" => "p-3",
-    "smaller" => "p-2",
-    "smallest" => "p-1",
+    "biggest" => "size-24",
+    "bigger" => "size-20",
+    "big" => "size-14",
+    "small" => "size-10",
+    "smaller" => "size-8",
+    "smallest" => "size-4",
 ];
 
 $inputVariants = [
