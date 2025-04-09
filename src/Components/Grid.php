@@ -19,7 +19,7 @@ class Grid extends CompoundComponent
         }
         $options = array_keys($this->themeDefinitions["colSpanOptions"]);
         foreach ($node->nodes as $index => $node) {
-            $spans = $node->span ?? 3;
+            $spans = $node->span ?? 'full';
             foreach (explode_prop($spans) as $span) {
                 if (!in_array($span, $options)) {
                     $this->errors[] = sprintf("Grid span for node \"%s\" only allows one of %s. Found %s", $index + 1, implode(", ", $options),$span);
