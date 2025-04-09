@@ -7,6 +7,7 @@ use PixelWrap\Laravel\Components\Badge;
 use PixelWrap\Laravel\Components\Button;
 use PixelWrap\Laravel\Components\Column;
 use PixelWrap\Laravel\Components\ComponentContract;
+use PixelWrap\Laravel\Components\Field;
 use PixelWrap\Laravel\Components\Form;
 use PixelWrap\Laravel\Components\Image;
 use PixelWrap\Laravel\Components\Navbar;
@@ -63,6 +64,7 @@ class PixelWrapRenderer
         'form'      =>  Form::class,
         'table'     =>  Table::class,
         'input'     =>  Input::class,
+        'field'     =>  Field::class,
         'select'    =>  Select::class,
         'typeahead' =>  TypeAhead::class,
         'timeline'  =>  Timeline::class,
