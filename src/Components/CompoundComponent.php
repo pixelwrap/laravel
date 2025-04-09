@@ -9,6 +9,7 @@ class CompoundComponent extends ComponentContract
 {
     protected array $requiredFields = ["nodes"];
     public array $nodes = [];
+    public bool $rounded = false;
 
     /**
      * @throws NodeNotImplemented
