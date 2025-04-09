@@ -15,12 +15,7 @@ class CompoundComponent extends ComponentContract
      */
     public function parseProps($node, $data): void
     {
-        if (isset($node->nodes)) {
-            foreach ($node->nodes as $node) {
-                $this->nodes[] = PixelWrapRenderer::from($data, $node, $this->theme);
-            }
-        }
-        $utilityClasses = ['grow' => 'flexGrowOptions', 'align' => 'alignmentOptions', 'justify' => 'justifyOptions'];
+        $utilityClasses = ['align' => 'alignmentOptions', 'grow' => 'flexGrowOptions', 'justify' => 'justifyOptions'];
         foreach ($utilityClasses as $name => $class) {
             $options = $this->themeDefinitions[$class];
             $input = mb_strtolower($node->{$name} ?? $this->{$name} ?? '');
@@ -31,6 +26,12 @@ class CompoundComponent extends ComponentContract
                 } else {
                     $this->addClass($options[$input]);
                 }
+            }
+        }
+
+        if (isset($node->nodes)) {
+            foreach ($node->nodes as $childNode) {
+                $this->nodes[] = PixelWrapRenderer::from($data, $childNode, $this->theme);
             }
         }
     }

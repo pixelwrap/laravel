@@ -15,10 +15,10 @@ class Listing extends Grid
     public mixed $dataset;
     protected array $requiredFields = ["dataset", "nodes"];
 
-    public function parseProps($listing, $data): void
+    public function parseProps($node, $data): void
     {
-        parent::parseProps($listing, $data);
-        $this->showEmptyMessage = $listing->showEmptyMessage ?? $this->showEmptyMessage;
+        parent::parseProps($node, $data);
+        $this->showEmptyMessage = $node->showEmptyMessage ?? $this->showEmptyMessage;
     }
 
     public function parseDataset($args): void
