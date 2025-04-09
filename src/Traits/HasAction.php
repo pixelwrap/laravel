@@ -13,7 +13,6 @@ trait HasAction
                 ...get_object_vars($action),
                 "type" => "Button",
                 "action" => $action,
-                "type" => "Button",
                 "variant" => $action->variant ?? "primary",
                 "name" => $action->name ?? "",
                 "size" => $action->size ?? "small",
@@ -35,7 +34,7 @@ trait HasAction
                     "nodes" => [$node],
                 ];
             }
-            $this->actions[] = PixelWrapRenderer::from($this->data, $node, $this->theme);
+            $this->actions[] = PixelWrapRenderer::from($this->data, $node, $this->theme, $this->rounded);
         }
     }
 }
