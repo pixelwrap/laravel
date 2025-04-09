@@ -20,7 +20,7 @@ class CompoundComponent extends ComponentContract
                 $this->nodes[] = PixelWrapRenderer::from($data, $node, $this->theme);
             }
         }
-        $utilityClasses = ['flexGrowOptions', 'alignmentOptions', 'justifyOptions'];
+        $utilityClasses = ['grow' => 'flexGrowOptions', 'align' => 'alignmentOptions', 'justify' => 'justifyOptions'];
         foreach ($utilityClasses as $name => $class) {
             $options = $this->themeDefinitions[$class];
             $input = mb_strtolower($name);
