@@ -13,7 +13,7 @@ class Card extends CompoundComponent
 
     public bool $showLabel = true;
     public string $label = "Title not set";
-    public bool $rounding = true;
+    public bool $rounding = false;
 
     public function parseProps($node, $data): void
     {

@@ -353,5 +353,5 @@ $borderRadiusOptions = [
     "bigger" => "rounded-xl",
     "biggest" => "rounded-2xl",
     "jumbo" => "rounded-3xl",
-    "circle" => "rounded-full",
+    "full" => "rounded-full",
 ];

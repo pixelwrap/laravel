@@ -49,7 +49,7 @@ class Button extends Text
             }
             $this->addClass($this->themeDefinitions["iconSizes"][$size]);
         } else {
-            $this->addClass($this->roundClasses);
+            $this->addClass($this->themeDefinitions["borderRadiusOptions"][$this->rounded]);
             $this->addClass($this->themeDefinitions["buttonSizes"][$size]);
         }
         if ($this->role === "link") {

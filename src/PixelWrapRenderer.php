@@ -109,7 +109,7 @@ class PixelWrapRenderer
         $rounded = config('pixelwrap.rounded');
         if (view()->exists($pageContainer)) {
             $pageHtml = $this->render($page, $data, $rounded);
-            return view('pixelwrap::page', compact('pageContainer', 'pageHtml', 'options'));
+            return view('pixelwrap::page', compact('pageContainer', 'pageHtml'));
         } else {
             raise(null, sprintf("The page-root view \"%s\".blade.php does not exist. Please check your config file \"config/pixelwrap.php\" and try again.", $pageContainer));
         }
