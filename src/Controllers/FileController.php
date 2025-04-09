@@ -104,6 +104,6 @@ class FileController extends PixelController
     {
         $file = $this->getFile($request);
         $file->delete();
-        return $this->route("index")->with("success", "$this->filename deleted successfully");
+        return $this->route("index", $request->route()->parameters)->with("success", "$this->filename deleted successfully");
     }
 }
