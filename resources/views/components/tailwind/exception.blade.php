@@ -2,7 +2,7 @@
     $ignoreNodes =  $ignoreNodes ?? true;
     $errors = $component->errors ?? $errors;
 @endphp
-<div class="border-2 border-red-600 dark:border-red-600 me-1 {{ $component->classes }}">
+<div class="border-2 border-red-600 dark:border-red-600 {{ $component->classes }}">
     @foreach($errors as $error)
         <p class="text-start text-wrap text-lg p-1 bg-red-600 dark:bg-red-600 text-gray-100 dark:text-gray-900">
             {{$error }}
