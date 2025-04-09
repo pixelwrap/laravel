@@ -47,6 +47,7 @@ class PixelWrapRenderer
         'tabs' => Tabs::class,
         'switch' => Toggle::class,
         'text' => Text::class,
+        'icon' => Icon::class,
         'progress' => Progress::class,
         'navbar' => Navbar::class,
         'sidebar' => Sidebar::class,
