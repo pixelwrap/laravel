@@ -117,7 +117,7 @@
         @endforeach
     </table>
 
-    @if($table->isPaginated)
+    @if($table->isPaginated && $table->paginator->hasPages())
         <div class="px-0 py-3">
             {{ $table->paginator->links("pixelwrap::components/tailwind/pagination") }}
         </div>
