@@ -24,6 +24,7 @@ abstract class ComponentContract
     public $span = "full";
     public bool $ignoreNodes = true;
     public $roundClasses = "rounded-none";
+    public bool $rounded = true;
 
     public function __construct($data, $node, $theme = "tailwind")
     {
@@ -41,6 +42,9 @@ abstract class ComponentContract
             $this->validateModel($node);
             $this->parseBoxModelProperties($node);
             $this->parseProps($node, $data);
+            if($this->rounded){
+                $this->addClass($this->roundClasses);
+            }
         } else {
             throw new InvalidValue("Theme '{$theme}' is not supported");
         }
