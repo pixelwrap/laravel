@@ -9,6 +9,7 @@ use PixelWrap\Laravel\Components\Column;
 use PixelWrap\Laravel\Components\ComponentContract;
 use PixelWrap\Laravel\Components\Field;
 use PixelWrap\Laravel\Components\Form;
+use PixelWrap\Laravel\Components\Icon;
 use PixelWrap\Laravel\Components\Image;
 use PixelWrap\Laravel\Components\Navbar;
 use PixelWrap\Laravel\Components\Sidebar;
