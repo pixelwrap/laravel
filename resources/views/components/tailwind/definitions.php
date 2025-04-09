@@ -33,7 +33,6 @@ $colSpanOptions = [
     "half" => "col-span-6",
     "third" => "col-span-4",
     "quarter" => "col-span-3",
-    "fifth" => "col-span-2.4",
     "sixth" => "col-span-2",
     "twelfth" => "col-span-1",
 
@@ -42,7 +41,6 @@ $colSpanOptions = [
     "small-half" => "sm:col-span-6",
     "small-third" => "sm:col-span-4",
     "small-quarter" => "sm:col-span-3",
-    "small-fifth" => "sm:col-span-[2.4]",
     "small-sixth" => "sm:col-span-2",
     "small-twelfth" => "sm:col-span-1",
 
@@ -51,7 +49,6 @@ $colSpanOptions = [
     "medium-half" => "md:col-span-6",
     "medium-third" => "md:col-span-4",
     "medium-quarter" => "md:col-span-3",
-    "medium-fifth" => "md:col-span-[2.4]",
     "medium-sixth" => "md:col-span-2",
     "medium-twelfth" => "md:col-span-1",
 
@@ -60,7 +57,6 @@ $colSpanOptions = [
     "large-half" => "lg:col-span-6",
     "large-third" => "lg:col-span-4",
     "large-quarter" => "lg:col-span-3",
-    "large-fifth" => "lg:col-span-[2.4]",
     "large-sixth" => "lg:col-span-2",
     "large-twelfth" => "lg:col-span-1",
 
