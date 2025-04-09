@@ -44,7 +44,7 @@ class Button extends Text
         $this->addClass($this->themeDefinitions["buttonVariants"][$variant]);
         if ($variant === "icon") {
             if (!isset($node->icon)) {
-                $message = "Icon must be set. Please check if your template is compliant with the specification.";
+                $message = "PixelIcon must be set. Please check if your template is compliant with the specification.";
                 $this->errors[] = $message;
             }
             $this->addClass($this->themeDefinitions["iconSizes"][$size]);

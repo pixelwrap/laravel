@@ -9,7 +9,7 @@ use PixelWrap\Laravel\Components\Column;
 use PixelWrap\Laravel\Components\ComponentContract;
 use PixelWrap\Laravel\Components\Field;
 use PixelWrap\Laravel\Components\Form;
-use PixelWrap\Laravel\Components\Icon;
+use PixelWrap\Laravel\Components\PixelIcon;
 use PixelWrap\Laravel\Components\Image;
 use PixelWrap\Laravel\Components\Navbar;
 use PixelWrap\Laravel\Components\Sidebar;
@@ -48,7 +48,7 @@ class PixelWrapRenderer
         'tabs' => Tabs::class,
         'switch' => Toggle::class,
         'text' => Text::class,
-        'icon' => Icon::class,
+        'icon' => PixelIcon::class,
         'progress' => Progress::class,
         'navbar' => Navbar::class,
         'sidebar' => Sidebar::class,

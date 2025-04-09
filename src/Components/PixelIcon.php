@@ -2,9 +2,7 @@
 
 namespace PixelWrap\Laravel\Components;
 
-use Illuminate\Contracts\View\View;
-
-class Icon extends ComponentContract
+class PixelIcon extends ComponentContract
 {
     public string $name = "";
     protected array $requiredFields = ["name"];
