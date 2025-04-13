@@ -4,6 +4,7 @@ namespace PixelWrap\Laravel;
 
 use Exception;
 use PixelWrap\Laravel\Components\Badge;
+use PixelWrap\Laravel\Components\Breadcrumb;
 use PixelWrap\Laravel\Components\Button;
 use PixelWrap\Laravel\Components\Column;
 use PixelWrap\Laravel\Components\ComponentContract;
@@ -70,6 +71,7 @@ class PixelWrapRenderer
         'field' => Field::class,
         'select' => Select::class,
         'typeahead' => TypeAhead::class,
+        'breadcrumb' => Breadcrumb::class,
         'timeline' => Timeline::class,
         null => PlaceHolder::class,
         'exception' => Components\Exception::class,
