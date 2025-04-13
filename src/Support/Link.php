@@ -25,7 +25,6 @@ class Link
 
     public static function from(string $label, string $url, string|null $icon): self
     {
-
         return new static($label, $url, $icon);
     }
 }
