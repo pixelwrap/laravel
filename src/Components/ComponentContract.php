@@ -82,8 +82,8 @@ abstract class ComponentContract
                     $this->addClass($options[$input], "spanClasses");
                 } else if ($key === "rounded") {
                     $moderated = in_array($input, ["full", "jumbo", "biggest"]) ? "bigger" : $input;
-                    $this->addClass($options[$input],'roundClasses');
-                    $this->addClass($options[$moderated],'roundModeratedClasses');
+                    $this->addClass($options[$input], 'roundClasses');
+                    $this->addClass($options[$moderated], 'roundModeratedClasses');
                     if ($this->rounding) {
                         $this->addClass($options[$input]);
                     }
@@ -155,5 +155,10 @@ abstract class ComponentContract
     public function id($args)
     {
         return interpolateString($this->id, [...($this->data ?? []), ...$args]);
+    }
+
+    public function clone()
+    {
+        return clone $this;
     }
 }

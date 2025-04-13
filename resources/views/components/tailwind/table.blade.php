@@ -70,7 +70,7 @@
                     @if(count($table->actions)>0)
                         <td class="py-1 flex flex-row justify-center gap-x-2 print:hidden">
                             @foreach($table->actions as $action)
-                                {{$action->render($row->toArray())}}
+                                {{$action->clone()->render($row->toArray())}}
                             @endforeach
                         </td>
                     @endif

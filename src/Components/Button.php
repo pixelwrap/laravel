@@ -63,6 +63,7 @@ class Button extends Text
         }
     }
 
+
     public function render($args = []): View|null
     {
         if ($this->role === "link") {
