@@ -11,6 +11,7 @@ class Link
     public string $label;
     public string $url;
     protected array $data;
+    protected array $filters = [];
     public string|null $icon = null;
 
     public function __construct(string $label, string $url, string|null $icon = null)
