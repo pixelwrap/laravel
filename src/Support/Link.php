@@ -2,11 +2,12 @@
 
 namespace PixelWrap\Laravel\Support;
 
+use PixelWrap\Laravel\Traits\HasLink;
 use PixelWrap\Laravel\Traits\HasText;
 
 class Link
 {
-    use HasText;
+    use HasText, HasLink;
 
     public string $label;
     public string $url;

@@ -10,7 +10,7 @@ trait HasLink
 {
     public function buildLink($action, $context): string
     {
-        $link   = $action->link;
+        $link   = is_string($action) ? $action : $action->link;
         $link   = BaseUri::from($link);
         $link   = Http::fromBaseUri($link->getUriString(), request()->getUri());
         $link   = $link->withPath(rtrim($link->getPath(), '/'));
