@@ -26,7 +26,7 @@
                             <path d="M9 6l6 6l-6 6"/>
                         </svg>
                     @endif
-                    <span>{{ $link->label }}</span>
+                    <span>{{ $link->text(get_defined_vars()) }}</span>
                 </a>
             </li>
         @endforeach
