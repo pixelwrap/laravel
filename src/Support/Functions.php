@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use PixelWrap\Laravel\PixelWrapRenderer;
@@ -134,6 +135,13 @@ function filter($filters, $value): string|null
                 if (is_numeric($value)) {
                     $value = number_format(floatval($value), 2);
                 }
+                break;
+            case "datetime":
+                $format = $params[0] ?? "Y-m-d H:i:s";
+                $value = match ($format) {
+                    "relative" => Carbon::parse($value)->diffForHumans(),
+                    default => Carbon::parse($value)->format($format),
+                };
                 break;
             case "lowercase":
                 $value = Str::lower($value);
