@@ -20,7 +20,7 @@ class Field extends Text
 
     public function value($args = [])
     {
-        $value =  interpolateString($this->value, [...$args, ...$this->data]);
+        $value = interpolateString($this->value, [...$args, ...$this->data]);
         return filter($this->filters, $value);
     }
 }
