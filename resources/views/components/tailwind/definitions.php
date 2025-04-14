@@ -69,7 +69,6 @@ $colSpanOptions = [
     "medium-quarter" => "md:col-span-3",
     "medium-sixth" => "md:col-span-2",
     "medium-twelfth" => "md:col-span-1",
-    "medium-double-quarter" => "md:col-span-6",
     "medium-double-third" => "md:col-span-8",
     "medium-triple-quarter" => "md:col-span-9",
 
@@ -80,7 +79,6 @@ $colSpanOptions = [
     "large-quarter" => "lg:col-span-3",
     "large-sixth" => "lg:col-span-2",
     "large-twelfth" => "lg:col-span-1",
-    "large-double-quarter" => "lg:col-span-6",
     "large-double-third" => "lg:col-span-8",
     "large-triple-quarter" => "lg:col-span-9",
 
