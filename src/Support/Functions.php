@@ -138,10 +138,12 @@ function filter($filters, $value): string|null
                 break;
             case "datetime":
                 $format = $params[0] ?? "Y-m-d H:i:s";
-                $value = match ($format) {
-                    "relative" => Carbon::parse($value)->diffForHumans(),
-                    default => Carbon::parse($value)->format($format),
-                };
+                try {
+                    $value = match ($format) {
+                        "relative" => Carbon::parse($value)->diffForHumans(),
+                        default => Carbon::parse($value)->format($format),
+                    };
+                } catch (Throwable) {}
                 break;
             case "lowercase":
                 $value = Str::lower($value);
