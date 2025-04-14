@@ -125,7 +125,7 @@ function setupTypeAhead(
         );
         clearTimeout(searchTimeout);
         currentWorkId++;
-        if (query) {
+        if (query.length > 0) {
             searchTimeout = setTimeout(
                 () => fetchSearchResults(query, currentWorkId),
                 100,
