@@ -132,6 +132,7 @@ function setupTypeAhead(
             );
         } else {
             results.innerHTML = "";
+            resultsWindow.classList.add("hidden");
         }
     });
 
