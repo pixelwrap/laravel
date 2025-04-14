@@ -1,4 +1,4 @@
 @extends($pageContainer)
 @section('pixelwrap-container')
-    {!! $pageHtml !!}
+    {!! $pageHtml() !!}
 @endsection

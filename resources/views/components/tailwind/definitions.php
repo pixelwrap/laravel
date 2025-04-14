@@ -4,15 +4,29 @@ $columnOptions = [
     "full" => "grid-cols-12",
     "half" => "grid-cols-6",
     "quarter" => "grid-cols-3",
+    "double-third" => "grid-cols-8",
+    "triple-quarter" => "grid-cols-9",
     "small-full" => "sm:grid-cols-12",
     "small-half" => "sm:grid-cols-6",
     "small-quarter" => "sm:grid-cols-3",
+    "small-double-third" => "sm:grid-cols-8",
+    "small-triple-quarter" => "sm:grid-cols-9",
+    "small-third" => "sm:grid-cols-4",
+    "small-sixth" => "sm:grid-cols-2",
     "medium-full" => "md:grid-cols-12",
     "medium-half" => "md:grid-cols-6",
     "medium-quarter" => "md:grid-cols-3",
+    "medium-double-third" => "md:grid-cols-8",
+    "medium-triple-quarter" => "md:grid-cols-9",
+    "medium-third" => "md:grid-cols-4",
+    "medium-sixth" => "md:grid-cols-2",
     "large-full" => "lg:grid-cols-12",
     "large-half" => "lg:grid-cols-6",
     "large-quarter" => "lg:grid-cols-3",
+    "large-double-third" => "lg:grid-cols-8",
+    "large-triple-quarter" => "lg:grid-cols-9",
+    "large-third" => "lg:grid-cols-4",
+    "large-sixth" => "lg:grid-cols-2",
     "1" => "grid-cols-1",
     "2" => "grid-cols-2",
     "3" => "grid-cols-3",
@@ -35,6 +49,8 @@ $colSpanOptions = [
     "quarter" => "col-span-3",
     "sixth" => "col-span-2",
     "twelfth" => "col-span-1",
+    "double-third" => "col-span-8",
+    "triple-quarter" => "col-span-9",
 
     // Small screens
     "small-full" => "sm:col-span-12",
@@ -43,6 +59,8 @@ $colSpanOptions = [
     "small-quarter" => "sm:col-span-3",
     "small-sixth" => "sm:col-span-2",
     "small-twelfth" => "sm:col-span-1",
+    "small-double-third" => "sm:col-span-8",
+    "small-triple-quarter" => "sm:col-span-9",
 
     // Medium screens
     "medium-full" => "md:col-span-12",
@@ -51,6 +69,9 @@ $colSpanOptions = [
     "medium-quarter" => "md:col-span-3",
     "medium-sixth" => "md:col-span-2",
     "medium-twelfth" => "md:col-span-1",
+    "medium-double-quarter" => "md:col-span-6",
+    "medium-double-third" => "md:col-span-8",
+    "medium-triple-quarter" => "md:col-span-9",
 
     // Large screens
     "large-full" => "lg:col-span-12",
@@ -59,6 +80,9 @@ $colSpanOptions = [
     "large-quarter" => "lg:col-span-3",
     "large-sixth" => "lg:col-span-2",
     "large-twelfth" => "lg:col-span-1",
+    "large-double-quarter" => "lg:col-span-6",
+    "large-double-third" => "lg:col-span-8",
+    "large-triple-quarter" => "lg:col-span-9",
 
     // Numeric spans
     "1" => "col-span-1",
