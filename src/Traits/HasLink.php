@@ -62,9 +62,7 @@ trait HasLink
                                 $value = $value->alias ?? $value->value ?? $key;
                             }
                         }
-                        if (isset($context[$value])) {
-                            $value = $context[$value];
-                        }
+                        $value = interpolateString($value, $context);
                         $params[$key] = $value;
                     }
                 }
