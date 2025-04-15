@@ -120,7 +120,7 @@ abstract class ComponentContract
                     }
                     foreach ($condition as $key => $value) {
                         $value = interpolateString($value, $context);
-                        if ((isset($context[$key]) && $context[$key] === $value) || (!isset($context[$key]) && $value === null)) {
+                        if ((isset($context[$key]) && $context[$key] == $value) || (!isset($context[$key]) && $value == null)) {
                             $show = $showIf;
                             break 2;
                         }
