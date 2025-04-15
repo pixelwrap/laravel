@@ -2,7 +2,7 @@
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         @foreach($breadcrumb->links as $link)
             <li class="inline-flex items-center">
-                <a href="{{ $link->url }}"
+                <a href="{{ $link->link(get_defined_vars()) }}"
                    class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white gap-x-1">
                     @if($loop->first)
                         @if($link->icon)

@@ -10,41 +10,70 @@ trait HasLink
 {
     public function buildLink($action, $context): string
     {
-        $link   = is_string($action) ? $action : $action->link;
-        $link   = BaseUri::from($link);
-        $link   = Http::fromBaseUri($link->getUriString(), request()->getUri());
-        $link   = $link->withPath(rtrim($link->getPath(), '/'));
-        $query  = Http::fromBaseUri($link)->getQuery();
-        $query  = QueryString::parse(mb_strlen($query) >0 ? $query : null);
-        if (isset($action->params)) {
-            foreach ($action->params as $key => $value) {
-                if (is_object($value)) {
-                    if (!isset($value->key)) {
-                        $this->errors[] = sprintf(
-                            "Key field %s must be set. Please check if your template is compliant with the specification.",
-                            $action->name
-                        );
-                    }else{
-                        $key    = $value->key;
-                        $value  = $value->alias ?? $value->value ?? $key;
+        if (is_object($action)) {
+            if (isset($action->link)) {
+                $link = $action->link;
+                $link = BaseUri::from($link);
+                $link = Http::fromBaseUri($link->getUriString(), request()->getUri());
+                $link = $link->withPath(rtrim($link->getPath(), '/'));
+                $query = Http::fromBaseUri($link)->getQuery();
+                $query = QueryString::parse(mb_strlen($query) > 0 ? $query : null);
+                if (isset($action->params)) {
+                    foreach ($action->params as $key => $value) {
+                        if (is_object($value)) {
+                            if (!isset($value->key)) {
+                                $this->errors[] = sprintf(
+                                    "Key field %s must be set. Please check if your template is compliant with the specification.",
+                                    $action->name
+                                );
+                            } else {
+                                $key = $value->key;
+                                $value = $value->alias ?? $value->value ?? $key;
+                            }
+                        }
+
+                        $param = sprintf("{%s}", $key);
+                        if (isset($context[$value])) {
+                            $value = $context[$value];
+                        }
+                        $decodedLink = urldecode($link);
+                        if (mb_strpos($decodedLink, $param) !== false) {
+                            $link = str_replace($param, $value, $decodedLink);
+                        } else {
+                            $query[] = [$key, $value];
+                        }
                     }
                 }
-
-                $param  =  sprintf("{%s}", $key);
-                if(isset($context[$value])){
-                    $value  =  $context[$value];
+                $link = urldecode($link);
+                $link = interpolateString($link, $context);
+                return Http::fromBaseUri($link)->withQuery(QueryString::buildFromPairs($query) ?? "");
+            } else if (isset($action->route)) {
+                $params = [];
+                if (isset($action->params)) {
+                    foreach ($action->params as $key => $value) {
+                        if (is_object($value)) {
+                            if (!isset($value->key)) {
+                                $this->errors[] = sprintf(
+                                    "Key field %s must be set. Please check if your template is compliant with the specification.",
+                                    $action->name
+                                );
+                            } else {
+                                $key = $value->key;
+                                $value = $value->alias ?? $value->value ?? $key;
+                            }
+                        }
+                        if (isset($context[$value])) {
+                            $value = $context[$value];
+                        }
+                        $params[$key] = $value;
+                    }
                 }
-                $decodedLink = urldecode($link);
-                if(mb_strpos($decodedLink, $param) !== false){
-                    $link = str_replace($param, $value, $decodedLink);
-                }else {
-                    $query[] = [$key, $value];
-                }
+                return route($action->route, $params);
             }
+        } else if (is_string($action)) {
+            return $action;
         }
-        $link = urldecode($link);
-        $link = interpolateString($link, $context);
-        return Http::fromBaseUri($link)->withQuery(QueryString::buildFromPairs($query) ?? "");
+        return "";
     }
 
 }

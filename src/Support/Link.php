@@ -10,22 +10,32 @@ class Link
     use HasText, HasLink;
 
     public string $label;
-    public string $url;
+    public mixed $link;
+    public array $params;
     protected array $data;
     protected array $filters = [];
     public string|null $icon = null;
 
-    public function __construct(string $label, string $url, string|null $icon = null)
+    public function __construct(string $label, mixed $link, string|null $icon = null)
     {
         $this->label = $label;
-        $this->url = $url;
+        $this->link = $link;
         $this->icon = $icon;
     }
 
-
-
-    public static function from(string $label, string $url, string|null $icon): self
+    public function link($args)
     {
-        return new static($label, $url, $icon);
+        if (is_string($this->link)) {
+            return $this->buildLink($this->link, $args);
+        } else {
+            $link = $this->link;
+            $link->route = $link->name;
+            return $this->buildLink($link, $args);
+        }
+    }
+
+    public static function from($link): self
+    {
+        return new static($link->label ?? 'Not Set', $link->url ?? $link->route, $link->icon ?? null);
     }
 }

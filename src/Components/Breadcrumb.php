@@ -16,9 +16,7 @@ class Breadcrumb extends ComponentContract
         if (isset($node->links)) {
             if (is_array($node->links)) {
                 foreach ($node->links as $link) {
-                    $label = $link->label ?? 'Not Set';
-                    $url = $link->url ?? 'Not Set';
-                    $this->links[] = Link::from($label, $url, $link->icon ?? null);
+                    $this->links[] = Link::from($link);
                 }
             } else {
                 $this->errors[] = "Links should be an array";
