@@ -17,7 +17,7 @@
                     </th>
                 @endforeach
                 @if(count($table->actions)>0)
-                    <th scope="col" class="px-2 py-3 text-center print:hidden {{ $table->headingClasses ?? '' }}">
+                    <th scope="col" class="px-2 py-3 text-end print:hidden {{ $table->headingClasses ?? '' }}">
                         Actions
                     </th>
                 @endif
