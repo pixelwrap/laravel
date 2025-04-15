@@ -21,8 +21,8 @@ trait HasAction
                 "showLabel" => ($action->variant ?? null) === "icon" ? false : $action->showLabel ?? true,
                 "label" => $action->label ?? "Label not set",
                 "value" => $action->value ?? null,
-                "show-if" => $action->{"show-if"} ?? [],
-                "hide-if" => $action->{"hide-if"} ?? [],
+                "show-if" => $action->{"showIf"} ?? [],
+                "hide-if" => $action->{"hideIf"} ?? [],
             ];
 
             if (mb_strtolower($action->role) === "form") {
