@@ -68,7 +68,7 @@
                         @endif
                     @endforeach
                     @if(count($table->actions)>0)
-                        <td class="py-1 flex flex-row justify-center gap-x-2 print:hidden">
+                        <td class="py-1 flex flex-row justify-end gap-x-2 print:hidden">
                             @foreach($table->actions as $action)
                                 {{$action->clone()->render($row->toArray())}}
                             @endforeach
