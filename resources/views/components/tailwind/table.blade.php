@@ -105,7 +105,7 @@
                                 @endif
                             @endforeach
                             @if(count($table->actions)>0)
-                                <td class="py-1 flex flex-row justify-center gap-x-2">
+                                <td class="py-1 flex flex-row justify-end gap-x-2">
                                     -
                                 </td>
                             @endif
