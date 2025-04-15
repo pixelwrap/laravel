@@ -2,6 +2,6 @@
     @method($form->method)
     @csrf
     @foreach($form->nodes as $component)
-        {{ $component->render() }}
+        {{ $component->render(get_defined_vars()) }}
     @endforeach
 </form>
