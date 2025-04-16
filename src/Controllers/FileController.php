@@ -97,7 +97,7 @@ class FileController extends PixelController
         } else {
             $file->update($request->all());
         }
-        return $this->route("edit", $file)->with("success", "$this->filename updated successfully");
+        return back()->with("success", "$this->filename updated successfully");
     }
 
     public function destroy(Request $request)
