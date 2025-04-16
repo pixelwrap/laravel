@@ -78,9 +78,9 @@ class PixelWrapRenderer
         'horizontalruler' => HorizontalRuler::class,
     ];
 
-    static function make($theme = "tailwind", $paths = []): static
+    static function make($theme = "tailwind", $paths = [], $rounded = "none"): static
     {
-        return (new static)->setTheme($theme)->setPaths($paths);
+        return (new static)->setTheme($theme)->setPaths($paths)->setRounded($rounded);
     }
 
     /**

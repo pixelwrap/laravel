@@ -16,7 +16,7 @@ class PixelWrapServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/pixelwrap.php', 'pixelwrap');
 
         app()->bind('pixelwrap', function ($app) {
-            return PixelWrapRenderer::make($app->config->get('pixelwrap.theme'), $app->config->get('pixelwrap.resources'));
+            return PixelWrapRenderer::make($app->config->get('pixelwrap.theme'), $app->config->get('pixelwrap.resources'), $app->config->get('pixelwrap.rounded'));
         });
 
         app()->bind(PixelWrapRenderer::class, function ($app) {
