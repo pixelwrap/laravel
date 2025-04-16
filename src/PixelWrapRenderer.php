@@ -127,7 +127,7 @@ class PixelWrapRenderer
     function render($page, $data = [], $rounded = null): string
     {
         $nodes = $this->loadPage($page);
-        if ($rounded === null) {
+        if (!$rounded) {
             $rounded = $this->rounded;
         }
         return $this->renderComponents($nodes, $data, $rounded, $page);
