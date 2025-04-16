@@ -18,7 +18,7 @@ class TypeAhead extends Input
     public string $show = "name";
     public string|null $image = null;
     public ComponentContract $input;
-
+    public bool $rounding = false;
     /**
      * @throws NodeNotImplemented
      */
