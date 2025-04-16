@@ -191,4 +191,19 @@ class PixelWrapRenderer
         $this->paths = $paths;
         return $this;
     }
+
+    public function getTheme(): string
+    {
+        return $this->theme;
+    }
+
+    public function getRounded(): string
+    {
+        return $this->rounded;
+    }
+
+    public function getPaths(): array
+    {
+        return $this->paths;
+    }
 }
