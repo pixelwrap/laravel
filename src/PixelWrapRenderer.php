@@ -127,15 +127,15 @@ class PixelWrapRenderer
     function render($page, $data = [], $rounded = null): string
     {
         $nodes = $this->loadPage($page);
-        if (!$rounded) {
-            $rounded = $this->rounded;
-        }
         return $this->renderComponents($nodes, $data, $rounded, $page);
     }
 
-    private function renderComponents($nodes, $data, $rounded = "none", $page = null): string
+    private function renderComponents($nodes, $data, $rounded = null, $page = null): string
     {
         try {
+            if (!$rounded) {
+                $rounded = $this->rounded;
+            }
             // Ensure $nodes is always an array of objects
             $nodes = array_map(fn($node) => is_array($node) ? (object)$node : $node, (array)$nodes);
             $components = array_map(fn($node) => static::from($data, $node, $this->theme, $rounded), $nodes);
@@ -145,7 +145,6 @@ class PixelWrapRenderer
             $components = [(object)["type" => "Exception"]];
             $data = compact('errors', 'component');
         }
-
         return implode("", array_map(fn($component) => $component->render($data), $components));
     }
 
