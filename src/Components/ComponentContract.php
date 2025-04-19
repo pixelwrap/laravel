@@ -34,8 +34,8 @@ abstract class ComponentContract
         $this->name = $this->template;
         $this->id = $node->id ?? $this->id;
         $this->rounded = $node->rounded ?? $rounded;
-        $this->showIf = $node->{"show-if"} ?? $this->showIf;
-        $this->hideIf = $node->{"hide-if"} ?? $this->hideIf;
+        $this->showIf = $node->{"showIf"} ?? $this->showIf;
+        $this->hideIf = $node->{"hideIf"} ?? $this->hideIf;
         $this->filters = explode("|", $node->filters ?? null);
         if (in_array($theme, $this->supportedThemes)) {
             $this->theme = $theme;
