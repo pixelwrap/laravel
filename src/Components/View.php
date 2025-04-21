@@ -8,11 +8,11 @@ class View extends ComponentContract
 {
     use HasText;
 
-    protected array $requiredFields = ["view"];
-    public $view = null;
+    protected array $requiredFields = ["name"];
+    public string $name = "";
 
     public function parseProps($node, $data): void
     {
-        $this->view = $node->view ?? $this->view;
+        $this->name = $node->name ?? $this->name;
     }
 }
