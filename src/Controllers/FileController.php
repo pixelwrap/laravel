@@ -87,7 +87,7 @@ class FileController extends PixelController
     public function show(Request $request)
     {
         $file = $this->getFile($request);
-        $this->authorize('show', $file);
+        $this->authorize('view', $file);
         $details = $file->toArray();
         if (method_exists($this, "getDetails")) {
             $details = [...$this->getDetails($file), ...$file->toArray()];
