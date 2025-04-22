@@ -10,6 +10,7 @@ use PixelWrap\Laravel\PixelWrapRenderer;
 class FileController extends PixelController
 {
     protected $class = Model::class;
+    protected $authorization = false;
     protected $filename;
     protected $file;
     protected $perPage = 15;
@@ -32,6 +33,7 @@ class FileController extends PixelController
 
     public function index()
     {
+        $this->authorize('viewAny', $this->class);
         $query = $this->class::query()->with($this->relationships)->latest($this->primaryKey);
         $details = [];
         if (method_exists($this, "listingQuery")) {
@@ -46,6 +48,7 @@ class FileController extends PixelController
 
     public function create()
     {
+        $this->authorize('create', $this->class);
         $data = [];
         if (method_exists($this, "createDetails")) {
             $data = $this->createDetails();
@@ -59,6 +62,7 @@ class FileController extends PixelController
     }
     public function store(Request $request)
     {
+        $this->authorize('create', $this->class);
         if (method_exists($this, "storeDetails")) {
             $details = $this->storeDetails($request);
         } else {
@@ -71,6 +75,7 @@ class FileController extends PixelController
     public function edit(Request $request)
     {
         $file = $this->getFile($request);
+        $this->authorize('update', $file);
         if (method_exists($this, "editDetails")) {
             $details = [...$this->editDetails($file), ...$file->toArray()];
         } else {
@@ -82,6 +87,7 @@ class FileController extends PixelController
     public function show(Request $request)
     {
         $file = $this->getFile($request);
+        $this->authorize('show', $file);
         $details = $file->toArray();
         if (method_exists($this, "getDetails")) {
             $details = [...$this->getDetails($file), ...$file->toArray()];
@@ -92,6 +98,7 @@ class FileController extends PixelController
     public function update(Request $request)
     {
         $file = $this->getFile($request);
+        $this->authorize('update', $file);
         if (method_exists($this, "performUpdate")) {
             return $this->performUpdate($file);
         } else {
@@ -103,6 +110,7 @@ class FileController extends PixelController
     public function destroy(Request $request)
     {
         $file = $this->getFile($request);
+        $this->authorize('delete', $file);
         $file->delete();
         return $this->route("index", $request->route()->parameters)->with("success", "$this->filename deleted successfully");
     }
