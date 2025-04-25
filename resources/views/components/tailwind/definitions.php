@@ -324,6 +324,24 @@ $iconSizes = [
     "smallest" => "size-4",
 ];
 
+$verticalTimelineIconSizes = [
+    "biggest" => "size-24 -start-24",
+    "bigger" => "size-20 -start-20",
+    "big" => "size-15 -start-14",
+    "small" => "size-11 -start-10",
+    "smaller" => "size-9 -start-8",
+    "smallest" => "size-4 -start-4",
+];
+
+$horizontalTimelineIconSizes = [
+    "biggest" => "size-24 -start-12",
+    "bigger" => "size-20 -start-10",
+    "big" => "size-14 -start-7",
+    "small" => "size-10 -start-5",
+    "smaller" => "size-8 -start-4",
+    "smallest" => "size-4 -start-2",
+];
+
 $inputVariants = [
     "primary" =>
         "w-full p-2 text-sm text-gray-900 dark:text-gray-50 bg-white dark:bg-gray-800 border border-gray-600 dark:border-gray-400 shadow-sm focus:ring-1 focus:ring-blue-500 focus:border-blue-500 focus:outline-none",
