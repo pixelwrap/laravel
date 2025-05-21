@@ -8,7 +8,7 @@
                             @class([
                                'px-2 py-2 text-sm font-bold flex flex-row gap-x-2 items-center border-b-4 ',
                                'text-gray-900 border-gray-900 dark:border-gray-50 dark:text-gray-50 hover:text-white dark:hover:text-gray-50 dark:hover:bg-gray-950 hover:bg-gray-600' => $item->selected,
-                               'text-gray-950 dark:bg-gray-950 dark:border-gray-950 hover:border-gray-600 dark:hover:border-gray-500 border-gray-300 dark:text-gray-300 hover:text-white dark:hover:text-gray-950 dark:hover:bg-gray-200 hover:bg-gray-950' => !$item->selected])>
+                               'text-gray-950 dark:bg-gray-950 dark:border-gray-950 hover:border-gray-600 dark:hover:border-gray-500 border-gray-50 dark:text-gray-300 hover:text-white dark:hover:text-gray-950 dark:hover:bg-gray-200 hover:bg-gray-950' => !$item->selected])>
                             @if($item->icon)
                                 <span>@pixelicon($item->icon)</span>
                             @endif
@@ -39,7 +39,7 @@
                         @class([
                            'block px-4 py-2 text-sm font-medium',
                            'bg-gray-800 text-gray-50 dark:bg-gray-50 dark:text-gray-950' => $item->selected,
-                           'bg-gray-300 text-gray-950 dark:bg-gray-950 dark:text-gray-50' =>!$item->selected ])>
+                           'bg-gray-50 text-gray-950 dark:bg-gray-950 dark:text-gray-50' =>!$item->selected ])>
                         {{ $item->label }}
                     </a>
                 </li>
