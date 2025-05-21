@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="flex items-center sm:hidden m-4">
+    <div class="flex items-center sm:hidden my-4">
         <button data-collapse-toggle="{{$navbar->id}}" type="button"
                 class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 {{ $navbar->classes }}">
             <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -29,6 +29,7 @@
             </svg>
         </button>
     </div>
+
     <!-- Collapsible menu -->
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="{{$navbar->id}}">
         <ul class="flex flex-col font-medium md:p-0 my-4 md:flex-row md:space-x-8 md:mt-0 {{ $navbar->roundModeratedClasses }}">
