@@ -1,4 +1,4 @@
-<nav class="bg-gray-300 dark:bg-gray-950 print:hidden w-full {{ $navbar->classes }}">
+<nav class="bg-gray-50 dark:bg-gray-950 print:hidden w-full {{ $navbar->classes }}">
     <div class="flex h-auto items-center justify-between">
         <div class="flex flex-1 sm:items-stretch sm:justify-start">
             <div class="hidden sm:block">
