@@ -6,13 +6,13 @@
    ])>
     @if($timeline->dataset)
         @foreach($timeline->dataset as $row)
-            @foreach($timeline->nodes as $event)
-                @include("pixelwrap::components/{$timeline->theme}/timeline-event",[ ...get_defined_vars(), ...$row, "timeline" => $timeline, "event" => $event])
+            @foreach($timeline->nodes as $node)
+                @include("pixelwrap::components/{$timeline->theme}/timeline-event",[ ...get_defined_vars(), ...$row, "timeline" => $timeline, "event" => $node])
             @endforeach
         @endforeach
     @else
         @foreach($timeline->nodes as $event)
-            @include("pixelwrap::components/{$timeline->theme}/timeline-event",[ ...get_defined_vars(), "timeline" => $timeline,"event" => $event])
+            @include("pixelwrap::components/{$timeline->theme}/timeline-event",[ ...get_defined_vars(), "timeline" => $timeline, "event" => $event])
         @endforeach
     @endif
 </ol>
